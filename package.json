@@ -4,12 +4,76 @@
   "description": "Aleksey Gonchar personal web site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard",
+    "start": "nodemon -e js index.js"
   },
   "keywords": [
     "pesronal",
     "blog"
   ],
   "author": "Tuiteraz",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.2.0",
+    "bluebird": "^2.9.34",
+    "body-parser": "^1.13.2",
+    "bunyan": "^1.0.1",
+    "express": "^4.13.1",
+    "express-jwt": "^3.0.1",
+    "font-awesome": "^4.3.0",
+    "handlebars": "^3.0.3",
+    "immutable": "^3.7.2",
+    "jquery": "2.1.4",
+    "jsonwebtoken": "^5.0.0",
+    "konphyg": "^1.4.0",
+    "lodash": "^3.9.3",
+    "method-override": "^2.3.1",
+    "mocha-multi": "^0.7.1",
+    "moment": "^2.10.3",
+    "moment-objectid": "0.0.1",
+    "mongoose": "^4.0.8",
+    "mongoose-createdmodified": "^0.0.2",
+    "mongoose-paginator": "^0.2.3",
+    "mongoose-timestamp": "^0.4.0",
+    "mongoose-unique-validator": "^0.4.1",
+    "multer": "^0.1.6",
+    "request": "^2.40.0",
+    "react": "0.13.3",
+    "react-bootstrap": "0.23.5",
+    "react-chosen": "^0.3.7",
+    "react-router": "^0.13.3",
+    "require-tree": "^1.0.1",
+    "stylus": "^0.51.1",
+    "uglify-js": "~2.4.13",
+    "underscore.string": "^3.0.3"
+  },
+  "devDependencies": {
+    "autoprefixer-stylus": "0.7.0",
+    "bunyan-format": "^0.2.1",
+    "chai": "^2.3.0",
+    "faker": "^3.0.0",
+    "karma": "^0.12.31",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.10",
+    "karma-mocha": "^0.1.10",
+    "karma-mocha-reporter": "^1.0.2",
+    "karma-source-map-support": "^1.0.0",
+    "longjohn": "^0.2.4",
+    "mocha": "^2.2.4",
+    "morgan": "^1.5.3",
+    "qs": "4.0.0",
+    "sinon": "^1.14.1",
+    "source-map-support": "^0.2.10",
+    "standard": "^3.7.3"
+  },
+  "standard": {
+    "ignore": [
+      "**/build/**",
+      "**/public/**",
+      "**/uploads/**"
+    ]
+  },
+  "engines": {
+    "node": "0.12.x"
+  }
 }
