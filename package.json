@@ -1,0 +1,15 @@
+{
+  "name": "i-am-a-maze.me",
+  "version": "0.0.1",
+  "description": "Aleksey Gonchar personal web site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pesronal",
+    "blog"
+  ],
+  "author": "Tuiteraz",
+  "license": "ISC"
+}

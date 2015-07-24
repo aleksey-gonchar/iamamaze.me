@@ -1,0 +1,2 @@
+# iamamaze.me
+personal blog
