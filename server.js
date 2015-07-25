@@ -1,7 +1,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
-var initMongo = require('./initializers/mongo')
-var initExpress = require('./initializers/express')
+var initMongo = require('./lib/initializers/mongo')
+var initExpress = require('./lib/initializers/express')
 var http = require('http')
 var Promise = require('bluebird')
 
@@ -29,9 +29,7 @@ function onError(error) {
     throw error
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port
+  var bind = 'Port ' + port
 
   switch (error.code) {
     case 'EACCES':
