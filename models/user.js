@@ -13,7 +13,7 @@ var schema = {
   lastName: { type: String, required: true },
   password: { type: String, select: false, required: true },
   active: { type: Boolean, default: false },
-  deleted: { type: Boolean, default: false },
+  deleted: { type: Boolean, default: false }
 }
 var userSchema = new mongoose.Schema(schema)
 

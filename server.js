@@ -23,8 +23,7 @@ Promise.all([initMongo(), initExpress()])
   })
   .done()
 
-
-function onError(error) {
+function onError (error) {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -45,7 +44,7 @@ function onError(error) {
   }
 }
 
-function onListening() {
+function onListening () {
   var addr = server.address()
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
