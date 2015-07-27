@@ -4,6 +4,7 @@ var initMongo = require('./lib/initializers/mongo')
 var initExpress = require('./lib/initializers/express')
 var http = require('http')
 var Promise = require('bluebird')
+var log = require('./lib/logger')
 
 if (process.env.NODE_ENV === 'development') {
   require('longjohn')
@@ -32,11 +33,11 @@ function onError (error) {
 
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
+      log.error(bind + ' requires elevated privileges')
       process.exit(1)
       break
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
+      log.error(bind + ' is already in use')
       process.exit(1)
       break
     default:
@@ -49,5 +50,5 @@ function onListening () {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  console.log('Listening on ' + bind)
+  log.info('Listening on ' + bind)
 }
