@@ -22,7 +22,7 @@
     "express": "^4.13.1",
     "express-jwt": "^3.0.1",
     "font-awesome": "^4.3.0",
-    "handlebars": "^3.0.3",
+    "hbs": "^3.1.0",
     "immutable": "^3.7.2",
     "jquery": "2.1.4",
     "jsonwebtoken": "^5.0.4",
