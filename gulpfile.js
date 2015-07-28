@@ -36,11 +36,14 @@ gulp.task('js', function () {
   })
 
   return b.bundle()
+    .on('error', function (err) {
+      gutil.log(err)
+      this.emit("end");
+    })
     .pipe(source('index.bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(debug())
-    .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/js/'))
 })
@@ -49,6 +52,8 @@ gulp.task('watch', function () {
   gulp.watch(['src/front-end/**/*.css', 'src/front-end/**/*.styl'], ['style'])
   gulp.watch(['src/front-end/**/*.jsx', 'src/front-end/**/*.js'], ['js'])
 })
+
+gulp.task('build', ['js', 'style'], function () {})
 
 gulp.task('browser-sync', function () {
   var files = [
