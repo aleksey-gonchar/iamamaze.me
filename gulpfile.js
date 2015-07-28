@@ -32,8 +32,7 @@ gulp.task('js', function () {
   var b = browserify({
     entries: './src/front-end/js/index.jsx',
     debug: true,
-    transform: [babelify],
-    require: ['jquery', 'lodash']
+    transform: [babelify]
   })
 
   return b.bundle()
