@@ -50,7 +50,7 @@ gulp.task('js', function () {
 
 gulp.task('watch', function () {
   gulp.watch(['src/front-end/**/*.css', 'src/front-end/**/*.styl'], ['style'])
-  gulp.watch(['src/front-end/**/*.jsx', 'src/front-end/**/*.js'], ['js'])
+  gulp.watch(['src/front-end/**/**/**/*.jsx', 'src/front-end/**/**/**/*.js'], ['js'])
 })
 
 gulp.task('build', ['js', 'style'], function () {})

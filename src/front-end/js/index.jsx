@@ -1,9 +1,11 @@
 /*---- boot ----*/
 let $ = window.jQuery = require('jquery')
-require('bootstrap')
-import React from 'react'
-import HelloWorld from './components/HelloWorld/HelloWorld.jsx'
+window.React = require('react')
+window.RB = require('react-bootstrap')
+
+let IndexPage = require('./pages/IndexPage.jsx')
 
 $(function () {
-  React.render(<HelloWorld />, document.body)
+  React.render(<IndexPage/>, document.body)
 })
+
