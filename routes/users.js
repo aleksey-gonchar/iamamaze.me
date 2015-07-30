@@ -12,6 +12,6 @@ module.exports = function (router) {
     }
   }))
 
-  router.get('/users/login', usersCtrl.login)
+  router.post('/users/login', usersCtrl.login)
   router.get('/users/current', [ apiHelpers.allowLogged, usersCtrl.current ])
 }

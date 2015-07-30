@@ -1,15 +1,18 @@
 var express = require('express')
 var router = express.Router()
+var apiRouter = express.Router()
 var path = require('path')
 var frontCfg = require('konphyg')(process.cwd() + '/config')('front-end')
-
-require('./auth/jwt')(router)
+var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
 
 router.get('/', function (req, res) {
   res.render('index', frontCfg.meta)
 })
 
-require('./users')(router)
+require('./auth/jwt')(apiRouter)
+require('./users')(apiRouter)
+
+router.use(serverCfg.api.mountPoint, apiRouter)
 
 module.exports = router
 
