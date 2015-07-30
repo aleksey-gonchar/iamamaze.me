@@ -9,7 +9,7 @@ module.exports = function (router) {
   router.post('/users/login', usersCtrl.login)
   router.get('/users/current', [ apiHelpers.allowLogged, usersCtrl.current ])
 
-  router.use('/users', apiHelpers.crud(User, {
+  router.use('/users', apiHelpers.buildCRUD(User, {
     actions: {
       update: false
     }
