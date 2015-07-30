@@ -15,29 +15,31 @@ module.exports = function (router) {
     }
   })
 
-  router.use(function (req, res, next) {
-    req.getToken = function (user) {
-      var userProfile = {
-        id: user.id.toString(),
-        created: user.created,
-        email: user.email
-      }
-      return jwt.sign(userProfile, secretsCfg.jwt.key, secretsCfg.jwt.options)
-    }
-
-    req.session = {}
-
-    if (req.headers['authorization']) {
-      authorize(req, res, function () {
-        if (req.user) {
-          req.session.userId = req.user.id
-          req.session.user = req.user
-          delete req.user
+  router.use(
+    (req, res, next) => {
+      req.getToken = function (user) {
+        var userProfile = {
+          id: user.id.toString(),
+          created: user.created,
+          email: user.email
         }
+        return jwt.sign(userProfile, secretsCfg.jwt.key, secretsCfg.jwt.options)
+      }
+
+      req.session = {}
+
+      if (req.headers['authorization']) {
+        authorize(req, res, function (v) {
+          if (req.user) {
+            req.session.userId = req.user.id
+            req.session.user = req.user
+            delete req.user
+          }
+          next()
+        })
+      } else {
         next()
-      })
-    } else {
-      next()
+      }
     }
-  })
+  )
 }

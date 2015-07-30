@@ -6,12 +6,12 @@ var apiHelpers = requireTree('../lib/api-helpers')
 var User = $require('models/user')
 
 module.exports = function (router) {
+  router.post('/users/login', usersCtrl.login)
+  router.get('/users/current', [ apiHelpers.allowLogged, usersCtrl.current ])
+
   router.use('/users', apiHelpers.crud(User, {
     actions: {
       update: false
     }
   }))
-
-  router.post('/users/login', usersCtrl.login)
-  router.get('/users/current', [ apiHelpers.allowLogged, usersCtrl.current ])
 }

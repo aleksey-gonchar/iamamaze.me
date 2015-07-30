@@ -1,3 +1,4 @@
+var $require = require(process.cwd() + '/lib/require')
 var express = require('express')
 var router = express.Router()
 var apiRouter = express.Router()
