@@ -12,8 +12,6 @@ module.exports = function (router) {
     }
   }))
 
-  router.get('/users/current',
-    apiHelpers.allowLogged,
-    usersCtrl.current
-  )
+  router.get('/users/login', usersCtrl.login)
+  router.get('/users/current', [ apiHelpers.allowLogged, usersCtrl.current ])
 }

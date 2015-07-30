@@ -4,11 +4,12 @@ var path = require('path')
 var frontCfg = require('konphyg')(process.cwd() + '/config')('front-end')
 
 require('./auth/jwt')(router)
-require('./users')(router)
 
 router.get('/', function (req, res) {
   res.render('index', frontCfg.meta)
 })
+
+require('./users')(router)
 
 module.exports = router
 
