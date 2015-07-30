@@ -70,7 +70,7 @@ userSchema.static('findByEmail', function (email, next) {
 })
 
 userSchema.static('findByIdAndActivate', function (id, body, next) {
-  this.findById(id).select('+password').populate('advertiser').exec(function (err, user) {
+  this.findById(id).select('+password').exec(function (err, user) {
     if (err) return next(err)
     if (!user) return next()
     if (typeof body.password !== 'undefined') {

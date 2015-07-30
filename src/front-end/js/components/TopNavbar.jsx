@@ -3,7 +3,7 @@ export default React.createClass({
 
   render () {
     return (
-      <RB.Navbar brand="I am a maze" fixedtop>
+      <RB.Navbar brand="My brand name" fixedtop>
         <RB.Nav navbar>
           <RB.NavItem eventKey={1} href='#'>Link</RB.NavItem>
         </RB.Nav>
