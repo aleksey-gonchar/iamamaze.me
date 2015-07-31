@@ -5,14 +5,16 @@ var initExpress = require('./lib/initializers/express')
 var http = require('http')
 var Promise = require('bluebird')
 var log = require('./lib/logger')
+var _ = require('lodash')
 
-if (process.env.NODE_ENV === 'development') {
+if (_.include(['development', 'test'], process.env.NODE_ENV)) {
   require('longjohn')
 }
 
 var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
 var port = serverCfg.port || 3000
 var server
+var onServerListenHook = null
 
 Promise.all([initMongo(), initExpress()])
   .then(function (res) {
@@ -21,6 +23,7 @@ Promise.all([initMongo(), initExpress()])
     server.listen(port)
     server.on('error', onError)
     server.on('listening', onListening)
+    server.on('close', onClosing)
   })
   .done()
 
@@ -51,4 +54,18 @@ function onListening () {
     ? 'pipe ' + addr
     : 'port ' + addr.port
   log.info('Listening on ' + bind)
+  if (_.isFunction(onServerListenHook)) {
+    onServerListenHook(null, server)
+  }
+}
+
+function onClosing () {
+  log.info('Server stopped')
+  process.exit()
+}
+
+module.exports = (hook) => {
+  if (_.isFunction(hook)) {
+    onServerListenHook = hook
+  }
 }
