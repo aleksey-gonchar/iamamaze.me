@@ -1,4 +1,3 @@
-require('harmonize')()
 var path = require('path')
 var rmdir = require('rimraf')
 var Promise = require('bluebird')
@@ -22,6 +21,7 @@ var pkg = $require('package.json')
 
 global.expect = chai.expect
 global.sinon = require('sinon')
+global.faker = faker
 
 var test = global.test = {}
 var variables = test.variables = {
@@ -38,11 +38,11 @@ test.cleanUploads = function (next) {
   rmdir(variables.uploadsDir, next)
 }
 
-test.cleanDB = function (done) {
+test.cleanDB = function (next) {
   mongoose.connect(variables.dbUri, function (err) {
-    if (err) return done(err)
+    if (err) return next(err)
     mongoose.connection.db.dropDatabase(function () {
-      mongoose.disconnect(done)
+      mongoose.disconnect(next)
     })
   })
 }
@@ -65,13 +65,16 @@ function stop (next) {
   if (test.server) {
     test.server.close()
     setTimeout( function () {
+      console.log('stop')
       next()
-    }, 500)
+    }, 1000)
   }
 }
 
-test.start = _.debounce(start, 2000)
-test.stop = _.debounce(stop, 2000)
+//test.start = _.debounce(start, 2000)
+//test.stop = _.debounce(stop, 2000)
+test.start = start
+test.stop = stop
 
 test.stopAndCleanupUploads = function (next) {
   test.stop(function (err) {

@@ -11,6 +11,8 @@ if (_.include(['development', 'test'], process.env.NODE_ENV)) {
   require('longjohn')
 }
 
+log.info('Starting app in [' + process.env.NODE_ENV + '] mode')
+
 var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
 var port = serverCfg.port || 3000
 var server
@@ -61,10 +63,10 @@ function onListening () {
 
 function onClosing () {
   log.info('Server stopped')
-  process.exit()
+  process.exit(0)
 }
 
-module.exports = (hook) => {
+module.exports = function (hook) {
   if (_.isFunction(hook)) {
     onServerListenHook = hook
   }

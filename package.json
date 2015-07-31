@@ -36,7 +36,6 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "handlebars-layouts": "^3.1.0",
-    "harmonize": "^1.4.4",
     "hbs": "^3.1.0",
     "hbs-utils": "^0.0.3",
     "immutable": "^3.7.2",

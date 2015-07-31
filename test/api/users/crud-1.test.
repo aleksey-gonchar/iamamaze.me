@@ -1,9 +1,9 @@
-describe('users CRUD1', () => {
+describe.skip('users CRUD1', function () {
 
   before(test.start)
   after(test.stop)
 
-  it('second test', () => {
+  it('second test', function () {
     expect(true).to.be.true
   })
 })

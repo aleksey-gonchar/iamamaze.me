@@ -16,7 +16,7 @@ module.exports = function (router) {
   })
 
   router.use(
-    (req, res, next) => {
+    function (req, res, next) {
       req.getToken = function (user) {
         var userProfile = {
           id: user.id.toString(),
