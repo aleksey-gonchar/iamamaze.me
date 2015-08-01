@@ -49,7 +49,7 @@ test.server = null
 
 var stopCallTimeoutId = null
 
-var start = next => {
+function start (next) {
   if (test.server) {
     // sever should be started once per folder
     if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
@@ -68,13 +68,13 @@ var start = next => {
 }
 
 
-var stop = next => {
+function stop (next) {
   if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
   stopCallTimeoutId = setTimeout( stopServer , 1000)
   next()
 }
 
-var stopServer = () => {
+function stopServer () {
   if (test.server) {
     test.server.close()
     process.exit(0)

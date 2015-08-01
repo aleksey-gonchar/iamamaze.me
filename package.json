@@ -19,7 +19,7 @@
     "bcryptjs": "^2.2.0",
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.2",
-    "bootsrtap": "^3.3.5",
+    "bootstrap": "^3.3.5",
     "browserify": "^11.0.0",
     "bunyan": "^1.4.0",
     "co": "^4.6.0",

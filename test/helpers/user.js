@@ -7,7 +7,7 @@ var Promise = require('bluebird')
 
 var User = $require('models/user')
 
-var getToken = user => {
+function getToken (user) {
   var jwt = require('jsonwebtoken')
   var userProfile = {
     id: user.id.toString(),
@@ -27,7 +27,7 @@ var getToken = user => {
  * + password
  *
  */
-var createUser = userData => {
+function createUser (userData) {
   var deferred = Promise.defer()
 
   // clone userData so that it stays untouched
@@ -50,7 +50,7 @@ var createUser = userData => {
   return deferred.promise
 }
 
-var loginUser = userData => {
+function loginUser (userData) {
   var deferred = Promise.defer()
   request.post({
     uri: test.variables.apiEndpoint + '/users/login',
@@ -72,7 +72,7 @@ var loginUser = userData => {
   return deferred.promise
 }
 
-var activateUser = userData => {
+function activateUser (userData) {
   var deferred = Promise.defer()
   User.findByCredentials(userData.email, userData.password, function (err, user) {
     if (err) {
@@ -90,7 +90,7 @@ var activateUser = userData => {
   return deferred.promise
 }
 
-var createAndLoginUser = (userData) => {
+function createAndLoginUser (userData) {
   // clone the given userData and inject if not present email and password values to be used for create and login actions
   var clonedUserData = R.clone(userData)
   clonedUserData.email = clonedUserData.email || faker.internet.email()
@@ -106,7 +106,7 @@ var createAndLoginUser = (userData) => {
     })
 }
 
-module.exports = (test) => {
+module.exports = function (test) {
   test.getToken = getToken
   test.createUser = createUser
   test.loginUser = loginUser
