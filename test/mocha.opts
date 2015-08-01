@@ -4,3 +4,6 @@
 --timeout 5000
 --recursive
 --harmony
+--check-leaks
+--no-exit
+--globals projection

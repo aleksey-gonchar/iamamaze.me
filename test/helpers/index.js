@@ -47,7 +47,15 @@ test.cleanDB = function (next) {
 
 test.server = null
 
-function start(next) {
+var stopCallTimeoutId = null
+
+var start = next => {
+  if (test.server) {
+    // sever should be started once per folder
+    if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
+    return next()
+  }
+
   test.cleanDB(function (err) {
     if (err) return next(err)
     if (!test.server) {
@@ -59,15 +67,20 @@ function start(next) {
   })
 }
 
-function stop (next) {
+
+var stop = next => {
+  if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
+  stopCallTimeoutId = setTimeout( stopServer , 1000)
+  next()
+}
+
+var stopServer = () => {
   if (test.server) {
     test.server.close()
-    next()
+    process.exit(0)
   }
 }
 
-//test.start = _.once(start)
-//test.stop = _.debounce(stop, 2000)
 test.start = start
 test.stop = stop
 
