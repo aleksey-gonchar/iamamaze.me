@@ -18,61 +18,35 @@ describe('users CRUD', function () {
   after(helpers.stop)
 
   var created = null
-  it('users basic crud', helpers.testCRUD({
-    url: testUrl,
-    mocks: {
-      'create-valid': function() {
-        return {
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-          email: faker.internet.email(),
-          password: faker.internet.password()
-        }
+  describe('users basic CRUD', helpers.testCRUD(testUrl, {
+    'create-valid': {
+      data: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        email: faker.internet.email(),
+        password: faker.internet.password()
       },
-      'create-invalid': function(){
-        return {
-          'email': 'invalid'
-        }
-      },
-      'update-valid': function(){
-        return {
-          'email': faker.internet.email()
-        }
-      },
-      'update-invalid': function(){
-        return {
-          'email': 'invalid'
-        }
-      },
-      'list-paginated': function() {
-        var largerCursor = moment(created.created).add(1, 'second').toObjectId()
-        return {
-          limit: 1,
-          cursor: largerCursor
-        }
+      expects: function(err, res){
+        created = res.body
       }
     },
-    expects: {
-      'create-valid': function(body, next){
-        created = body
-        next()
+    'create-invalid': {
+      data: {
+        'email': 'invalid'
+      }
+    },
+    'patch-valid': {
+      data: {
+        'email': faker.internet.email()
+      }
+    },
+    'patch-invalid': {
+      data: {
+        'email': 'invalid'
       },
-      'list': function(body, next){
-        expect(body.length).to.equal(1)
-        next()
-      },
-      'list-paginated': function(body, next){
-        expect(typeof body).to.be.an('object')
-        expect(body.limit).to.equal(1)
-        expect(body.cursor).to.be.defined
-        expect(body.items).to.be.defined
-        expect(body.items.length).to.equal(1)
-        expect(body.total).to.equal(1)
-        next()
-      },
-      'update-invalid': function(body, next){
+      expects : function(err, res){
+        var body = res.body
         expect(body.errors.email[0]).to.equal('email invalid')
-        next()
       }
     }
   }))
