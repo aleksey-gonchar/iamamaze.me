@@ -1,13 +1,12 @@
-/* global it,expect */
+/* global before, after, it, expect, faker, sinon, afterEach, beforeEach, describe, helpers */
 var _ = require('lodash')
 var qs = require('querystring')
+var moment = require('moment')
+require('moment-objectid')()
 
 module.exports = function (helpers) {
-  var moment = require('moment')
-  require('moment-objectid')()
-
   helpers.testCRUD = function (options) {
-    return function () {
+    return function (next) {
       var request = require('request')
       var created = null
 
@@ -199,6 +198,8 @@ module.exports = function (helpers) {
           }
         })
       })
+
+      next()
     }
   }
 }

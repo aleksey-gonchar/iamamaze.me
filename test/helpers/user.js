@@ -53,7 +53,7 @@ function createUser (userData) {
 function loginUser (userData) {
   var deferred = Promise.defer()
   request.post({
-    uri: test.variables.apiEndpoint + '/users/login',
+    uri: helpers.variables.apiEndpoint + '/users/login',
     json: {
       'email': userData.email,
       'password': userData.password
@@ -97,19 +97,21 @@ function createAndLoginUser (userData) {
   clonedUserData.password = clonedUserData.password || faker.internet.password()
   clonedUserData.beenConvicted = clonedUserData.beenConvicted || false
 
-  return test.createUser(clonedUserData)
+  return helpers.createUser(clonedUserData)
     .then(function () {
-      return test.activateUser(clonedUserData)
+      return helpers.activateUser(clonedUserData)
         .then(function () {
-          return test.loginUser(clonedUserData)
+          return helpers.loginUser(clonedUserData)
         })
     })
 }
 
-module.exports = function (test) {
-  test.getToken = getToken
-  test.createUser = createUser
-  test.loginUser = loginUser
-  test.activateUser = activateUser
-  test.createAndLoginUser = createAndLoginUser
+module.exports = function (helpers) {
+  helpers.user = {
+    getToken: getToken,
+    create: createUser,
+    login: loginUser,
+    activate: activateUser,
+    createAndLogin: createAndLoginUser
+  }
 }

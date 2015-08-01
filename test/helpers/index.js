@@ -20,23 +20,23 @@ global.expect = chai.expect
 global.sinon = require('sinon')
 global.faker = faker
 
-var test = global.test = {}
-var variables = test.variables = {
+var helpers = global.helpers= {}
+var variables = helpers.variables = {
   dbUri: mongoCfg.uri,
   httpEndpoint: 'http://127.0.0.1:' + serverCfg.port,
   apiEndpoint: 'http://127.0.0.1:' + serverCfg.port + serverCfg.api.mountPoint,
   uploadsDir: path.join(process.cwd(), '/test/uploads')
 }
 
-//require('./testCRUD')(test)
-//require('./mock-resources')(test)
-require('./user')(test)
+require('./testCRUD')(helpers)
+//require('./mock-resources')(helpers)
+require('./user')(helpers)
 
-test.cleanUploads = function (next) {
+helpers.cleanUploads = function (next) {
   rmdir(variables.uploadsDir, next)
 }
 
-test.cleanDB = function (next) {
+helpers.cleanDB = function (next) {
   mongoose.connect(variables.dbUri, function (err) {
     if (err) return next(err)
     mongoose.connection.db.dropDatabase(function () {
@@ -45,22 +45,22 @@ test.cleanDB = function (next) {
   })
 }
 
-test.server = null
+helpers.server = null
 
 var stopCallTimeoutId = null
 
 function start (next) {
-  if (test.server) {
+  if (helpers.server) {
     // sever should be started once per folder
     if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
     return next()
   }
 
-  test.cleanDB(function (err) {
+  helpers.cleanDB(function (err) {
     if (err) return next(err)
-    if (!test.server) {
+    if (!helpers.server) {
       $require(pkg.main)(function whenStarted(err, server) {
-        test.server = server
+        helpers.server = server
         next()
       })
     } else { next() }
@@ -75,18 +75,18 @@ function stop (next) {
 }
 
 function stopServer () {
-  if (test.server) {
-    test.server.close()
+  if (helpers.server) {
+    helpers.server.close()
     process.exit(0)
   }
 }
 
-test.start = start
-test.stop = stop
+helpers.start = start
+helpers.stop = stop
 
-test.stopAndCleanupUploads = function (next) {
-  test.stop(function (err) {
+helpers.stopAndCleanupUploads = function (next) {
+  helpers.stop(function (err) {
     if (err) return next(err)
-    test.cleanUploads(next)
+    helpers.cleanUploads(next)
   })
 }
