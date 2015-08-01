@@ -63,7 +63,6 @@ function onListening () {
 
 function onClosing () {
   log.info('Server stopped')
-  process.exit(0)
 }
 
 module.exports = function (hook) {
