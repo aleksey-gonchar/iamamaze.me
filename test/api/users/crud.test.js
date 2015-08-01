@@ -36,7 +36,7 @@ describe('users CRUD', function () {
       },
       'update-valid': function(){
         return {
-          'email': 'valid-update@email.com'
+          'email': faker.internet.email()
         }
       },
       'update-invalid': function(){
