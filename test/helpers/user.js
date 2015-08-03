@@ -2,7 +2,7 @@
 var $require = require(process.cwd() + '/lib/require')
 var faker = require('faker')
 var _ = require('lodash')
-var request = require('superagent')
+var request = require('request')
 var Promise = require('bluebird')
 
 var User = $require('models/user')
@@ -18,8 +18,9 @@ function getToken (user) {
 }
 
 /**
- * creates user directly into db
- * userData is object hash of User model properties, where the following will be automatically populated:
+ * Creates user directly into db
+ * userData is object hash of User model properties, where the following will be automatically
+ * populated:
  *
  * + firstName
  * + lastName
@@ -30,16 +31,14 @@ function getToken (user) {
 function createUser (userData) {
   var deferred = Promise.defer()
 
-  // clone userData so that it stays untouched
-  var clonedUserData = _.clone(userData)
+  var fullUserData = _.chain(userData).clone().defaults({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }).value
 
-  // populate fields automatically if not present
-  clonedUserData.firstName = clonedUserData.firstName || faker.name.firstName()
-  clonedUserData.lastName = clonedUserData.lastName || faker.name.lastName()
-  clonedUserData.email = clonedUserData.email || faker.internet.email()
-  clonedUserData.password = clonedUserData.password || faker.internet.password()
-
-  User.create(clonedUserData, function (err, user) {
+  User.create(fullUserData, function (err, user) {
     if (err) {
       deferred.reject(err)
     }
@@ -62,7 +61,7 @@ function loginUser (userData) {
       return deferred.reject(err)
     }
     if (res.statusCode !== 200) {
-      return deferred.reject(new Error(res.statusCode + body))
+      return deferred.reject(body)
     }
 
     deferred.resolve(body)

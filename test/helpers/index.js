@@ -60,7 +60,7 @@ function start (next) {
       $require(pkg.main)((err, server) => {
         console.error(err)
         helpers.server = server
-        next()
+        process.nextTick(next)
       })
     } else { next() }
   })
