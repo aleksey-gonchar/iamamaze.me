@@ -6,4 +6,5 @@
 --check-leaks
 --no-exit
 --trace
+--harmony
 --globals projection

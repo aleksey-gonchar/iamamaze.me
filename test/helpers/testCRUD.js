@@ -11,7 +11,7 @@ var request = require('superagent')
 var defaults = {
   'create-valid' : {
     data: {},
-    expects: function (err, res) {
+    expects: (err, res) => {
       var body = res.body
       expect(err).to.be.not.defined
       expect(res.statusCode).to.equal(200)
@@ -21,7 +21,7 @@ var defaults = {
   },
   'create-invalid' : {
     data: {},
-    expects: function (err, res) {
+    expects: (err, res) => {
       var body = res.body
       expect(err).to.be.not.defined
       expect(res.statusCode).to.equal(422)
@@ -29,27 +29,40 @@ var defaults = {
     }
   },
   'patch-valid': {
-    data: {}
+    path : () => { return '/' + currDoc.id },
+    data: {},
+    expects: (err, res) => {
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+    }
   },
   'patch-invalid': {
-    data: {}
+    path : () => { return '/' + currDoc.id },
+    data: {},
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(422)
+      expect(body.errors).to.be.not.undefined
+    }
   },
   'list' : {
     data: {},
-    expects : function(err, res){
+    expects : (err, res) => {
       var body = res.body
       expect(body.length).to.be.at.least(1)
     }
   },
   'list-paginated': {
-    data: function () {
+    path : () => { return '?' + qs.stringify(_.result(this, 'data')) },
+    data: () => {
       var largerCursor = moment(currDoc.created).add(1, 'second').toObjectId()
       return {
         limit: 1,
         cursor: largerCursor
       }
     },
-    expects: function(err, res){
+    expects: (err, res) => {
       var body = res.body
       expect(body).to.be.an('object')
       expect(body.limit).to.equal(1)
@@ -58,15 +71,70 @@ var defaults = {
       expect(body.items.length).to.equal(1)
       expect(body.total).to.equal(1)
     }
+  },
+  'list-paginated-no-cursor': {
+    path: () => { return '?' + qs.stringify({ limit: 1 }) },
+    data: '',
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+      expect(body.total).to.equal(1)
+      expect(body.limit).to.equal(1)
+    }
+  },
+  'list-paginated-empty': {
+    path: () => {
+      var smallerCursor = moment(currDoc.created).subtract(10, 'second').toObjectId()
+      return '?' + qs.stringify({cursor: smallerCursor, limit: 1})
+    },
+    data: '',
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+      expect(body.total).to.equal(0)
+      expect(body.limit).to.equal(1)
+    }
+  },
+  'list-paginated-invalid': {
+    path: () => {
+      var smallerCursor = moment(currDoc.created).subtract(10, 'second').toObjectId()
+      return '?' + qs.stringify({ cursor: smallerCursor })
+    },
+    data: '',
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+      expect(body).to.be.an('array')
+    }
+  },
+  'retrieve': {
+    path : () => { return '/' + currDoc.id },
+    data: {},
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+      expect(body.id).to.equal(currDoc.id)
+    }
+  },
+  'remove': {
+    path : () => { return '/' + currDoc.id },
+    data: {},
+    expects: (err, res) => {
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+    }
   }
 }
 
 var actions = _.keys(defaults)
-
 var currDoc = null
 
 function extendDefaultsByOptions(options) {
-  _.each(actions, function (action) {
+  _.each(actions, (action) => {
     if (_.has(options, action)) {
       if (_.isFunction(options[action].expects)) {
         options[action].expects = [options[action].expects]
@@ -74,40 +142,33 @@ function extendDefaultsByOptions(options) {
       if (_.isFunction(defaults[action].expects)) {
         options[action].expects= [defaults[action].expects]
       }
-
+      options[action].path = defaults[action].path
       options[action].data = options[action].data
     } else {
-      options[action] =  defaults[action]
+      options[action] = defaults[action]
     }
   })
 
   return options
 }
 
+// should be used only in describe block
 function createTestCRUDFunction (baseUrl, options) {
   return function () {
     options = extendDefaultsByOptions(options)
 
-    _.each(options, function (opt, action) {
+    _.each(options, (opt, action) => {
       var route = buildCRUD.actionsMapping[action.split('-').shift()]
       var method = route.split(' ').shift().toLowerCase()
-      var hasId = _s.include(route, 'mongoId')
+      method = method === 'delete' ? 'del' : method
 
-      it(action, function(next) {
-        var actionUrl = baseUrl
-
-        if (hasId) {
-          actionUrl = baseUrl + '/' + currDoc.id
-        }
-
-        if(action === 'list-paginated') {
-          actionUrl = baseUrl + '?' + qs.stringify(_.result(opt, 'data'))
-        }
+      it(action, (next) => {
+        var actionUrl = baseUrl + (_.result(opt, 'path') || '')
         request[method](actionUrl)
           .send(opt.data)
-          .end(function (err, res) {
+          .end((err, res) => {
             if (_.isArray(opt.expects)) {
-              _.each(opt.expects, function (item) { item(err, res) })
+              _.each(opt.expects, (item) => { item(err, res) })
             }
             if (_.isFunction(opt.expects)) { opt.expects(err, res) }
             next()
@@ -115,132 +176,7 @@ function createTestCRUDFunction (baseUrl, options) {
       })
     })
   }
-
-  //  it('list paginated no cursor', function (next) {
-  //    var url = _.result(options, 'url') + '?' + qs.stringify({ limit: 1 })
-  //    request.get({
-  //      url: url,
-  //      json: {}
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      expect(body.total).to.equal(1)
-  //      expect(body.limit).to.equal(1)
-  //      if (options.expects['list-paginated-no-cursor']) {
-  //        options.expects['list-paginated-no-cursor'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('list paginated empty', function (next) {
-  //    var smallerCursor = moment(created.created).subtract(10, 'second').toObjectId()
-  //    var url = _.result(options, 'url') + '?' + qs.stringify({ cursor: smallerCursor, limit: 1 })
-  //    request.get({
-  //      url: url,
-  //      json: {}
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      expect(body.total).to.equal(0)
-  //      expect(body.limit).to.equal(1)
-  //      if (options.expects['list-paginated-empty']) {
-  //        options.expects['list-paginated-empty'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('list paginated invalid', function (next) {
-  //    var smallerCursor = moment(created.created).subtract(10, 'second').toObjectId()
-  //    var url = _.result(options, 'url') + '?' + qs.stringify({ cursor: smallerCursor })
-  //    request.get({
-  //      url: url,
-  //      json: {}
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      expect(_.isArray(body)).to.equal(true)
-  //      if (options.expects['list-paginated-invalid']) {
-  //        options.expects['list-paginated-invalid'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('retrieve', function (next) {
-  //    var url = _.result(options, 'url')
-  //    request.get({
-  //      url: url + '/' + created.id,
-  //      json: {}
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      expect(body.id).to.equal(created.id)
-  //      if (options.expects['retrieve']) {
-  //        options.expects['retrieve'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('update valid', function (next) {
-  //    var url = _.result(options, 'url')
-  //    request.put({
-  //      url: url + '/' + created.id,
-  //      json: options.mocks['update-valid']()
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      if (options.expects['update-valid']) {
-  //        options.expects['update-valid'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('update invalid', function (next) {
-  //    var url = _.result(options, 'url')
-  //    request.put({
-  //      url: url + '/' + created.id,
-  //      json: options.mocks['update-invalid']()
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(422, body)
-  //      expect(body.errors).to.be.not.undefined
-  //      if (options.expects['update-invalid']) {
-  //        options.expects['update-invalid'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  it('delete', function (next) {
-  //    var url = _.result(options, 'url')
-  //    request.del({
-  //      url: url + '/' + created.id,
-  //      json: {}
-  //    }, function (err, res, body) {
-  //      expect(err).to.be.not.defined
-  //      expect(res.statusCode).to.equal(200, body)
-  //      if (options.expects['delete-valid']) {
-  //        options.expects['delete-valid'](body, next)
-  //      } else {
-  //        next()
-  //      }
-  //    })
-  //  })
-  //
-  //  next()
-  //}
 }
-
 
 module.exports = function (helpers) {
   helpers.testCRUD = createTestCRUDFunction
