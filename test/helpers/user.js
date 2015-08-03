@@ -1,8 +1,8 @@
+/* global helpers */
 var $require = require(process.cwd() + '/lib/require')
-var mongoose = require('mongoose')
 var faker = require('faker')
-var request = require('superagent')
 var _ = require('lodash')
+var request = require('superagent')
 var Promise = require('bluebird')
 
 var User = $require('models/user')
@@ -31,14 +31,13 @@ function createUser (userData) {
   var deferred = Promise.defer()
 
   // clone userData so that it stays untouched
-  var clonedUserData = R.clone(userData)
+  var clonedUserData = _.clone(userData)
 
   // populate fields automatically if not present
   clonedUserData.firstName = clonedUserData.firstName || faker.name.firstName()
   clonedUserData.lastName = clonedUserData.lastName || faker.name.lastName()
   clonedUserData.email = clonedUserData.email || faker.internet.email()
   clonedUserData.password = clonedUserData.password || faker.internet.password()
-  clonedUserData.beenConvicted = clonedUserData.beenConvicted || false
 
   User.create(clonedUserData, function (err, user) {
     if (err) {
@@ -92,10 +91,9 @@ function activateUser (userData) {
 
 function createAndLoginUser (userData) {
   // clone the given userData and inject if not present email and password values to be used for create and login actions
-  var clonedUserData = R.clone(userData)
+  var clonedUserData = _.clone(userData)
   clonedUserData.email = clonedUserData.email || faker.internet.email()
   clonedUserData.password = clonedUserData.password || faker.internet.password()
-  clonedUserData.beenConvicted = clonedUserData.beenConvicted || false
 
   return helpers.createUser(clonedUserData)
     .then(function () {

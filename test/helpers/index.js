@@ -1,8 +1,6 @@
 var $require = require(process.cwd() + '/lib/require')
 var path = require('path')
 var rmdir = require('rimraf')
-var request = require('superagent')
-var _ = require('lodash')
 var faker = require('faker')
 var mongoose = require('mongoose')
 
@@ -20,7 +18,7 @@ global.expect = chai.expect
 global.sinon = require('sinon')
 global.faker = faker
 
-var helpers = global.helpers= {}
+var helpers = global.helpers = {}
 var variables = helpers.variables = {
   dbUri: mongoCfg.uri,
   httpEndpoint: 'http://127.0.0.1:' + serverCfg.port,
@@ -29,7 +27,7 @@ var variables = helpers.variables = {
 }
 
 require('./testCRUD')(helpers)
-//require('./mock-resources')(helpers)
+// require('./mock-resources')(helpers)
 require('./user')(helpers)
 
 helpers.cleanUploads = function (next) {
@@ -59,7 +57,8 @@ function start (next) {
   helpers.cleanDB(function (err) {
     if (err) return next(err)
     if (!helpers.server) {
-      $require(pkg.main)(function whenStarted(err, server) {
+      $require(pkg.main)((err, server) => {
+        console.error(err)
         helpers.server = server
         next()
       })
@@ -67,10 +66,9 @@ function start (next) {
   })
 }
 
-
 function stop (next) {
   if (stopCallTimeoutId) { clearTimeout(stopCallTimeoutId) }
-  stopCallTimeoutId = setTimeout( stopServer , 1000)
+  stopCallTimeoutId = setTimeout(stopServer, 1000)
   next()
 }
 

@@ -4,8 +4,10 @@
   "description": "Aleksey Gonchar personal web site",
   "main": "server.js",
   "scripts": {
-    "test": "standard && mocha",
-    "start": "nodemon -e js index.js"
+    "start": "nodemon -e js index.js",
+    "test": "npm run standard && npm run mocha",
+    "mocha": "node --harmony ./node_modules/mocha/bin/_mocha --ui bdd",
+    "standard": "node ./node_modules/standard/bin/cmd.js"
   },
   "keywords": [
     "pesronal",

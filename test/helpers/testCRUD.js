@@ -1,7 +1,6 @@
-/* global before, after, it, expect, faker, sinon, afterEach, beforeEach, describe, helpers */
+/* global it, expect */
 var $require = require(process.cwd() + '/lib/require')
 var _ = require('lodash')
-var _s = require('underscore.string')
 var qs = require('querystring')
 var moment = require('moment')
 var buildCRUD = $require('lib/api-helpers/buildCRUD')
@@ -9,7 +8,7 @@ require('moment-objectid')()
 var request = require('superagent')
 
 var defaults = {
-  'create-valid' : {
+  'create-valid': {
     data: {},
     expects: (err, res) => {
       var body = res.body
@@ -19,7 +18,7 @@ var defaults = {
       currDoc = res.body
     }
   },
-  'create-invalid' : {
+  'create-invalid': {
     data: {},
     expects: (err, res) => {
       var body = res.body
@@ -29,7 +28,7 @@ var defaults = {
     }
   },
   'patch-valid': {
-    path : () => { return '/' + currDoc.id },
+    path: () => { return '/' + currDoc.id },
     data: {},
     expects: (err, res) => {
       expect(err).to.be.not.defined
@@ -37,7 +36,7 @@ var defaults = {
     }
   },
   'patch-invalid': {
-    path : () => { return '/' + currDoc.id },
+    path: () => { return '/' + currDoc.id },
     data: {},
     expects: (err, res) => {
       var body = res.body
@@ -46,15 +45,16 @@ var defaults = {
       expect(body.errors).to.be.not.undefined
     }
   },
-  'list' : {
+  'list': {
     data: {},
-    expects : (err, res) => {
+    expects: (err, res) => {
+      expect(err).to.be.not.defined
       var body = res.body
       expect(body.length).to.be.at.least(1)
     }
   },
   'list-paginated': {
-    path : () => { return '?' + qs.stringify(_.result(this, 'data')) },
+    path: () => { return '?' + qs.stringify(_.result(this, 'data')) },
     data: () => {
       var largerCursor = moment(currDoc.created).add(1, 'second').toObjectId()
       return {
@@ -63,6 +63,7 @@ var defaults = {
       }
     },
     expects: (err, res) => {
+      expect(err).to.be.not.defined
       var body = res.body
       expect(body).to.be.an('object')
       expect(body.limit).to.equal(1)
@@ -111,7 +112,7 @@ var defaults = {
     }
   },
   'retrieve': {
-    path : () => { return '/' + currDoc.id },
+    path: () => { return '/' + currDoc.id },
     data: {},
     expects: (err, res) => {
       var body = res.body
@@ -121,7 +122,7 @@ var defaults = {
     }
   },
   'remove': {
-    path : () => { return '/' + currDoc.id },
+    path: () => { return '/' + currDoc.id },
     data: {},
     expects: (err, res) => {
       expect(err).to.be.not.defined
@@ -133,15 +134,11 @@ var defaults = {
 var actions = _.keys(defaults)
 var currDoc = null
 
-function extendDefaultsByOptions(options) {
+function extendDefaultsByOptions (options) {
   _.each(actions, (action) => {
     if (_.has(options, action)) {
-      if (_.isFunction(options[action].expects)) {
-        options[action].expects = [options[action].expects]
-      }
-      if (_.isFunction(defaults[action].expects)) {
-        options[action].expects= [defaults[action].expects]
-      }
+      options[action].expects = [options[action].expects || null]
+      options[action].expects = [defaults[action].expects || null]
       options[action].path = defaults[action].path
       options[action].data = options[action].data
     } else {

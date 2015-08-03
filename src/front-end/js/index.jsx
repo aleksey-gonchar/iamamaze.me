@@ -1,4 +1,4 @@
-/*---- boot ----*/
+/* global React */
 let $ = window.jQuery = require('jquery')
 window.React = require('react')
 window.RB = require('react-bootstrap')
