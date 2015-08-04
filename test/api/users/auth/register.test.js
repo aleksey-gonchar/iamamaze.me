@@ -1,9 +1,7 @@
-/* global before, after, it, expect, faker, sinon, afterEach, beforeEach, describe, helpers */
-
+/* global before, after, it, expect, faker, describe, helpers */
 var request = require('superagent')
 
-describe.skip('users CRUD1', function () {
-  var currUser
+describe('register', function () {
   var userData = {
     email: faker.internet.email(),
     password: faker.internet.password(),
@@ -11,12 +9,12 @@ describe.skip('users CRUD1', function () {
     lastName: faker.name.lastName()
   }
 
-  var testUrl = helpers.variables.apiEndpoint + '/users'
+  var testUrl = helpers.variables.apiEndpoint + '/users/register'
 
   before(helpers.start)
   after(helpers.stop)
 
-  it('create another new user', function (next) {
+  it('register new user', function (next) {
     request.post(testUrl)
       .send(userData)
       .set('Accept', 'application/json')

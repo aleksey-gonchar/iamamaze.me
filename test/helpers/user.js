@@ -7,14 +7,31 @@ var Promise = require('bluebird')
 
 var User = $require('models/user')
 
-function getToken (user) {
-  var jwt = require('jsonwebtoken')
-  var userProfile = {
-    id: user.id.toString(),
-    created: user.created,
-    email: user.email
-  }
-  return jwt.sign(userProfile, 'iamamaze.meapiv0')
+function activate (userData) {
+  var deferred = Promise.defer()
+  User.findByCredentials(userData.email, userData.password, function (err, user) {
+    if (err) {
+      return deferred.reject(err)
+    }
+    if (!user) {
+      return deferred.reject(new Error('user not found ' + userData.email + ' ' + userData.password))
+    }
+    user.active = true
+    user.save(function (res) {
+      deferred.resolve(res)
+    })
+  })
+
+  return deferred.promise
+}
+
+function checkUserDefaults (userData) {
+  return _.chain(userData).clone().defaults({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }).value()
 }
 
 /**
@@ -28,27 +45,37 @@ function getToken (user) {
  * + password
  *
  */
-function createUser (userData) {
+function create (userData) {
   var deferred = Promise.defer()
 
-  var fullUserData = _.chain(userData).clone().defaults({
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    password: faker.internet.password()
-  }).value
+  var fullUserData = checkUserDefaults(userData)
 
   User.create(fullUserData, function (err, user) {
-    if (err) {
-      deferred.reject(err)
-    }
+    if (err) { deferred.reject(err) }
     deferred.resolve(user)
   })
 
   return deferred.promise
 }
 
-function loginUser (userData) {
+function createAndLogin (userData) {
+  var fullUserData = checkUserDefaults(userData)
+  return create(fullUserData)
+    .then(() => { return activate(fullUserData) })
+    .then(() => { return login(fullUserData) })
+}
+
+function getToken (user) {
+  var jwt = require('jsonwebtoken')
+  var userProfile = {
+    id: user.id.toString(),
+    created: user.created,
+    email: user.email
+  }
+  return jwt.sign(userProfile, 'iamamaze.meapiv0')
+}
+
+function login (userData) {
   var deferred = Promise.defer()
   request.post({
     uri: helpers.variables.apiEndpoint + '/users/login',
@@ -70,45 +97,12 @@ function loginUser (userData) {
   return deferred.promise
 }
 
-function activateUser (userData) {
-  var deferred = Promise.defer()
-  User.findByCredentials(userData.email, userData.password, function (err, user) {
-    if (err) {
-      return deferred.reject(err)
-    }
-    if (!user) {
-      return deferred.reject(new Error('user not found ' + userData.email + ' ' + userData.password))
-    }
-    user.active = true
-    user.save(function (res) {
-      deferred.resolve(res)
-    })
-  })
-
-  return deferred.promise
-}
-
-function createAndLoginUser (userData) {
-  // clone the given userData and inject if not present email and password values to be used for create and login actions
-  var clonedUserData = _.clone(userData)
-  clonedUserData.email = clonedUserData.email || faker.internet.email()
-  clonedUserData.password = clonedUserData.password || faker.internet.password()
-
-  return helpers.createUser(clonedUserData)
-    .then(function () {
-      return helpers.activateUser(clonedUserData)
-        .then(function () {
-          return helpers.loginUser(clonedUserData)
-        })
-    })
-}
-
 module.exports = function (helpers) {
   helpers.user = {
     getToken: getToken,
-    create: createUser,
-    login: loginUser,
-    activate: activateUser,
-    createAndLogin: createAndLoginUser
+    create: create,
+    login: login,
+    activate: activate,
+    createAndLogin: createAndLogin
   }
 }

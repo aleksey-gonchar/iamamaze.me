@@ -58,7 +58,7 @@ function start (next) {
     if (err) return next(err)
     if (!helpers.server) {
       $require(pkg.main)((err, server) => {
-        console.error(err)
+        if (err) { console.error(err) }
         helpers.server = server
         process.nextTick(next)
       })

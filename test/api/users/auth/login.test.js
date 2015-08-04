@@ -1,8 +1,8 @@
 /* global before, after, it, expect, faker, describe, helpers */
 var request = require('superagent')
 
-describe('register', function () {
-  // var currUser
+describe('login', function () {
+   var currUser
   var userData = {
     email: faker.internet.email(),
     password: faker.internet.password(),
@@ -10,12 +10,18 @@ describe('register', function () {
     lastName: faker.name.lastName()
   }
 
-  var testUrl = helpers.variables.apiEndpoint + '/users/register'
+  var testUrl = helpers.variables.apiEndpoint + '/users/login'
 
   before(helpers.start)
+  before((next) => {
+    helpers.user.createAndLogin(userData).then((user) => {
+      currUser = user
+      next()
+    })
+  })
   after(helpers.stop)
 
-  it('register new user', function (next) {
+  it('login user', function (next) {
     request.post(testUrl)
       .send(userData)
       .set('Accept', 'application/json')
@@ -25,7 +31,7 @@ describe('register', function () {
         var body = res.body
         expect(body.email).to.be.equal(userData.email.toLowerCase())
         expect(body.password).to.be.undefined
-        expect(body.token).to.be.undefined
+        expect(body.token).to.be.ok
         next()
       })
   })

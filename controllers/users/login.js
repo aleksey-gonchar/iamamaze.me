@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
 
   User.findByCredentials(email, password, (err, user) => {
     if (err) return next(err)
-    if (!user) return next(errResNotFound('User'))
+    if (!user) return next(errResNotAuthorized('wrong credentials'))
     res.body = user.toJSON()
     res.body.token = req.getToken(res.body)
     next()
