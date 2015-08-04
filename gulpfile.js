@@ -16,6 +16,7 @@ gulp.task('style', function () {
     .pipe(sourcemaps.init())
     .pipe(gstylus({
       use: autoprefixer(),
+      'include css': true,
       define: {
         url: stylus.resolver()
       }
@@ -23,7 +24,7 @@ gulp.task('style', function () {
     .pipe(debug())
     .on('error', gutil.log)
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('build/styles/'))
+    .pipe(gulp.dest('build/css/'))
 })
 
 gulp.task('js', function () {
@@ -46,8 +47,11 @@ gulp.task('js', function () {
     .pipe(gulp.dest('build/js/'))
 })
 
-gulp.task('watch', function () {
+gulp.task('watch', ['watch-js'], function () {
   gulp.watch(['src/front-end/**/*.css', 'src/front-end/**/*.styl'], ['style'])
+})
+
+gulp.task('watch-js', function () {
   gulp.watch(['src/front-end/**/**/**/*.jsx', 'src/front-end/**/**/**/*.js'], ['js'])
 })
 

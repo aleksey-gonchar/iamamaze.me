@@ -4,7 +4,7 @@ export default React.createClass({
 
   render () {
     return (
-      <RB.Navbar brand='My brand name' fixedtop>
+      <RB.Navbar brand='My brand name' fixedtop fluid>
         <RB.Nav navbar>
           <RB.NavItem eventKey={1} href='#'>Link</RB.NavItem>
         </RB.Nav>
