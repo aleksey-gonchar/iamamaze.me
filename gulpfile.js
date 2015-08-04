@@ -1,7 +1,6 @@
 var gulp = require('gulp')
 var gstylus = require('gulp-stylus')
 var stylus = require('stylus')
-var concat = require('gulp-concat')
 var sourcemaps = require('gulp-sourcemaps')
 var autoprefixer = require('autoprefixer-stylus')
 var browserSync = require('browser-sync')
@@ -11,9 +10,8 @@ var babelify = require('babelify')
 var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
 var gutil = require('gulp-util')
-var guglify = require('gulp-uglify')
 
-gulp.task('style', function() {
+gulp.task('style', function () {
   return gulp.src('src/front-end/styles/index.bundle.styl')
     .pipe(sourcemaps.init())
     .pipe(gstylus({
@@ -38,7 +36,7 @@ gulp.task('js', function () {
   return b.bundle()
     .on('error', function (err) {
       gutil.log(err)
-      this.emit("end");
+      this.emit('end')
     })
     .pipe(source('index.bundle.js'))
     .pipe(buffer())
@@ -60,11 +58,11 @@ gulp.task('browser-sync', function () {
     'src/front-end/**/*.css',
     'src/front-end/**/*.styl',
     'src/front-end/**/*.js'
-  ];
+  ]
 
   browserSync.init(files, {
     server: {
       baseDir: './'
     }
-  });
-});
+  })
+})

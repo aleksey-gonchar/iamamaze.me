@@ -4,8 +4,6 @@ var createdModifiedPlugin = require('mongoose-createdmodified').createdModifiedP
 var paginatorPlugin = require('mongoose-paginator')
 var bcrypt = require('bcryptjs')
 
-var ObjectId = mongoose.Schema.ObjectId
-
 var saltRounds = 10
 var schema = {
   email: { type: String, required: true, unique: true, lowercase: true },

@@ -1,5 +1,4 @@
-import React from 'react'
-
+/* global React */
 export default React.createClass({
   displayName: 'HelloWorld',
 
@@ -7,7 +6,7 @@ export default React.createClass({
     return (
       <div className='container-fluid'>
         <div className='jumbotron'>
-          <h1><i className="fa fa-fw fa-rocket"></i>Hello world</h1>
+          <h1><i className='fa fa-fw fa-rocket'></i>Hello world</h1>
         </div>
       </div>
     )

@@ -1,3 +1,4 @@
+/* global React */
 let TopNavbar = require('../components/TopNavbar.jsx')
 let HelloWorld = require('../components/HelloWorld.jsx')
 
@@ -8,7 +9,7 @@ export default React.createClass({
     return (
       <body>
         <TopNavbar/>
-        <div className="container-fluid">
+        <div className='container-fluid'>
           <HelloWorld/>
         </div>
       </body>

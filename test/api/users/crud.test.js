@@ -1,94 +1,53 @@
-/* global before, after, it, expect, faker, sinon, afterEach, beforeEach, describe, helpers */
-
-var moment = require('moment')
-var request = require('superagent')
-
+/* global before, after, faker, describe, helpers, expect */
 describe('users CRUD', function () {
   var currUser
-  var userData = {
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName()
-  }
-
+  var currHeader
   var testUrl = helpers.variables.apiEndpoint + '/users'
+
+  var userData = {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }
 
   before(helpers.start)
   after(helpers.stop)
 
-  var created = null
-  it('users basic crud', helpers.testCRUD({
-    url: testUrl,
-    mocks: {
-      'create-valid': function() {
-        return {
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-          email: faker.internet.email(),
-          password: faker.internet.password()
-        }
-      },
-      'create-invalid': function(){
-        return {
-          'email': 'invalid'
-        }
-      },
-      'update-valid': function(){
-        return {
-          'email': faker.internet.email()
-        }
-      },
-      'update-invalid': function(){
-        return {
-          'email': 'invalid'
-        }
-      },
-      'list-paginated': function() {
-        var largerCursor = moment(created.created).add(1, 'second').toObjectId()
-        return {
-          limit: 1,
-          cursor: largerCursor
-        }
+  describe('checking', helpers.testCRUD(testUrl, {
+    'create-valid': {
+      data: userData,
+      after: (res, next) => {
+        currUser = res.body
+        currUser.password = userData.password
+
+        helpers.user.login(currUser).then((res) => {
+          currHeader = { Authorization: res.token }
+          next()
+        })
       }
     },
-    expects: {
-      'create-valid': function(body, next){
-        created = body
-        next()
+    'create-invalid': {
+      data: {
+        'email': 'invalid'
+      }
+    },
+    'patch-valid': {
+      header: () => { return currHeader },
+      data: {
+        'email': faker.internet.email()
+      }
+    },
+    'patch-invalid': {
+      header: () => { return currHeader },
+      data: {
+        'email': 'invalid'
       },
-      'list': function(body, next){
-        expect(body.length).to.equal(1)
-        next()
-      },
-      'list-paginated': function(body, next){
-        expect(typeof body).to.be.an('object')
-        expect(body.limit).to.equal(1)
-        expect(body.cursor).to.be.defined
-        expect(body.items).to.be.defined
-        expect(body.items.length).to.equal(1)
-        expect(body.total).to.equal(1)
-        next()
-      },
-      'update-invalid': function(body, next){
+      expects: (err, res) => {
+        expect(err).to.be.not.defined
+        var body = res.body
         expect(body.errors.email[0]).to.equal('email invalid')
-        next()
       }
     }
   }))
-
-  it('create new user', function (next) {
-    request.post(testUrl)
-      .send(userData)
-      .set('Accept', 'application/json')
-      .end(function (err, res) {
-        expect(err).to.be.null
-        expect(res.statusCode).to.be.equal(200)
-        var body = res.body
-        expect(body.email).to.be.equal(userData.email.toLowerCase())
-        expect(body.password).to.be.undefined
-        expect(body.token).to.be.undefined
-        next()
-      })
-  })
 })

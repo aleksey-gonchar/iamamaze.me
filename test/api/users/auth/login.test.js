@@ -1,9 +1,8 @@
-/* global before, after, it, expect, faker, sinon, afterEach, beforeEach, describe, helpers */
-
+/* global before, after, it, expect, faker, describe, helpers */
 var request = require('superagent')
 
-describe.skip('users CRUD1', function () {
-  var currUser
+describe('login', function () {
+   var currUser
   var userData = {
     email: faker.internet.email(),
     password: faker.internet.password(),
@@ -11,12 +10,18 @@ describe.skip('users CRUD1', function () {
     lastName: faker.name.lastName()
   }
 
-  var testUrl = helpers.variables.apiEndpoint + '/users'
+  var testUrl = helpers.variables.apiEndpoint + '/users/login'
 
   before(helpers.start)
+  before((next) => {
+    helpers.user.createAndLogin(userData).then((user) => {
+      currUser = user
+      next()
+    })
+  })
   after(helpers.stop)
 
-  it('create another new user', function (next) {
+  it('login user', function (next) {
     request.post(testUrl)
       .send(userData)
       .set('Accept', 'application/json')
@@ -26,7 +31,7 @@ describe.skip('users CRUD1', function () {
         var body = res.body
         expect(body.email).to.be.equal(userData.email.toLowerCase())
         expect(body.password).to.be.undefined
-        expect(body.token).to.be.undefined
+        expect(body.token).to.be.ok
         next()
       })
   })

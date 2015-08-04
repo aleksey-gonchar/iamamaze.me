@@ -1,78 +1,13 @@
+/* global helpers */
 var $require = require(process.cwd() + '/lib/require')
-var mongoose = require('mongoose')
 var faker = require('faker')
-var request = require('superagent')
 var _ = require('lodash')
+var request = require('request')
 var Promise = require('bluebird')
 
 var User = $require('models/user')
 
-function getToken (user) {
-  var jwt = require('jsonwebtoken')
-  var userProfile = {
-    id: user.id.toString(),
-    created: user.created,
-    email: user.email
-  }
-  return jwt.sign(userProfile, 'iamamaze.meapiv0')
-}
-
-/**
- * creates user directly into db
- * userData is object hash of User model properties, where the following will be automatically populated:
- *
- * + firstName
- * + lastName
- * + email
- * + password
- *
- */
-function createUser (userData) {
-  var deferred = Promise.defer()
-
-  // clone userData so that it stays untouched
-  var clonedUserData = R.clone(userData)
-
-  // populate fields automatically if not present
-  clonedUserData.firstName = clonedUserData.firstName || faker.name.firstName()
-  clonedUserData.lastName = clonedUserData.lastName || faker.name.lastName()
-  clonedUserData.email = clonedUserData.email || faker.internet.email()
-  clonedUserData.password = clonedUserData.password || faker.internet.password()
-  clonedUserData.beenConvicted = clonedUserData.beenConvicted || false
-
-  User.create(clonedUserData, function (err, user) {
-    if (err) {
-      deferred.reject(err)
-    }
-    deferred.resolve(user)
-  })
-
-  return deferred.promise
-}
-
-function loginUser (userData) {
-  var deferred = Promise.defer()
-  request.post({
-    uri: helpers.variables.apiEndpoint + '/users/login',
-    json: {
-      'email': userData.email,
-      'password': userData.password
-    }
-  }, function (err, res, body) {
-    if (err) {
-      return deferred.reject(err)
-    }
-    if (res.statusCode !== 200) {
-      return deferred.reject(new Error(res.statusCode + body))
-    }
-
-    deferred.resolve(body)
-  })
-
-  return deferred.promise
-}
-
-function activateUser (userData) {
+function activate (userData) {
   var deferred = Promise.defer()
   User.findByCredentials(userData.email, userData.password, function (err, user) {
     if (err) {
@@ -90,28 +25,84 @@ function activateUser (userData) {
   return deferred.promise
 }
 
-function createAndLoginUser (userData) {
-  // clone the given userData and inject if not present email and password values to be used for create and login actions
-  var clonedUserData = R.clone(userData)
-  clonedUserData.email = clonedUserData.email || faker.internet.email()
-  clonedUserData.password = clonedUserData.password || faker.internet.password()
-  clonedUserData.beenConvicted = clonedUserData.beenConvicted || false
+function checkUserDefaults (userData) {
+  return _.chain(userData).clone().defaults({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }).value()
+}
 
-  return helpers.createUser(clonedUserData)
-    .then(function () {
-      return helpers.activateUser(clonedUserData)
-        .then(function () {
-          return helpers.loginUser(clonedUserData)
-        })
-    })
+/**
+ * Creates user directly into db
+ * userData is object hash of User model properties, where the following will be automatically
+ * populated:
+ *
+ * + firstName
+ * + lastName
+ * + email
+ * + password
+ *
+ */
+function create (userData) {
+  var deferred = Promise.defer()
+
+  var fullUserData = checkUserDefaults(userData)
+
+  User.create(fullUserData, function (err, user) {
+    if (err) { deferred.reject(err) }
+    deferred.resolve(user)
+  })
+
+  return deferred.promise
+}
+
+function createAndLogin (userData) {
+  var fullUserData = checkUserDefaults(userData)
+  return create(fullUserData)
+    .then(() => { return activate(fullUserData) })
+    .then(() => { return login(fullUserData) })
+}
+
+function getToken (user) {
+  var jwt = require('jsonwebtoken')
+  var userProfile = {
+    id: user.id.toString(),
+    created: user.created,
+    email: user.email
+  }
+  return jwt.sign(userProfile, 'iamamaze.meapiv0')
+}
+
+function login (userData) {
+  var deferred = Promise.defer()
+  request.post({
+    uri: helpers.variables.apiEndpoint + '/users/login',
+    json: {
+      'email': userData.email,
+      'password': userData.password
+    }
+  }, function (err, res, body) {
+    if (err) {
+      return deferred.reject(err)
+    }
+    if (res.statusCode !== 200) {
+      return deferred.reject(body)
+    }
+
+    deferred.resolve(body)
+  })
+
+  return deferred.promise
 }
 
 module.exports = function (helpers) {
   helpers.user = {
     getToken: getToken,
-    create: createUser,
-    login: loginUser,
-    activate: activateUser,
-    createAndLogin: createAndLoginUser
+    create: create,
+    login: login,
+    activate: activate,
+    createAndLogin: createAndLogin
   }
 }

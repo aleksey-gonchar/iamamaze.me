@@ -1,9 +1,10 @@
+/* global React */
 export default React.createClass({
   displayName: 'TopNavbar',
 
   render () {
     return (
-      <RB.Navbar brand="My brand name" fixedtop>
+      <RB.Navbar brand='My brand name' fixedtop>
         <RB.Nav navbar>
           <RB.NavItem eventKey={1} href='#'>Link</RB.NavItem>
         </RB.Nav>
