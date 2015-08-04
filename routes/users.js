@@ -16,7 +16,7 @@ module.exports = function (router) {
       'pre-retrieve': apiHelpers.allowLogged,
       'pre-patch': apiHelpers.allowLogged,
       'pre-remove': apiHelpers.allowLogged,
-      update: false,
+      update: false
     }
   }))
 }
