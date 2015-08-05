@@ -7,7 +7,6 @@ export default React.createClass({
       <div className='container-fluid'>
         <div className='jumbotron'>
           <h1><i className='fa fa-fw fa-rocket'></i>Hello world</h1>
-          <div id='test1'>asd</div>
         </div>
       </div>
     )
