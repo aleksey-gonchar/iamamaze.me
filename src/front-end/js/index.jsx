@@ -25,7 +25,7 @@ $(() => {
       <Route name='sign-up' handler={SignUp}/>
       <Route name='login' handler={Login}/>
       <Route name='dashboard' handler={Dashboard}/>
-      <Route name='public' handler={Private}/>
+      <Route name='public' handler={Public}/>
       <Route name='private' handler={Private}/>
       <DefaultRoute handler={Dashboard} />
     </Route>

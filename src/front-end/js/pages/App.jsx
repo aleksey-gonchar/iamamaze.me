@@ -1,17 +1,19 @@
-/* global React, Router */
-let TopNavbar = require('../components/TopNavbar.jsx')
+/* global React */
+import TopNavbar from '../components/TopNavbar.jsx'
+
+let { RouteHandler } = Router
 
 export default React.createClass({
   displayName: 'AppIndex',
 
   render () {
     return (
-      <body>
+      <div id='app'>
         <TopNavbar/>
         <div className='container-fluid'>
-          <Router.RouteHandler user={this.state}/>
+          <RouteHandler/>
         </div>
-      </body>
+      </div>
     )
   }
 })
