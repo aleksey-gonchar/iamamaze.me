@@ -49,7 +49,7 @@ gulp.task('js', function () {
 
 gulp.task('vendor-js', function () {
   var b = browserify({
-    entries: './src/front-end/js/vendor/index.js',
+    entries: './src/vendor/js/index.js',
     debug: true,
     transform: [babelify]
   })
@@ -73,7 +73,7 @@ gulp.task('watch', ['watch-js'], function () {
 
 gulp.task('watch-js', function () {
   gulp.watch(['src/front-end/**/**/**/*.jsx', 'src/front-end/**/**/**/*.js'], ['js'])
-  gulp.watch(['src/front-end/**/**/**/*.jsx', 'src/front-end/**/**/**/*.js'], ['vendor-js'])
+  gulp.watch(['src/vendor/**/**/**/*.jsx', 'src/vendor/**/**/**/*.js'], ['vendor-js'])
 })
 
 gulp.task('build', ['js', 'vendor-js', 'style'], function () {})

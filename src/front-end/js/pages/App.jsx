@@ -1,16 +1,15 @@
-/* global React */
+/* global React, Router */
 let TopNavbar = require('../components/TopNavbar.jsx')
-let HelloWorld = require('../components/HelloWorld.jsx')
 
 export default React.createClass({
-  displayName: 'IndexPage',
+  displayName: 'AppIndex',
 
   render () {
     return (
       <body>
         <TopNavbar/>
         <div className='container-fluid'>
-          <HelloWorld/>
+          <Router.RouteHandler user={this.state}/>
         </div>
       </body>
     )
