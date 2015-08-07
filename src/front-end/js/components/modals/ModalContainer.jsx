@@ -1,6 +1,7 @@
 /* global React */
-
 import SignUpModal from './SignUpModal.jsx'
+import ModalStore from '../../stores/ModalStore.js'
+import ModalActions from '../../actions/ModalActions.js'
 
 export default React.createClass({
   displayName: 'ModalContainer',

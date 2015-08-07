@@ -2,16 +2,17 @@
 let { Nav } = RB
 let { NavItemLink } = RRB
 
+import ModalActions from '../actions/ModalActions.js'
+
 export default React.createClass({
   displayName: 'UserNavbar',
 
   render () {
     return (
       <Nav navbar right>
-        <NavItemLink to='login'>Log in</NavItemLink>
-        <NavItemLink to='sign-up'>Sign up</NavItemLink>
+        <NavItem onClick={ModalAction.show('login')}>Log in</NavItem>
+        <NavItem onClick={ModalAction.show('sign-up')}>Sign up</NavItem>
       </Nav>
     )
   }
 })
-

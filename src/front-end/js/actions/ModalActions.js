@@ -5,16 +5,16 @@ var Actions = {
   show: (modalName) => {
     Dispatcher.dispatch({
       actionType: ModalConstants.SHOW_MODAL,
-      data: modalName
+      name: modalName
     })
   },
 
   hide: (modalName) => {
     Dispatcher.dispatch({
       actionType: ModalConstants.HIDE_MODAL,
-      data: modalName
+      name: modalName
     })
   }
 }
 
-module.exports = Actions
+export default Actions
