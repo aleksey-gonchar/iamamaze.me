@@ -1,5 +1,6 @@
 /* global React */
 import TopNavbar from '../components/TopNavbar.jsx'
+import ModalContainer from '../components/modals/ModalContainer.jsx'
 
 let { RouteHandler } = Router
 
@@ -13,6 +14,7 @@ export default React.createClass({
         <div className='container-fluid'>
           <RouteHandler/>
         </div>
+        <ModalContainer />
       </div>
     )
   }
