@@ -1,12 +1,13 @@
-/* global React */
+import Component from './Component.jsx'
 import UserNavbar from './UserNavbar.jsx'
 
 let { Link } = Router
 let { Nav, Navbar, NavItem, CollapsibleNav } = RB
 let { NavItemLink } = RRB
 
-export default React.createClass({
-  displayName: 'TopNavbar',
+class TopNavbar extends Component {
+  constructor(props) { super(props) }
+
   render () {
     return (
       <Navbar fixedtop fluid toggleNavKey={0}>
@@ -29,4 +30,6 @@ export default React.createClass({
       </Navbar>
     )
   }
-})
+}
+
+export default TopNavbar

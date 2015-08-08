@@ -1,7 +1,7 @@
 /* global React, Router */
 require('./vendor-config')
 
-window.React = require('react')
+window.React = require('react/addons')
 window.Router = require('react-router')
 window.RB = require('react-bootstrap')
 window.RRB = require('react-router-bootstrap')

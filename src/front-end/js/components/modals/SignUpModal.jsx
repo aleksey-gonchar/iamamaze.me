@@ -1,32 +1,23 @@
-/* global React */
+import Component from '../Component.jsx'
+import ModalActions from '../../actions/ModalActions.js'
+import ModalStore from '../../stores/ModalStore.js'
+
 let { Modal, Button } = RB
 let { Header, Body, Title, Footer } = Modal
 
-import React from 'react/addons'
-
-export default React.createClass({
-  displayName: 'SingUpModal',
-  mixins: [
-    React.addons.LinkedStateMixin,
-    Router.Navigation,
-    Router.State
-  ],
-
-  getInitialState () {
-    return { showModal: false }
-  },
+class SignUpModal extends Component{
+  constructor(props) {
+    super(props)
+    this.state = ModalStore.getState().get('sign-up')
+  }
 
   close () {
-    this.setState({ showModal: false })
-  },
-
-  open () {
-    this.setState({ showModal: true })
-  },
+    this.props.actions.close('sign-up')
+  }
 
   render () {
     return (
-      <Modal show={this.state.showModal} onHide={this.close}>
+      <Modal show={this.state.isOpen} onHide={this.close}>
         <Header closeButton>
           <Title>Sign up</Title>
         </Header>
@@ -40,4 +31,14 @@ export default React.createClass({
       </Modal>
     )
   }
-})
+}
+
+SignUpModal.propsTypes = {
+  actions : React.PropTypes.object.isRequired
+}
+
+SignUpModal.defaulsProps = {
+  actions: ModalActions
+}
+
+export default SignUpModal

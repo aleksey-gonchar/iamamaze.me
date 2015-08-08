@@ -1,7 +1,7 @@
 import Dispatcher from '../dispatcher.js'
 import ModalConstants from '../constants/ModalConstants.js'
 
-var Actions = {
+var ModalActions = {
   show: (modalName) => {
     Dispatcher.dispatch({
       actionType: ModalConstants.SHOW_MODAL,
@@ -17,4 +17,4 @@ var Actions = {
   }
 }
 
-export default Actions
+export default ModalActions

@@ -1,12 +1,11 @@
-/* global React */
+/* global React, Router */
+import Component from '../components/Component.jsx'
 import TopNavbar from '../components/TopNavbar.jsx'
 import ModalContainer from '../components/modals/ModalContainer.jsx'
 
 let { RouteHandler } = Router
 
-export default React.createClass({
-  displayName: 'AppIndex',
-
+class App extends Component {
   render () {
     return (
       <div id='app'>
@@ -18,4 +17,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default App
