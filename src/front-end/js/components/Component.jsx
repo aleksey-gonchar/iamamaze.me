@@ -21,9 +21,9 @@ class Component extends React.Component {
    * @method shouldComponentUpdate
    * @returns {Boolean}
    */
-  shouldComponentUpdate() {
-    return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments)
-  }
+  //shouldComponentUpdate() {
+  //  return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments)
+  //}
 }
 
 export default Component

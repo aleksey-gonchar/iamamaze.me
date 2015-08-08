@@ -1,7 +1,4 @@
-/* global React */
-export default React.createClass({
-  displayName: 'HelloWorld',
-
+class HelloWorld extends React.Component {
   render () {
     return (
       <div className='container-fluid'>
@@ -11,4 +8,6 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+export default HelloWorld

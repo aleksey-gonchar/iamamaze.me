@@ -1,11 +1,9 @@
-/* global React */
-
-export default React.createClass({
-  displayName: 'Private',
-
+class Private extends React.Component {
   render () {
     return (
       <p>private content pending</p>
     )
   }
-})
+}
+
+export default Private
