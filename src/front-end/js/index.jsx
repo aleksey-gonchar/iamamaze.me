@@ -12,8 +12,6 @@ let App = require('./pages/App.jsx')
 
 /* partials */
 let Dashboard = require('./partials/Dashboard.jsx')
-let Login = require('./partials/Login.jsx')
-let SignUp = require('./partials/SignUp.jsx')
 let Private = require('./partials/Private.jsx')
 let Public = require('./partials/Public.jsx')
 
@@ -22,8 +20,6 @@ $(() => {
 
   let routes = (
     <Route name='app' path='/' handler={App} >
-      <Route name='sign-up' handler={SignUp}/>
-      <Route name='login' handler={Login}/>
       <Route name='dashboard' handler={Dashboard}/>
       <Route name='public' handler={Public}/>
       <Route name='private' handler={Private}/>

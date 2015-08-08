@@ -1,11 +1,10 @@
-/* global React, Router */
 import Component from '../components/Component.jsx'
 import TopNavbar from '../components/TopNavbar.jsx'
 import ModalContainer from '../components/modals/ModalContainer.jsx'
 
 let { RouteHandler } = Router
 
-class App extends Component {
+class App extends React.Component {
   render () {
     return (
       <div id='app'>
