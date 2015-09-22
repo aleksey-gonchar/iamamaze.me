@@ -1,7 +1,7 @@
 {
-  "name": "emmofret",
+  "name": "IAmAMaze.me",
   "version": "1.0.0",
-  "description": "express.js + mongoose + mocha/chai + flux + react.js + TWBP boilerplate",
+  "description": "Alex Potter personal web page",
   "main": "server.js",
   "scripts": {
     "init": "node ./lib/initializers/secrets.js",
@@ -15,16 +15,15 @@
     "build-prod": "NODE_ENV=production node ./node_modules/webpack/bin/webpack"
   },
   "keywords": [
-    "boilerplate", "express", "react", "redux", "REST", "CRUD", "universal", "JWT"
+    "personal", "express", "react", "redux", "REST", "CRUD", "universal", "JWT"
   ],
   "author": "Tuiteraz",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:aleksey-gonchar/emmofret.git"
+    "url": "git@github.com:aleksey-gonchar/iamamaze.me.git"
   },
   "dependencies": {
-    "async": "1.4.0",
     "babel-runtime": "5.8.20",
     "bcryptjs": "2.2.0",
     "bluebird": "2.9.34",
@@ -43,13 +42,13 @@
     "file-loader": "0.8.4",
     "font-awesome": "4.3.0",
     "handlebars-layouts": "3.1.0",
-    "hbs": "3.1.0",
+    "hbs": "3.1.1",
     "hbs-utils": "0.0.3",
     "jquery": "2.1.4",
     "js-cookie": "2.0.3",
     "jsonwebtoken": "5.0.4",
     "konphyg": "1.4.0",
-    "lodash": "3.9.3",
+    "lodash": "3.10.1",
     "method-override": "2.3.4",
     "moment": "2.10.3",
     "moment-objectid": "0.0.1",
