@@ -26,6 +26,7 @@ function activate (userData) {
 }
 
 function checkUserDefaults (userData) {
+  userData = userData || {}
   return _.chain(userData).clone().defaults({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -72,13 +73,13 @@ function getToken (user) {
     created: user.created,
     email: user.email
   }
-  return jwt.sign(userProfile, 'iamamaze.meapiv0')
+  return jwt.sign(userProfile, 'emmofret.meapiv0')
 }
 
 function login (userData) {
   var deferred = Promise.defer()
   request.post({
-    uri: helpers.variables.apiEndpoint + '/users/login',
+    uri: helpers.variables.apiEndpoint + '/users/log-in',
     json: {
       'email': userData.email,
       'password': userData.password

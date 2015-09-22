@@ -1,9 +1,4 @@
 {
   "meta" : {
-    "title": "Alex Potter personal blog",
-    "description": "Alex Potter short bio, cv, tech articles and links",
-    "keywords": "personal blog, javascript, node.js, blog, react, developing, html",
-    "author": "Alex Potter",
-    "version": "0.0.1"
   }
 }

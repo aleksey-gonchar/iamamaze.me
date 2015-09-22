@@ -2,7 +2,7 @@
 var request = require('superagent')
 
 describe('[EDGE CASES] login', function () {
-   var currUser
+  var currUser
   var userData = {
     email: faker.internet.email(),
     password: faker.internet.password(),
@@ -10,7 +10,7 @@ describe('[EDGE CASES] login', function () {
     lastName: faker.name.lastName()
   }
 
-  var testUrl = helpers.variables.apiEndpoint + '/users/login'
+  var testUrl = helpers.variables.apiEndpoint + '/users/log-in'
 
   before(helpers.start)
   before((next) => {
@@ -34,7 +34,26 @@ describe('[EDGE CASES] login', function () {
       .set('Accept', 'application/json')
       .end(function (err, res) {
         expect(err).to.be.an('object')
-        expect(res.statusCode).to.be.equal(401)
+        expect(res.statusCode).to.be.equal(403)
+        expect(res.body).to.be.deep.equal(expectedRes)
+        next()
+      })
+  })
+
+  it.skip('return error when try to log in logged user', (next) => {
+    var expectedRes = {
+      error: 'wrong credentials'
+    }
+
+    request.post(testUrl)
+      .send({
+        email: userData.email,
+        password: userData.password
+      })
+      .set('Accept', 'application/json')
+      .end(function (err, res) {
+        expect(err).to.be.an('object')
+        expect(res.statusCode).to.be.equal(403)
         expect(res.body).to.be.deep.equal(expectedRes)
         next()
       })

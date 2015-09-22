@@ -17,7 +17,7 @@ var defaults = {
       expect(res.statusCode).to.equal(200)
       expect(body.errors).to.be.not.defined
     },
-    after: (res, next)=> {
+    after: (res, next) => {
       currDoc = res.body
       next()
     }
@@ -37,9 +37,6 @@ var defaults = {
     expects: (err, res) => {
       expect(err).to.be.null
       expect(res.statusCode).to.equal(200)
-    },
-    before: (next) => {
-      next()
     }
   },
   'patch-invalid': {
@@ -63,7 +60,7 @@ var defaults = {
   },
   'list-paginated': {
     header: () => { return _.result(currOptions['patch-valid'], 'header') },
-    path: () => { return '?' + qs.stringify(_.result(this, 'data')) },
+    path: () => { return '?' + qs.stringify(_.result(currOptions['list-paginated'], 'data')) },
     data: () => {
       var largerCursor = moment(currDoc.created).add(1, 'second').toObjectId()
       return {
@@ -134,6 +131,33 @@ var defaults = {
       expect(body.id).to.equal(currDoc.id)
     }
   },
+  'retrieve-set': {
+    header: () => { return _.result(currOptions['patch-valid'], 'header') },
+    path: () => { return '/' + currDoc.id + ';' + currDoc1.id },
+    data: {},
+    expects: (err, res) => {
+      var body = res.body
+      expect(err).to.be.not.defined
+      expect(res.statusCode).to.equal(200)
+      expect(body).to.be.an('array')
+      expect(body.length).to.eq(2)
+      expect(body[0].id).to.eq(currDoc.id)
+      expect(body[1].id).to.eq(currDoc1.id)
+    },
+    before: (next) => {
+      // suppose to have here function on every call returning different set of values
+      var data = _.result(currOptions['retrieve-set'], 'data')
+      request.post(resourceUrl)
+        .send(data)
+        .set('Accept', 'application/json')
+        .set(_.result(currOptions['patch-valid'], 'header'))
+        .end(function (err, res) {
+          if (err) { return next(err) }
+          currDoc1 = res.body
+          next()
+        })
+    }
+  },
   'remove': {
     header: () => { return _.result(currOptions['patch-valid'], 'header') },
     path: () => { return '/' + currDoc.id },
@@ -145,8 +169,10 @@ var defaults = {
   }
 }
 
+var resourceUrl = null
 var actions = _.keys(defaults)
 var currDoc = null
+var currDoc1 = null
 var currOptions // var to store options fro call to have access to dynamic header e.g.
 
 function extendDefaultsByOptions (options) {
@@ -200,6 +226,7 @@ function processFn (fn) {
 
 // should be used only in describe block
 function createTestCRUDFunction (baseUrl, options) {
+  resourceUrl = baseUrl
   return function () {
     currOptions = options = extendDefaultsByOptions(options)
 
@@ -209,11 +236,9 @@ function createTestCRUDFunction (baseUrl, options) {
       method = method === 'delete' ? 'del' : method
 
       it(action, (next) => {
-        var actionUrl = baseUrl + (_.result(opt, 'path') || '')
-
         processFn(opt.before[0])
         .then(() => { return processFn(opt.before[1]) })
-        .then((res)=> {
+        .then((res) => {
           var header = _.result(opt, 'header') || {}
 
           if (res) {
@@ -226,9 +251,11 @@ function createTestCRUDFunction (baseUrl, options) {
             next()
           })
 
+          var actionUrl = baseUrl + (_.result(opt, 'path') || '')
+
           request[method](actionUrl)
             .set(header)
-            .send(opt.data)
+            .send(_.result(opt, 'data'))
             .end((err, res) => {
               _.each(opt.expects, (fn) => {
                 _.isFunction(fn) && fn(err, res)
