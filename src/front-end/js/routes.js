@@ -23,7 +23,6 @@ export default (store) => {
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/public' component={Public}/>
       <Route path='/private' component={Private} onEnter={RouterContainer.requireAuth(store)}/>
-      <Redirect from='/app' to='/dashboard'/>
     </Route>
   )
 }
