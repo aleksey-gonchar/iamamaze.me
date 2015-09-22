@@ -1,20 +1,8 @@
-import Dispatcher from '../dispatcher.js'
-import ModalConstants from '../constants/ModalConstants.js'
+import { createAction } from 'redux-actions'
+import constants from '../constants.js'
+const { SHOW_MODAL, HIDE_MODAL } = constants.modal
 
-var ModalActions = {
-  show: (modalName) => {
-    Dispatcher.dispatch({
-      actionType: ModalConstants.SHOW_MODAL,
-      name: modalName
-    })
-  },
-
-  hide: (modalName) => {
-    Dispatcher.dispatch({
-      actionType: ModalConstants.HIDE_MODAL,
-      name: modalName
-    })
-  }
+module.exports = {
+  show: createAction(SHOW_MODAL),
+  hide: createAction(HIDE_MODAL)
 }
-
-export default ModalActions
