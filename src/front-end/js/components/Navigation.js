@@ -14,7 +14,7 @@ export default class Navigation extends React.Component {
       <Navbar fixedtop fluid toggleNavKey={0}>
         <div className='navbar-header'>
           <span className='navbar-brand'>
-            <Link to='/app'>My brand name</Link>
+            <Link to='/app/about'>My brand name</Link>
           </span>
         </div>
         <Nav navbar>
