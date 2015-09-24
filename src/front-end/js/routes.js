@@ -7,9 +7,9 @@ import $ from 'jquery'
 import App from './containers/App.js'
 
 /* partials */
-import Dashboard from './pages/Dashboard.js'
-import Private from './pages/Private.js'
-import Public from './pages/Public.js'
+import About from './pages/About.js'
+import CV from './pages/CV.js'
+import HireMe from './pages/HireMe.js'
 import Registration from './pages/Registration.js'
 import Login from './pages/Login.js'
 
@@ -20,9 +20,9 @@ export default (store) => {
     <Route path='/app' component={App}>
       <Route path='/login' component={Login} onEnter={onEnter}/>
       <Route path='/registration' component={Registration} onEnter={onEnter}/>
-      <Route path='/dashboard' component={Dashboard}/>
-      <Route path='/public' component={Public}/>
-      <Route path='/private' component={Private} onEnter={RouterContainer.requireAuth(store)}/>
+      <Route path='/about' component={About}/>
+      <Route path='/cv' component={CV}/>
+      <Route path='/hire-me' component={HireMe}/>
     </Route>
   )
 }
