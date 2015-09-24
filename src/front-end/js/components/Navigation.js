@@ -11,7 +11,7 @@ NavItemLink.contextTypes = Object.assign(NavItemLink.contextTypes, {
 export default class Navigation extends React.Component {
   render () {
     return (
-      <Navbar fixedtop fluid toggleNavKey={0}>
+      <Navbar fixedtop fluid data-class='Navigation'>
         <div className='navbar-header'>
           <span className='navbar-brand'>
             <Link to='/app/about'>My brand name</Link>

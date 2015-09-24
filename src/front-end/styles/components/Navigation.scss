@@ -1,0 +1,13 @@
+[data-class='Navigation'] {
+  .navbar {
+    border: none;
+  }
+
+  @media screen and (min-width: $break-landscape) {
+    position: fixed;
+    height: 100%;
+    width: $navigation-landscape-width;
+    padding: 5em 0 0;
+    text-align: center;
+  }
+}

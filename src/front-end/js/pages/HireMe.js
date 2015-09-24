@@ -7,7 +7,7 @@ export default class HireMe extends React.Component {
     return (
       <div>
         <Navigation />
-        <div className='container-fluid'>
+        <div className='container-fluid content'>
           <p>`Hire Me` content pending</p>
         </div>
       </div>

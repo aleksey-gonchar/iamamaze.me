@@ -7,7 +7,7 @@ export default class CV extends React.Component {
     return (
       <div>
         <Navigation />
-        <div className='container-fluid'>
+        <div className='container-fluid content'>
           <p>`CV` content pending</p>
         </div>
       </div>
