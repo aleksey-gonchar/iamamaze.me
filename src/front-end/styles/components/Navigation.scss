@@ -1,0 +1,24 @@
+[data-class='Navigation'] {
+  &.navbar {
+    border-radius: 0px;
+  }
+
+  border-top: none;
+  border-left: none;
+
+
+  @media screen and (max-width: $break-landscape) {
+    border-right: none;
+  }
+
+  @media screen and (min-width: $break-landscape) {
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    position: fixed;
+    height: 100%;
+    width: $navigation-landscape-width;
+    padding: 5em 0 0;
+    text-align: center;
+  }
+}

@@ -30,7 +30,7 @@ function logOut (state) {
   newState.token = null
   newState.user = null
   cookie.remove('token')
-  state.router.transitionTo('/app/dashboard')
+  state.router.transitionTo('/app/about')
   return newState
 }
 
@@ -84,7 +84,7 @@ export function isFetched (store) {
 
 function gotoIndex (state, action) {
   const transition = action.payload
-  const path = '/app/dashboard'
+  const path = '/app/about'
 
   if (transition) {
     transition.to(path)

@@ -1,6 +1,12 @@
 @import '~vendor/styles/index';
 @import 'varaibles';
 
-@import 'components/TopNavbar';
+@import 'components/Navigation';
 @import 'components/UserNavbar';
 //@import './components/inputs/PasswordInput'
+
+.content {
+  @media screen and (min-width: $break-landscape) {
+    margin-left: $navigation-landscape-width;
+  }
+}

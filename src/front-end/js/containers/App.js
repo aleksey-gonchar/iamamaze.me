@@ -6,7 +6,7 @@ import * as AppActions from '../actions/AppActions.js'
 import { isFetched } from '../reducers/AppReducer.js'
 import { bindActionCreators } from 'redux'
 
-import Dashboard from '../pages/Dashboard.js'
+import About from '../pages/About.js'
 
 function select (state) {
   return { application: state.application }
@@ -46,7 +46,7 @@ export default class App extends React.Component {
   render () {
     return (
       <div id='app'>
-        {this.props.children || (<Dashboard/>)}
+        {this.props.children || (<About />)}
         <ModalsContainer />
       </div>
     )
