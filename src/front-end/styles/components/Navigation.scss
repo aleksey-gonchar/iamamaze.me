@@ -2,43 +2,114 @@
   a {
     color: white;
   }
-  .navbar-nav {
-    li {
-      a {
-        color: white;
-        &:hover {
-          color: #BCE1F1;
-        }
-      }
-
-      &.active {
-        a {
-          color: #BCE1F1;
-          &:hover {
-            color: #BCE1F1;
-          }
-        }
-      }
-    }
-  }
 
   &.navbar {
     border-radius: 0px;
   }
 
+  h2 {
+    text-shadow: 0px 2px 2px #333;
+  }
+
   border-top: none;
   border-left: none;
 
-  background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
-  //background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
+  //background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
+  background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 
+  .navbar-social {
+    margin-top: 20px;
+
+    .fa-stack-1x {
+      color: #333;
+    }
+  }
+
+  // portrait mode
   @media screen and (max-width: $break-landscape) {
     border-right: none;
     background-position: 50% 0;
+
+    .navbar-menu {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      width: 100%;
+      //background-color: rgba(#214263,0.1);
+
+      .navbar-nav {
+        float: right;
+        margin-right: 20px;
+      }
+    }
+    .container-fluid {
+      display: table;
+    }
+
+    .navbar-header {
+      display: table;
+      vertical-align: baseline;
+      float: none;
+      height: 300px;
+      margin-top: 135px;
+      //margin-bottom: 70px;
+      & > a {
+        display: inline-block;
+        width: $navigation-avatar-dimension;
+        height: $navigation-avatar-dimension;
+      }
+
+      .navbar-avatar {
+        display: table-cell;
+      }
+
+      .navbar-titles {
+        padding-left: 20px;
+        display: table-cell;
+
+        .navbar-titles-container {
+          position: relative;
+          top: -42px;
+        }
+
+        .navbar-name {
+          display: block;
+        }
+
+        h2 {
+          margin-top:0;
+        }
+      }
+    }
+
+    .navbar-nav {
+      li {
+        a {
+          color: white;
+          &:hover {
+            color: #214263;
+            border-color: #70a3be;
+          }
+        }
+
+        &.active {
+          a {
+            border-color: #70a3be;
+            color: #214263;
+            &:hover {
+              border-color: #70a3be;
+              color: #214263;
+            }
+          }
+        }
+      }
+    }
+
   }
 
+  // landscape
   @media screen and (min-width: $break-landscape) {
     background-position: 50% 50%;
     border-top: none;
@@ -49,5 +120,53 @@
     width: $navigation-landscape-width;
     padding: 5em 0 0;
     text-align: center;
+
+    .container-fluid {
+      display: table-cell;
+      width: $navigation-landscape-width;
+    }
+    .navbar-header {
+      float: none;
+    }
+
+    .navbar-menu {
+      margin-top: 13px;
+      margin-left: 27px;
+    }
+
+    .navbar-nav {
+      li {
+        a {
+          color: white;
+          &:hover {
+            color: #BCE1F1;
+          }
+        }
+
+        &.active {
+          a {
+            color: #BCE1F1;
+            &:hover {
+              color: #BCE1F1;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .navbar-avatar {
+    img {
+      width: $navigation-avatar-dimension;
+      height: $navigation-avatar-dimension;
+      border-radius: $navigation-avatar-dimension + 10;
+      outline: none;
+      border-style: none;
+    }
+  }
+
+  .navbar-sub-title {
+    color: lightgrey;
   }
 }
