@@ -14,28 +14,28 @@ export default class Navigation extends React.Component {
     const socials = (
       <div className='navbar-social'>
         <a href='http://telegram.me/tuiteraz'>
-                  <span className='fa-stack fa-lg'>
-                    <i className='fa fa-circle fa-stack-2x fa-inverse'/>
-                    <i className='fa fa-paper-plane fa-stack-1x'/>
-                  </span>
+          <span className='fa-stack fa-lg'>
+            <i className='fa fa-circle fa-stack-2x fa-inverse'/>
+            <i className='fa fa-paper-plane fa-stack-1x'/>
+          </span>
         </a>
         <a href='https://fb.com/gonchara.net'>
-                  <span className='fa-stack fa-lg'>
-                    <i className='fa fa-circle fa-stack-2x fa-inverse'/>
-                    <i className='fa fa-facebook fa-stack-1x'/>
-                  </span>
+          <span className='fa-stack fa-lg'>
+            <i className='fa fa-circle fa-stack-2x fa-inverse'/>
+            <i className='fa fa-facebook fa-stack-1x'/>
+          </span>
         </a>
         <a href='https://ua.linkedin.com/in/alekseygonchar'>
-                  <span className='fa-stack fa-lg'>
-                    <i className='fa fa-circle fa-stack-2x fa-inverse'/>
-                    <i className='fa fa-linkedin fa-stack-1x'/>
-                  </span>
+          <span className='fa-stack fa-lg'>
+            <i className='fa fa-circle fa-stack-2x fa-inverse'/>
+            <i className='fa fa-linkedin fa-stack-1x'/>
+          </span>
         </a>
         <a href='https://github.com/aleksey-gonchar'>
-                  <span className='fa-stack fa-lg'>
-                    <i className='fa fa-circle fa-stack-2x fa-inverse'/>
-                    <i className='fa fa-github-alt fa-stack-1x'/>
-                  </span>
+          <span className='fa-stack fa-lg'>
+            <i className='fa fa-circle fa-stack-2x fa-inverse'/>
+            <i className='fa fa-github-alt fa-stack-1x'/>
+          </span>
         </a>
       </div>
     )

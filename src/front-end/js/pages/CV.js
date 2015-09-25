@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Navigation from '../components/Navigation.js'
+import Footer from '../components/Footer.js'
 
 export default class CV extends React.Component {
   render () {
@@ -8,8 +9,12 @@ export default class CV extends React.Component {
       <div>
         <Navigation />
         <div className='container-fluid content'>
-          <p>`CV` content pending</p>
+          <div className='row'>
+            <p>`CV` content pending</p>
+          </div>
+          <Footer />
         </div>
+
       </div>
     )
   }

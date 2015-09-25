@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Navigation from '../components/Navigation.js'
+import Footer from '../components/Footer.js'
 
 export default class HireMe extends React.Component {
   render () {
@@ -8,7 +9,10 @@ export default class HireMe extends React.Component {
       <div>
         <Navigation />
         <div className='container-fluid content'>
-          <p>`Hire Me` content pending</p>
+          <div className='row'>
+            <p>`Hire Me` content pending</p>
+          </div>
+          <Footer />
         </div>
       </div>
     )
