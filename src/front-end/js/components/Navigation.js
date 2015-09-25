@@ -13,9 +13,12 @@ export default class Navigation extends React.Component {
     return (
       <Navbar fixedtop fluid data-class='Navigation'>
         <div className='navbar-header'>
-          <span className='navbar-brand'>
-            <Link to='/app/about'>My brand name</Link>
-          </span>
+          <Link to='/app/about'>
+            <img src='/public/images/avatars/budva.jpg' className='navbar-avatar'/><br/>
+            <h2>Alex Potter</h2>
+          </Link>
+          <br/>
+          <span className='navbar-sub-title'>full stack javascript developer</span>
         </div>
         <Nav navbar>
           <NavItemLink to='/app/about'>ABOUT</NavItemLink>

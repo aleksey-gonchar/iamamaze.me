@@ -29,14 +29,20 @@
   border-top: none;
   border-left: none;
 
-  background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
-  //background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
+  //background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
+  background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 
+  // landscape mode
   @media screen and (max-width: $break-landscape) {
     border-right: none;
     background-position: 50% 0;
+
+    .navbar-table {
+      display: table-cell;
+      text-align: center;
+    }
   }
 
   @media screen and (min-width: $break-landscape) {
@@ -49,5 +55,30 @@
     width: $navigation-landscape-width;
     padding: 5em 0 0;
     text-align: center;
+
+    .container-fluid {
+      display: table-cell;
+      width: $navigation-landscape-width;
+    }
+    .navbar-header {
+      float: none;
+    }
+
+    .navbar-nav {
+      margin-top: 24px;
+      margin-left: 27px;
+    }
+  }
+
+  .navbar-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 200px;
+    outline: none;
+    border-style: none;
+  }
+
+  .navbar-sub-title {
+    color: lightgrey;
   }
 }
