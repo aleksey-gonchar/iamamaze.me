@@ -1,4 +1,27 @@
 [data-class='Navigation'] {
+  a {
+    color: white;
+  }
+  .navbar-nav {
+    li {
+      a {
+        color: white;
+        &:hover {
+          color: #BCE1F1;
+        }
+      }
+
+      &.active {
+        a {
+          color: #BCE1F1;
+          &:hover {
+            color: #BCE1F1;
+          }
+        }
+      }
+    }
+  }
+
   &.navbar {
     border-radius: 0px;
   }
@@ -6,12 +29,18 @@
   border-top: none;
   border-left: none;
 
+  background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
+  //background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @media screen and (max-width: $break-landscape) {
     border-right: none;
+    background-position: 50% 0;
   }
 
   @media screen and (min-width: $break-landscape) {
+    background-position: 50% 50%;
     border-top: none;
     border-bottom: none;
     border-left: none;
