@@ -15,16 +15,21 @@ export default class Navigation extends React.Component {
         <div className='navbar-header'>
           <Link to='/app/about'>
             <img src='/public/images/avatars/budva.jpg' className='navbar-avatar'/><br/>
-            <h2>Alex Potter</h2>
           </Link>
-          <br/>
-          <span className='navbar-sub-title'>full stack javascript developer</span>
+          <div className='navbar-titles'>
+            <Link to='/app/about' className='navbar-name'>
+              <h2>Alex Potter</h2>
+            </Link>
+            <span className='navbar-sub-title'>full stack js developer</span>
+          </div>
         </div>
-        <Nav navbar>
-          <NavItemLink to='/app/about'>ABOUT</NavItemLink>
-          <NavItemLink to='/app/cv'>CV</NavItemLink>
-          <NavItemLink to='/app/hire-me'>HIRE ME</NavItemLink>
-        </Nav>
+        <div className='navbar-menu'>
+          <Nav navbar>
+            <NavItemLink to='/app/about'>ABOUT</NavItemLink>
+            <NavItemLink to='/app/cv'>CV</NavItemLink>
+            <NavItemLink to='/app/hire-me'>HIRE ME</NavItemLink>
+          </Nav>
+        </div>
       </Navbar>
     )
   }
