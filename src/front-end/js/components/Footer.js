@@ -42,8 +42,8 @@ export default class Footer extends React.Component {
               <td>
                 <Icon name='copyright'/>&nbsp;
                 { moment().format('YYYY')}&nbsp;
-                <span className='name'>Alex Potter.</span>&nbsp;
-                <span className='sub-title'>All rights reserved.</span>
+                <span className='name'>Alex Potter</span>
+                <span className='sub-title'> - Full stack javascript developer</span>
               </td>
               <td>
                 {socials}
