@@ -49,18 +49,34 @@
     }
 
     .navbar-header {
+      display: table;
+      vertical-align: baseline;
       float: none;
-      margin-top: 108px;
-      margin-bottom: 70px;
+      height: 300px;
+      margin-top: 135px;
+      //margin-bottom: 70px;
       & > a {
         display: inline-block;
         width: $navigation-avatar-dimension;
         height: $navigation-avatar-dimension;
       }
 
+      .navbar-avatar {
+        display: table-cell;
+      }
+
       .navbar-titles {
-        margin-left: 20px;
-        display: inline-block;
+        padding-left: 20px;
+        display: table-cell;
+
+        .navbar-titles-container {
+          position: relative;
+          top: -42px;
+        }
+
+        .navbar-name {
+          display: block;
+        }
 
         h2 {
           margin-top:0;
@@ -141,11 +157,13 @@
   }
 
   .navbar-avatar {
-    width: $navigation-avatar-dimension;
-    height: $navigation-avatar-dimension;
-    border-radius: $navigation-avatar-dimension + 10;
-    outline: none;
-    border-style: none;
+    img {
+      width: $navigation-avatar-dimension;
+      height: $navigation-avatar-dimension;
+      border-radius: $navigation-avatar-dimension + 10;
+      outline: none;
+      border-style: none;
+    }
   }
 
   .navbar-sub-title {
