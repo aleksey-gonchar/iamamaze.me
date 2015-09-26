@@ -11,8 +11,7 @@
     text-shadow: 0px 2px 2px #333;
   }
 
-  border-top: none;
-  border-left: none;
+  border: none;
 
   //background-image: url('/public/images/bg/water-deep-sea-sun-min.jpg');
   background-image: url('/public/images/bg/ocean-sea-water-waves-min.jpg');
@@ -29,7 +28,6 @@
 
   // portrait mode
   @media screen and (max-width: $break-landscape) {
-    border-right: none;
     background-position: 50% 0;
 
     .navbar-menu {
@@ -112,9 +110,6 @@
   // landscape
   @media screen and (min-width: $break-landscape) {
     background-position: 50% 50%;
-    border-top: none;
-    border-bottom: none;
-    border-left: none;
     position: fixed;
     height: 100%;
     width: $navigation-landscape-width;
