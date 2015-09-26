@@ -1,6 +1,7 @@
 [data-class='Navigation'] {
   a {
     color: white;
+    @include transition(color .2s, border-color .5s)
   }
 
   &.navbar {
