@@ -15,5 +15,6 @@ module.exports = (app) => {
   require('./auth/jwt')(app) // we need jwt check for all routes
 
   require('./users')(apiRouter)
+  require('./cv')(apiRouter)
   app.use(serverCfg.api.mountPoint, apiRouter)
 }
