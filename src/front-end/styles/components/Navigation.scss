@@ -26,6 +26,49 @@
     }
   }
 
+  @mixin navbar-nav-dark-links () {
+    li {
+      a {
+        color: white;
+        &:hover {
+          color: #214263;
+          border-color: #70a3be;
+        }
+      }
+
+      &.active {
+        a {
+          border-color: #70a3be;
+          color: #214263;
+          &:hover {
+            border-color: #70a3be;
+            color: #214263;
+          }
+        }
+      }
+    }
+  }
+
+  @mixin navbar-nav-light-links () {
+    li {
+      a {
+        color: white;
+        &:hover {
+          color: #BCE1F1;
+        }
+      }
+
+      &.active {
+        a {
+          color: #BCE1F1;
+          &:hover {
+            color: #BCE1F1;
+          }
+        }
+      }
+    }
+  }
+
   // portrait mode
   @media screen and (max-width: $break-landscape) {
     background-position: 50% 0;
@@ -35,7 +78,11 @@
       top: 0px;
       right: 0px;
       width: 100%;
-      //background-color: rgba(#214263,0.1);
+      @include transition(background-color .5s);
+
+      &.solid-bg {
+        background-color: rgba(#214263, 0.8);
+      }
 
       .navbar-nav {
         float: right;
@@ -83,25 +130,10 @@
     }
 
     .navbar-nav {
-      li {
-        a {
-          color: white;
-          &:hover {
-            color: #214263;
-            border-color: #70a3be;
-          }
-        }
+      @include navbar-nav-dark-links();
 
-        &.active {
-          a {
-            border-color: #70a3be;
-            color: #214263;
-            &:hover {
-              border-color: #70a3be;
-              color: #214263;
-            }
-          }
-        }
+      &.light-links {
+        @include navbar-nav-light-links();
       }
     }
 
@@ -130,23 +162,7 @@
     }
 
     .navbar-nav {
-      li {
-        a {
-          color: white;
-          &:hover {
-            color: #BCE1F1;
-          }
-        }
-
-        &.active {
-          a {
-            color: #BCE1F1;
-            &:hover {
-              color: #BCE1F1;
-            }
-          }
-        }
-      }
+      @include navbar-nav-light-links()
     }
 
   }

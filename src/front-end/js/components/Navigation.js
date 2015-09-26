@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import $ from 'jquery'
 
 import { Nav, Navbar, CollapsibleNav } from 'react-bootstrap'
 import { NavItemLink } from 'react-router-bootstrap'
@@ -9,7 +10,23 @@ NavItemLink.contextTypes = Object.assign(NavItemLink.contextTypes, {
   router: React.PropTypes.object
 })
 
+
 export default class Navigation extends React.Component {
+  componentDidMount () {
+    const navbarMenu = $('[data-class="Navigation"] .navbar-menu')
+    const navbarNav = $('[data-class="Navigation"] .navbar-nav')
+
+    window.onscroll= () => {
+      if (document.body.scrollTop > 108) {
+        navbarMenu.addClass('solid-bg')
+        navbarNav.addClass('light-links')
+      } else {
+        navbarMenu.removeClass('solid-bg')
+        navbarNav.removeClass('light-links')
+      }
+    }
+  }
+
   render () {
     const socials = (
       <div className='navbar-social'>

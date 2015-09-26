@@ -1,6 +1,8 @@
 @import '~vendor/styles/index';
 @import 'varaibles';
 
+@import 'mixins/transition.scss';
+
 @import 'components/Navigation';
 @import 'components/UserNavbar';
 @import 'components/Footer';
