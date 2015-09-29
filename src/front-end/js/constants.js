@@ -29,6 +29,13 @@ module.exports = keyMirror({
       ERROR: 'FETCH_APP_STATE_ERROR'
     }
   },
+  cv : {
+    FETCH_CV_STATE: {
+      REQUEST: 'FETCH_CV_STATE_REQUEST',
+      SUCCESS: 'FETCH_CV_STATE_SUCCESS',
+      ERROR: 'FETCH_CV_STATE_ERROR'
+    }
+  },
   modal: {
     SHOW_MODAL: null,
     HIDE_MODAL: null

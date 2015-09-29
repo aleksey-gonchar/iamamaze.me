@@ -112,9 +112,6 @@ export default () => {
   let data = {}
   if (__CLIENT__) {
     data = _.result(window, 'INITIAL_STATE.application')
-    if (!__DEVELOPMENT__) {
-      delete window.INITIAL_STATE
-    }
   } else {
     data = JSON.parse(INITIAL_STATE).application
   }
