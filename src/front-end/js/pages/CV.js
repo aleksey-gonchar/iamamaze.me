@@ -12,6 +12,18 @@ import Skills from '../components/CV/Skills.js'
 import Summary from '../components/CV/Summary.js'
 
 export default class CV extends React.Component {
+  static fetchState (store, params, query) {
+    return Promise.all([
+      Summary.fetchState(store),
+      Contact.fetchState(store),
+      Education.fetchState(store),
+      Hobbies.fetchState(store),
+      Languages.fetchState(store),
+      Projects.fetchState(store),
+      Skills.fetchState(store)
+    ])
+  }
+
   render () {
     return (
       <div>

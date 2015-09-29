@@ -10,7 +10,9 @@ function fetchStateRequest (state, action) {
 }
 
 function fetchStateSuccess (state, action) {
-  return Object.assign({}, state)
+  let newState = Object.assign({}, state)
+  newState[action.meta.section] = action.payload
+  return newState
 }
 
 function fetchStateError (state, action) {

@@ -13,6 +13,13 @@ const getFetchStateFns = (component = {}) => {
 
 function createTransitionHook (store) {
   return (nextState, transition, callback) => {
+    if (!__FETCH_STATE__) {
+      console.log('!!! app state fetch is disabled for server !!!')
+      return callback()
+    }
+
+    console.log('!!! fetching app state !!!')
+
     const { params, location: { query } } = nextState
 
     const promises = nextState.branch

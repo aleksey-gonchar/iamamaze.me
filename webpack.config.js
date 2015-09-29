@@ -4,7 +4,9 @@ var srcPath = path.join(__dirname, 'src')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var config = require('konphyg')(process.cwd() + '/config')
 var serverCfg = config('server')
-var apiBaseUrl = 'http://' + serverCfg.host + ':' + serverCfg.port + serverCfg.api.mountPoint
+
+var port = serverCfg.port ? ':' + serverCfg.port : ''
+var apiBaseUrl = 'http://' + serverCfg.host + port + serverCfg.api.mountPoint
 
 module.exports = {
   target: 'web',
@@ -54,6 +56,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      __FETCH_STATE__: true,
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: process.env.NODE_ENV === 'development',
