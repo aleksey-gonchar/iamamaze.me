@@ -4,9 +4,10 @@ var srcPath = path.join(__dirname, 'src')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var config = require('konphyg')(process.cwd() + '/config')
 var serverCfg = config('server')
+var frontCfg = config('frontend')
 
-var port = serverCfg.port ? ':' + serverCfg.port : ''
-var apiBaseUrl = 'http://' + serverCfg.host + port + serverCfg.api.mountPoint
+var port = frontCfg.port ? ':' + frontCfg.port : ''
+var apiBaseUrl = 'http://' + frontCfg.host + port + serverCfg.api.mountPoint
 
 module.exports = {
   target: 'web',

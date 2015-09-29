@@ -2,7 +2,7 @@ require('babel/register')
 var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-process.env.FETCH_STATE = process.env.FETCH_STATE || false
+process.env.FETCH_STATE = process.env.FETCH_STATE || true
 
 global.__FETCH_STATE__ = process.env.FETCH_STATE === 'false' ? false : true
 global.__CLIENT__ = false

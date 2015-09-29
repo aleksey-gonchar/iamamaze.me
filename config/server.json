@@ -1,6 +1,6 @@
 {
-  "host": "iamamaze.home.dev",
-  "port": null,
+  "host": "127.0.0.1",
+  "port": "3030",
   "uploadsDir": "uploads/",
   "api": {
     "mountPoint":"/api"
