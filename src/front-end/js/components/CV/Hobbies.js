@@ -4,7 +4,7 @@ import * as CVActions from '../../actions/CVActions.js'
 
 export default class Hobbies extends React.Component {
   static fetchState (store) {
-    if (isFetched(store.getState(), 'hobbies')) {
+    if (isFetched(store.getState().cv, 'hobbies')) {
       return Promise.resolve()
     } else {
       return store.dispatch(CVActions.fetchState('hobbies'))

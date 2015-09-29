@@ -1,4 +1,6 @@
 [data-class='Navigation'] {
+  z-index: $navigation-z-index;
+
   a {
     color: white;
     @include transition(color .2s, border-color .5s)

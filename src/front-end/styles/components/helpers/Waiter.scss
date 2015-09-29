@@ -1,0 +1,10 @@
+[data-class='Waiter'] {
+  display: table;
+  width: 100%;
+
+  .waiter-content {
+    display: table-cell;
+    width: 100%;
+    text-align: center;
+  }
+}

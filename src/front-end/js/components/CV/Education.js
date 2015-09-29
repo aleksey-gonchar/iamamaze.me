@@ -4,7 +4,7 @@ import * as CVActions from '../../actions/CVActions.js'
 
 export default class Education extends React.Component {
   static fetchState (store) {
-    if (isFetched(store.getState(), 'education')) {
+    if (isFetched(store.getState().cv, 'education')) {
       return Promise.resolve()
     } else {
       return store.dispatch(CVActions.fetchState('education'))

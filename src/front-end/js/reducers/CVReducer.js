@@ -19,9 +19,11 @@ function fetchStateError (state, action) {
   notify.error(action.payload)
   return state
 }
-
+/*
+  @param {Object} store - appStore.cv
+ */
 export function isFetched (store, section) {
-  const state = store.cv
+  const state = store
   if (state) {
     switch(typeof state[section]) {
       case 'string': return state[section].length > 0; break

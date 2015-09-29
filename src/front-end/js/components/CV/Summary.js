@@ -4,7 +4,7 @@ import * as CVActions from '../../actions/CVActions.js'
 
 export default class Summary extends React.Component {
   static fetchState (store) {
-    if (isFetched(store.getState(), 'summary')) {
+    if (isFetched(store.getState().cv, 'summary')) {
       return Promise.resolve()
     } else {
       return store.dispatch(CVActions.fetchState('summary'))

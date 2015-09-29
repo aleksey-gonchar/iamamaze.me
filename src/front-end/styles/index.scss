@@ -3,12 +3,14 @@
 
 @import 'mixins/transition.scss';
 
+@import 'components/helpers/Waiter.scss';
+
 @import 'components/Navigation';
 @import 'components/UserNavbar';
 @import 'components/Footer';
 //@import './components/inputs/PasswordInput'
 
-.content {
+.page-content {
 
   // portrait mode
   @media screen and (max-width: $break-landscape) {

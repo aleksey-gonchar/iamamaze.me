@@ -10,21 +10,23 @@ NavItemLink.contextTypes = Object.assign(NavItemLink.contextTypes, {
   router: React.PropTypes.object
 })
 
+function scrollCheckForNav () {
+  const navbarMenu = $('[data-class="Navigation"] .navbar-menu')
+  const navbarNav = $('[data-class="Navigation"] .navbar-nav')
+
+  if (document.body.scrollTop > 108) {
+    navbarMenu.addClass('solid-bg')
+    navbarNav.addClass('light-links')
+  } else {
+    navbarMenu.removeClass('solid-bg')
+    navbarNav.removeClass('light-links')
+  }
+}
 
 export default class Navigation extends React.Component {
   componentDidMount () {
-    const navbarMenu = $('[data-class="Navigation"] .navbar-menu')
-    const navbarNav = $('[data-class="Navigation"] .navbar-nav')
-
-    window.onscroll= () => {
-      if (document.body.scrollTop > 108) {
-        navbarMenu.addClass('solid-bg')
-        navbarNav.addClass('light-links')
-      } else {
-        navbarMenu.removeClass('solid-bg')
-        navbarNav.removeClass('light-links')
-      }
-    }
+    scrollCheckForNav()
+    window.onscroll= scrollCheckForNav
   }
 
   render () {

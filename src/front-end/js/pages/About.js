@@ -9,7 +9,7 @@ export default class About extends React.Component {
     return (
       <div>
         <Navigation />
-        <div className='container-fluid content'>
+        <div className='container-fluid page-content'>
           <div className='row'>
             <div className='col-xs-12 cold-md-12'>
               <h1>About</h1>
