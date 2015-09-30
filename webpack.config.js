@@ -4,7 +4,7 @@ var srcPath = path.join(__dirname, 'src')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var config = require('konphyg')(process.cwd() + '/config')
 var serverCfg = config('server')
-var frontCfg = config('frontend')
+var frontCfg = config('front-end')
 
 var port = frontCfg.port ? ':' + frontCfg.port : ''
 var apiBaseUrl = 'http://' + frontCfg.host + port + serverCfg.api.mountPoint
@@ -17,7 +17,7 @@ module.exports = {
     'common.bundle': [
       'lodash', 'jquery', 'underscore.string', 'keymirror', 'moment', 'superagent',
       'react', 'react-router', 'react-bootstrap', 'react-router-bootstrap',
-      'redux', 'react-redux', 'redux-actions', 'js-cookie', 'lodash', 'keymirror'
+      'redux', 'react-redux', 'redux-actions', 'js-cookie', 'lodash', 'marked'
     ],
     'vendor.bundle': path.join(srcPath, 'vendor/js/index.js')
   },

@@ -3,6 +3,7 @@ import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import marked from 'marked'
 
 import { Panel } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
@@ -43,7 +44,7 @@ export default class Summary extends React.Component {
   render () {
     const content = (
       <Panel header={(<h2>// SUMMARY</h2>)}>
-        <p>{this.props.summary}</p>
+        <div dangerouslySetInnerHTML={ {__html: marked(this.props.summary)} }/>
       </Panel>
     )
 
