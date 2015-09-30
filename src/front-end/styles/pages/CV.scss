@@ -1,0 +1,18 @@
+.page-cv {
+  .panel {
+    border-style: none;
+
+    .panel-heading{
+      color: $color-text-red;
+      border-style: none;
+      background-color: transparent;
+      padding: 0;
+      //font-weight: bold;
+    }
+    .panel-body{
+      padding-left: 0;
+      padding-right: 0;
+      text-wrap: normal;
+    }
+  }
+}

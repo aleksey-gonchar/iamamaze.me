@@ -1,4 +1,6 @@
 {
   "meta" : {
-  }
+  },
+  "host" : "iamamaze.home.dev",
+  "port": null,
 }
