@@ -41,9 +41,36 @@ export default class Contact extends React.Component {
   }
 
   render () {
+    let contacts = []
+
+    if (this.isFetched()) {
+      contacts = _.reduce(this.props.contacts, (res, contact) => {
+        let link = null
+        if (!_.isEmpty(contact.link)) {
+          link = (
+            <div className='cv-contact-link'>
+              <input type='text' disabled value={contact.link}/>
+            </div>
+          )
+        }
+
+        const el = (
+          <li className='cv-contact'>
+            <div className='cv-contact-icon'><Icon fw name={contact.icon}/></div>
+            <div className='cv-contact-details'>
+              <div className='cv-contact-title'>{contact.title}</div>
+              {link}
+            </div>
+          </li>
+        )
+        res.push(el)
+        return res
+      }, [])
+    }
+
     const content = (
       <Panel header={(<h2>// CONTACTS</h2>)}>
-        <p>{this.props.contacts}</p>
+        <ul className='cv-contacts'>{contacts}</ul>
       </Panel>
     )
 
