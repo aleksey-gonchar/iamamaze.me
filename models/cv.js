@@ -1,5 +1,5 @@
 var data = {
-  summary: "17 years of experience in software development, including 10 years in “1c” ERP development.\n\n Current tech stack includes: JavaScript, Node.js, Express.js, Mongoose, Redux+React, jQuery, LoDash/Underscore.js, HTML/HBS/Jade, Styl/CSS/LESS/SASS, Twitter-Bootstrap, WebSocket, Backbone.js, Mocha+Chai/Jasmine, Git.",
+  summary: "17 years of experience in software development, including 10 years in “1c” ERP development.\n\n Current tech stack includes: JavaScript, Node.js, Express.js, Mongoose, Redux+React, jQuery, LoDash, HBS/Jade/HTML, SASS/LESS/STYL, Twitter-Bootstrap, WebSocket, Mocha+Chai/Jasmine, Git.",
   contacts: [
     {
       title: 'tuiteraz@gmail.com',
@@ -40,7 +40,8 @@ var data = {
     }
   ],
   hobbies: [
-    'Hiking', 'Sports', 'Philosophy', 'Arts', 'Dance', 'Crossfit', 'Travel'
+    'Hiking', 'Sports', 'Philosophy', 'Arts', 'Dance', 'Crossfit', 'Travel', 'Progressive house',
+    'Sci-Fi', 'Running'
   ],
   education: [
     {

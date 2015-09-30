@@ -1,0 +1,28 @@
+.cv-hobbies {
+  list-style: none;
+  padding-left: 0;
+}
+
+.cv-hobby {
+  background-color: $bg-color-darkred;
+  display: table;
+  float: left;
+  padding: 4px 8px;
+
+  &:nth-child(n+1) {
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+.cv-hobby-icon{
+  display: table-cell;
+  color: $color-text-lightred;
+  padding-right: 8px;
+}
+
+.cv-hobby-title {
+  display: table-cell;
+  color: white;
+}
+
