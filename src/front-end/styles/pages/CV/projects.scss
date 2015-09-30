@@ -1,0 +1,18 @@
+.cv-projects {
+  list-style: none;
+  padding-left: 0;
+}
+
+.cv-project {
+  padding-bottom: 20px;
+
+  tr {
+    td:first-child {
+      color: $color-text-cyan;
+      //font-weight: bold;
+      background-color: $bg-color-lightcyan;
+    }
+  }
+}
+
+

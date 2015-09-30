@@ -3,7 +3,9 @@ import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import uuid from 'node-uuid'
 
+import Project from './Project.js'
 import { Panel } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
@@ -41,9 +43,21 @@ export default class Projects extends React.Component {
   }
 
   render () {
+    let projects = []
+
+    if (this.isFetched()) {
+      projects = _.reduce(this.props.projects, (res, project) => {
+        const el = (<Project project={project} key={uuid.v4()} />)
+        res[el.key]= el
+        return res
+      }, {})
+
+      projects = React.addons.createFragment(projects)
+    }
+
     const content = (
       <Panel header={(<h2>// 5 LARGE PROJECTS THAT CAUSES PRIDE</h2>)}>
-        <p>{this.props.projects}</p>
+        <ul className='cv-projects'>{projects}</ul>
       </Panel>
     )
 
