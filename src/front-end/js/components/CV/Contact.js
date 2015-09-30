@@ -45,7 +45,7 @@ export default class Contact extends React.Component {
 
   render () {
     const content = (
-      <Panel header='// CONTACTS'>
+      <Panel header={(<h2>// CONTACTS</h2>)}>
         <p>{this.props.contacts}</p>
       </Panel>
     )

@@ -1,14 +1,16 @@
 @import '~vendor/styles/index';
 @import 'varaibles';
 
-@import 'mixins/transition.scss';
+@import 'mixins/transition';
 
-@import 'components/helpers/Waiter.scss';
+@import 'components/helpers/Waiter';
+//@import './components/inputs/PasswordInput'
 
 @import 'components/Navigation';
 @import 'components/UserNavbar';
 @import 'components/Footer';
-//@import './components/inputs/PasswordInput'
+
+@import 'pages/CV';
 
 .page-content {
 

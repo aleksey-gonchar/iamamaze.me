@@ -15,13 +15,13 @@ export default class CV extends React.Component {
   // this complex fetch is used for server render when router inits
   static fetchState (store, params, query) {
     return Promise.all([
-      Summary.fetchState(store),
+      Summary.WrappedComponent.fetchState(store),
       Contact.WrappedComponent.fetchState(store),
-      Education.fetchState(store),
-      Hobbies.fetchState(store),
-      Languages.fetchState(store),
-      Projects.fetchState(store),
-      Skills.fetchState(store)
+      Education.WrappedComponent.fetchState(store),
+      Hobbies.WrappedComponent.fetchState(store),
+      Languages.WrappedComponent.fetchState(store),
+      Projects.WrappedComponent.fetchState(store),
+      Skills.WrappedComponent.fetchState(store)
     ])
   }
 
@@ -29,7 +29,7 @@ export default class CV extends React.Component {
     return (
       <div>
         <Navigation />
-        <div className='container-fluid page-content'>
+        <div className='container-fluid page-content page-cv'>
           <div className='row'>
             <div className='col-md-12 col-xs-12'>
               <h1>CV</h1>
