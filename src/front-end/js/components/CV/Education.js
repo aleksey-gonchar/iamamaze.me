@@ -36,10 +36,7 @@ export default class Education extends React.Component {
 
   componentDidMount () {
     if (!this.isFetched()) {
-      setTimeout( () => {
-        this.props.actions.fetchState()
-      }, 2000)
-
+      this.props.actions.fetchState()
     }
   }
 
