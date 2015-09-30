@@ -3,6 +3,7 @@ import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import uuid from 'node-uuid'
 
 import { Panel } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
@@ -41,9 +42,26 @@ export default class Hobbies extends React.Component {
   }
 
   render () {
+    let hobbies = []
+
+    if (this.isFetched()) {
+      hobbies = _.reduce(this.props.hobbies, (res, hobby) => {
+        const el = (
+          <li className='cv-hobby' key={uuid.v4()}>
+            <Icon fw name='heart' className='cv-hobby-icon'/>
+            <div className='cv-hobby-title'>{hobby}</div>
+          </li>
+        )
+        res[el.key]= el
+        return res
+      }, {})
+
+      hobbies = React.addons.createFragment(hobbies)
+    }
+
     const content = (
       <Panel header={(<h2>// HOBBIES</h2>)}>
-        <p>{this.props.hobbies}</p>
+        <ul className='cv-hobbies'>{hobbies}</ul>
       </Panel>
     )
 
