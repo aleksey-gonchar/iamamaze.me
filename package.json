@@ -49,6 +49,7 @@
     "jsonwebtoken": "5.0.4",
     "konphyg": "1.4.0",
     "lodash": "3.10.1",
+    "marked": "0.3.5",
     "method-override": "2.3.4",
     "moment": "2.10.3",
     "moment-objectid": "0.0.1",

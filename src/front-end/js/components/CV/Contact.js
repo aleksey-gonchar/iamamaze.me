@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react/addons'
 import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import uuid from 'node-uuid'
 
 import { Panel } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
@@ -55,17 +56,19 @@ export default class Contact extends React.Component {
         }
 
         const el = (
-          <li className='cv-contact'>
-            <div className='cv-contact-icon'><Icon fw name={contact.icon}/></div>
+          <li className='cv-contact' key={uuid.v4()}>
+            <div className='cv-contact-icon'><Icon name={contact.icon}/></div>
             <div className='cv-contact-details'>
               <div className='cv-contact-title'>{contact.title}</div>
               {link}
             </div>
           </li>
         )
-        res.push(el)
+        res[el.key]= el
         return res
-      }, [])
+      }, {})
+
+      contacts = React.addons.createFragment(contacts)
     }
 
     const content = (
