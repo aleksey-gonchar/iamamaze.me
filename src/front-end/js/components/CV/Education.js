@@ -3,8 +3,10 @@ import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import uuid from 'node-uuid'
+import marked from 'marked'
 
-import { Panel } from 'react-bootstrap'
+import { Panel, Table } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 
@@ -41,9 +43,34 @@ export default class Education extends React.Component {
   }
 
   render () {
+    let education = []
+
+    if (this.isFetched()) {
+      education = _.chain(this.props.education).sort('year').reverse().reduce((res, edu) => {
+        const el = (
+          <li className='cv-education-item' key={uuid.v4()}>
+            <div className='cv-education-item-year'>
+              {edu.year}
+            </div>
+            <div className='cv-education-item-text'>
+              <strong>{edu.title}</strong>
+              <span className='cv-edu-details' dangerouslySetInnerHTML={ {__html: marked(edu.details)} }/>
+            </div>
+          </li>
+        )
+        res[el.key]= el
+        return res
+      }, {}).value()
+
+      education = React.addons.createFragment(education)
+    }
+
     const content = (
       <Panel header={(<h2>// EDUCATION</h2>)}>
-        <p>{this.props.education}</p>
+        <ul className='cv-education clearfix'>
+          {education}
+        </ul>
+
       </Panel>
     )
 
