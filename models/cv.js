@@ -46,22 +46,22 @@ var data = {
   education: [
     {
       title: 'Elementary school',
-      details: '<u>Location:</u> Ukraine, Lugansk.',
+      details: '__Location:__ Ukraine, Lugansk.',
       year: 1985
     },
     {
       title: 'Physics and Mathematics Lyceum № 24',
-      details: '<u>Location:</u> Ukraine, Lugansk.',
+      details: '__Location:__ Ukraine, Lugansk.',
       year: 1993
     },
     {
       title: 'East-Ukrainian National University named Dalia',
-      details: '<u>Location:</u> Ukraine, Lugansk.',
+      details: '__Location:__ Ukraine, Lugansk.',
       year: 1996
     },
     {
       title: 'MA with distinction',
-      details: '<u>Speciality:</u> engineer of hydraulic and pneumatic machines and apparatus.',
+      details: '__Speciality:__ engineer of hydraulic and pneumatic machines and apparatus.',
       year: 2001
     }
   ],
