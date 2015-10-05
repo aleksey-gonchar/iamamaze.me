@@ -1,0 +1,37 @@
+.cv-skills{
+  list-style: none;
+  padding-left: 0;
+  position: relative;
+  height: 450px;
+}
+
+.cv-skill {
+  display: block;
+  float: left;
+  position: absolute;
+  border-radius: 300px;
+  background-color: $color-text-lightred1;
+  border: 3px solid lightgrey;
+  box-sizing: content-box;
+
+  &.disabled {
+    background-color: #DBB8B8;
+  }
+}
+
+.cv-skill-title{
+  position: relative;
+  text-align: center;
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+  height: inherit;
+  width: inherit;
+  line-height: 1em;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+

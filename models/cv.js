@@ -46,145 +46,213 @@ var data = {
   education: [
     {
       title: 'Elementary school',
-      details: '__Location:__ Ukraine, Lugansk.',
+      details: '*Location:* Ukraine, Lugansk.',
       year: 1985
     },
     {
       title: 'Physics and Mathematics Lyceum № 24',
-      details: '__Location:__ Ukraine, Lugansk.',
+      details: '*Location:* Ukraine, Lugansk.',
       year: 1993
     },
     {
       title: 'East-Ukrainian National University named Dalia',
-      details: '__Location:__ Ukraine, Lugansk.',
+      details: '*Location:* Ukraine, Lugansk.',
       year: 1996
     },
     {
       title: 'MA with distinction',
-      details: '__Speciality:__ engineer of hydraulic and pneumatic machines and apparatus.',
+      details: '*Speciality:* engineer of hydraulic and pneumatic machines and apparatus.',
       year: 2001
     }
   ],
   skillsActualOn: '2015.6',
   skills: [
     {
-      title: 'Mocha<br/>+<br/>Chai<br/>/Jasmine',
+      title: 'Mocha\n\n+\n\nChai\n\n/Jasmine',
       comment: '',
       years: 1,
       active: true,
-      size: 0
+      size: 100,
+      top: 286,
+      left: 390
     },
     {
       title: 'TWBP',
       comment: 'Twitter Bootstrap',
       years: 5,
       active: true,
-      size: 0
+      size: 60,
+      top: 4,
+      left: 121
     },
     {
-      title: 'CSS<br/>SASS<br/>STYL<br/>LESS',
+      title: 'CSS\n\nSASS\n\nSTYL\n\nLESS',
       comment: '',
       years: 10,
       active: true,
-      size: 0
+      size: 80,
+      top: 43,
+      left: 182
     },
     {
-      title: 'Ember.js<br/>Backbone.js',
+      title: 'Ember.js\n\nBackbone.js',
       comment: '',
       years: 1,
       active: false,
-      size: 0
+      size: 80,
+      fontSize: 'smaller',
+      top: 175,
+      left: 7
     },
     {
-      title: 'Node.js<br/>+<br/>Express.js',
+      title: 'Node.js\n\n+\n\nExpress.js',
       comment: '',
       years: 5,
       active: true,
-      size: 0
+      size: 100,
+      top: 45,
+      left: 13
     },
     {
-      title: 'React.js<br/>+<br/>Redux',
+      title: 'React.js\n\n+\n\nRedux',
       comment: '',
       years: 1,
       active: true,
-      size: 0
+      size: 100,
+      top: 294,
+      left: 13
     },
     {
-      title: 'Javascript<br/>+<br/>jQuery',
+      title: 'Javascript',
       comment: '',
       years: 7,
       active: true,
-      size: 0
+      size: 80,
+      top: 133,
+      left: 153
     },
     {
-      title: 'Ruby<br/>+<br/>R\'o\'R',
+      title: 'jQuery',
+      comment: '',
+      years: 7,
+      active: true,
+      size: 50,
+      fontSize: 'smaller',
+      top: 207,
+      left: 429
+    },
+    {
+      title: 'Coffee-script',
+      comment: '',
+      years: 7,
+      active: true,
+      size: 70,
+      top: 134,
+      left: 262
+    },
+    {
+      title: 'Ruby\n\n+\n\nR\'o\'R',
       comment: '',
       years: 2,
       active: false,
-      size: 0
+      size: 70,
+      top: 293,
+      left: 302
     },
     {
       title: 'PHP',
       comment: '',
       years: 3,
       active: false,
-      size: 0
+      size: 50,
+      top: 229,
+      left: 333
     },
     {
       title: 'Git',
       comment: '',
       years: 5,
       active: true,
-      size: 0
+      size: 50,
+      top: 99,
+      left: 349
     },
     {
-      title: 'HTML<br/>HBS<br/>JADE',
+      title: 'HTML\n\nHBS\n\nJADE',
       comment: '',
       years: 10,
       active: true,
-      size: 0
+      size: 80,
+      top: 20,
+      left: 282
     },
     {
-      title: 'MongoDB<br/>+<br/>Mongoose',
+      title: 'MongoDB\n\n+\n\nMongoose',
       comment: '',
       years: 5,
       active: true,
-      size: 0
+      size: 100,
+      top: 220,
+      left: 195
     },
     {
-      title: 'WebPack<br/>Gulp<br/>Grunt<br/>Require.js',
+      title: 'WebPack\n\nGulp\n\nGrunt\n\nRequire.js',
       comment: '',
       years: 4,
       active: true,
-      size: 0
+      size: 90,
+      fontSize: 'smaller',
+      top: 7,
+      left: 392
     },
     {
       title: '1C 7.7',
       comment: '',
       years: 10,
       active: false,
-      size: 0
+      size: 60,
+      top: 325,
+      left: 153
     },
     {
-      title: 'MySQL<br/>SQLite',
+      title: 'MySQL\n\nSQLite',
       comment: '',
       years: 3,
       active: false,
-      size: 0
+      size: 60,
+      fontSize: 'smaller',
+      top: 132,
+      left: 420
     },
     {
       title: 'Redis',
       comment: '',
       years: 1,
       active: false,
-      size: 0
+      size: 50,
+      fontSize: 'smaller',
+      top: 202,
+      left: 98
     },
     {
       title: 'OAuth',
       comment: '',
       years: 1,
       active: true,
-      size: 0
+      size: 50,
+      fontSize: 'smaller',
+      top: 257,
+      left: 124
+    },
+    {
+      title: 'JWT',
+      comment: '',
+      years: 1,
+      active: true,
+      size: 50,
+      fontSize: 'smaller',
+      top: 345,
+      left: 241
     }
   ],
   projects: [

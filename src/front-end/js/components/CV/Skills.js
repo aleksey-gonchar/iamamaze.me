@@ -7,6 +7,13 @@ import { bindActionCreators } from 'redux'
 import { Panel } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
+import uuid from 'node-uuid'
+import marked from 'marked'
+
+if (__CLIENT__) {
+  const $ = require('jquery')
+  require('../../helpers/draggable.js')
+}
 
 function select (state) {
   return { skills: state.cv.skills}
@@ -38,12 +45,37 @@ export default class Skills extends React.Component {
     if (!this.isFetched()) {
       this.props.actions.fetchState()
     }
+    $('.cv-skill').drags()
   }
 
   render () {
+    let skills = []
+
+    if (this.isFetched()) {
+      skills = _.chain(this.props.skills).reduce((res, skill) => {
+        const disabled = skill.active ? '' : 'disabled'
+        const el = (
+          <li className={`cv-skill ${disabled}`} key={uuid.v4()}
+              style={{ width: `${skill.size}px`, height: `${skill.size}px`,
+                       top: `${skill.top}px`, left: `${skill.left}px`
+                    }}>
+            <div className='cv-skill-title'
+                 style={{ height: 'inherit', fontSize: skill.fontSize }}
+                 dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>
+          </li>
+        )
+        res[el.key]= el
+        return res
+      }, {}).value()
+
+      skills = React.addons.createFragment(skills)
+    }
+
     const content = (
       <Panel header={(<h2>// SKILLS</h2>)}>
-        <p>{this.props.skills}</p>
+        <ul className='cv-skills clearfix'>
+          {skills}
+        </ul>
       </Panel>
     )
 
