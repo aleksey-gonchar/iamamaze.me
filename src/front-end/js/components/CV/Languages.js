@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import marked from 'marked'
 import uuid from 'node-uuid'
 
-import { Panel, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Panel, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 
@@ -50,26 +50,28 @@ export default class Languages extends React.Component {
       const starEmpty = (<Icon fw name='star-o'/>)
 
       languages = _.reduce(this.props.languages, (res, language) => {
-        const tooltip = (
-          <Tooltip>
+        const popover = (
+          <Popover>
             <div dangerouslySetInnerHTML={ {__html: marked(language.comment)} }
                  style={{ textAlign: 'left'}}
               />
-          </Tooltip>
+          </Popover>
         )
 
         let stars = _.fill(Array(5), star, 0, language.rating+1)
         stars = _.fill(stars, starEmpty, language.rating, 5)
         const el = (
-          <li className='cv-language' key={uuid.v4()}>
-            <div className='cv-language-title'>{language.title}</div>
-            <div className='cv-language-details'>
-              <div className='cv-language-rating'>
-                <OverlayTrigger placement='left' overlay={tooltip}>
-                  <div>{stars}</div>
-                </OverlayTrigger>
+          <li key={uuid.v4()}>
+            <OverlayTrigger placement='left' overlay={popover}>
+              <div className='cv-language'>
+                <div className='cv-language-title'>{language.title}</div>
+                <div className='cv-language-details'>
+                  <div className='cv-language-rating'>
+                    <div>{stars}</div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </OverlayTrigger>
           </li>
         )
         res[el.key] = el
