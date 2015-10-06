@@ -4,7 +4,7 @@ import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { Panel } from 'react-bootstrap'
+import { Panel, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 import uuid from 'node-uuid'
@@ -12,7 +12,7 @@ import marked from 'marked'
 
 if (__CLIENT__) {
   const $ = require('jquery')
-  require('../../helpers/draggable.js')
+  //require('../../helpers/draggable.js')
 }
 
 function select (state) {
@@ -45,7 +45,6 @@ export default class Skills extends React.Component {
     if (!this.isFetched()) {
       this.props.actions.fetchState()
     }
-    $('.cv-skill').drags()
   }
 
   render () {
@@ -53,15 +52,34 @@ export default class Skills extends React.Component {
 
     if (this.isFetched()) {
       skills = _.chain(this.props.skills).reduce((res, skill) => {
+        let comment = null
+
+        if (!_.isEmpty(skill.comment)) {
+          comment = (
+            <div>
+              <strong>Comment:</strong> {skill.comment}
+            </div>
+          )
+        }
+
+        const popover = (
+          <Popover>
+            <strong>Years</strong>: {skill.years}
+            {comment}
+          </Popover>
+        )
+
         const disabled = skill.active ? '' : 'disabled'
         const el = (
           <li className={`cv-skill ${disabled}`} key={uuid.v4()}
               style={{ width: `${skill.size}px`, height: `${skill.size}px`,
                        top: `${skill.top}px`, left: `${skill.left}px`
                     }}>
-            <div className='cv-skill-title'
-                 style={{ height: 'inherit', fontSize: skill.fontSize }}
-                 dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>
+            <OverlayTrigger trigger='click' placement='bottom' overlay={popover}>
+              <div className='cv-skill-title'
+                   style={{ height: 'inherit', fontSize: skill.fontSize }}
+                   dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>
+            </OverlayTrigger>
           </li>
         )
         res[el.key]= el

@@ -2,7 +2,7 @@
   list-style: none;
   padding-left: 0;
   position: relative;
-  height: 450px;
+  height: 430px;
 }
 
 .cv-skill {
@@ -28,6 +28,7 @@
   height: inherit;
   width: inherit;
   line-height: 1em;
+  cursor: pointer;
 
   p {
     margin: 0;
