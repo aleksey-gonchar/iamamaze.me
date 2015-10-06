@@ -65,7 +65,7 @@ var data = {
       year: 2001
     }
   ],
-  skillsLastUpdated: '2015.6',
+  skillsLastUpdated: '6.2015',
   skills: [
     {
       title: 'Mocha\n\n+\n\nChai\n\n/Jasmine',
