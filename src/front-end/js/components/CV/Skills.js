@@ -16,13 +16,17 @@ if (__CLIENT__) {
 }
 
 function select (state) {
-  return { skills: state.cv.skills}
+  return {
+    skills: state.cv.skills,
+    skillsLastUpdated: state.cv.skillsLastUpdated
+  }
 }
 
 function actions (dispatch) {
   return {
     actions: {
-      fetchState: bindActionCreators(() => CVActions.fetchState('skills'), dispatch)
+      fetchStateSkills: bindActionCreators(() => CVActions.fetchState('skills'), dispatch),
+      fetchStateSkillsLastUpdated: bindActionCreators(() => CVActions.fetchState('skills-last-updated'), dispatch)
     }
   }
 }
@@ -33,17 +37,21 @@ export default class Skills extends React.Component {
     if (isFetched(store.getState().cv, 'skills')) {
       return Promise.resolve()
     } else {
-      return store.dispatch(CVActions.fetchState('skills'))
+      return [
+        store.dispatch(CVActions.fetchState('skills')),
+        store.dispatch(CVActions.fetchState('skills-last-updated')),
+      ]
     }
   }
 
   isFetched () {
-    return this.props.skills.length > 0
+    return this.props.skills.length > 0 && this.props.skillsLastUpdated.length > 0
   }
 
   componentDidMount () {
     if (!this.isFetched()) {
-      this.props.actions.fetchState()
+      this.props.actions.fetchStateSkills()
+      this.props.actions.fetchStateSkillsLastUpdated()
     }
   }
 
@@ -94,6 +102,9 @@ export default class Skills extends React.Component {
         <ul className='cv-skills clearfix'>
           {skills}
         </ul>
+        <div className='pull-right' style={{ color:'darkgrey' }}>
+          Last updated: {this.props.skillsLastUpdated}
+        </div>
       </Panel>
     )
 
