@@ -106,4 +106,15 @@ describe.only('CV', () => {
         next()
       })
   })
+
+  it('GET\'s skill-last-updated' , (next) => {
+    request.get(testUrl + '/skills-last-updated')
+      .end((err, res) => {
+        expect(err).to.be.null
+        expect(res.statusCode).to.be.equal(200)
+        var body = res.body
+        expect(body).to.equal(CV.skillsLastUpdated)
+        next()
+      })
+  })
 })

@@ -12,5 +12,6 @@ module.exports = function (router) {
   router.get('/cv/hobbies', cvCtrl.get(CV.hobbies))
   router.get('/cv/education', cvCtrl.get(CV.education))
   router.get('/cv/skills', cvCtrl.get(CV.skills))
+  router.get('/cv/skills-last-updated', cvCtrl.get(CV.skillsLastUpdated))
   router.get('/cv/projects', cvCtrl.get(CV.projects))
 }
