@@ -75,7 +75,7 @@ export default class Skills extends React.Component {
               style={{ width: `${skill.size}px`, height: `${skill.size}px`,
                        top: `${skill.top}px`, left: `${skill.left}px`
                     }}>
-            <OverlayTrigger trigger='click' placement='bottom' overlay={popover}>
+            <OverlayTrigger placement='bottom' overlay={popover}>
               <div className='cv-skill-title'
                    style={{ height: 'inherit', fontSize: skill.fontSize }}
                    dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>
