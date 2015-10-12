@@ -81,7 +81,7 @@ export default class Skills extends React.Component {
         const el = (
           <li className={`cv-skill ${disabled}`} key={uuid.v4()}
               style={{ width: `${skill.size}px`, height: `${skill.size}px`,
-                       top: `${skill.top}px`, left: `${skill.left}px`
+                       top: skill.top, left: skill.left
                     }}>
             <OverlayTrigger placement='bottom' overlay={popover}>
               <div className='cv-skill-title'

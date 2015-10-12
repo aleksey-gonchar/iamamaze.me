@@ -73,8 +73,8 @@ var data = {
       years: 1,
       active: true,
       size: 100,
-      top: 286,
-      left: 390
+      top: '66.51%',
+      left: '76%'
     },
     {
       title: 'TWBP',
@@ -82,8 +82,8 @@ var data = {
       years: 5,
       active: true,
       size: 60,
-      top: 4,
-      left: 121
+      top: '0.93%',
+      left: '23.8%'
     },
     {
       title: 'CSS\n\nSASS\n\nSTYL\n\nLESS',
@@ -91,8 +91,8 @@ var data = {
       years: 10,
       active: true,
       size: 80,
-      top: 43,
-      left: 182
+      top: '10%',
+      left: '35.8%'
     },
     {
       title: 'Ember.js\n\nBackbone.js',
@@ -101,8 +101,8 @@ var data = {
       active: false,
       size: 80,
       fontSize: 'smaller',
-      top: 175,
-      left: 7
+      top: '40.69%',
+      left: '1.37%'
     },
     {
       title: 'Node.js\n\n+\n\nExpress.js',
@@ -110,8 +110,8 @@ var data = {
       years: 5,
       active: true,
       size: 100,
-      top: 45,
-      left: 13
+      top: '10.46%',
+      left: '2.55%'
     },
     {
       title: 'React.js\n\n+\n\nRedux',
@@ -119,8 +119,8 @@ var data = {
       years: 1,
       active: true,
       size: 100,
-      top: 294,
-      left: 13
+      top: '68.37%',
+      left: '2.55%'
     },
     {
       title: 'Javascript',
@@ -128,8 +128,8 @@ var data = {
       years: 7,
       active: true,
       size: 80,
-      top: 133,
-      left: 153
+      top: '30.93%',
+      left: '30.11%'
     },
     {
       title: 'jQuery',
@@ -138,17 +138,17 @@ var data = {
       active: true,
       size: 50,
       fontSize: 'smaller',
-      top: 207,
-      left: 429
+      top: '48.13%',
+      left: '84.44%'
     },
     {
       title: 'Coffee-script',
       comment: '',
       years: 7,
-      active: true,
+      active: false,
       size: 70,
-      top: 134,
-      left: 262
+      top: '31.16%',
+      left: '51.57%'
     },
     {
       title: 'Ruby\n\n+\n\nR\'o\'R',
@@ -156,8 +156,8 @@ var data = {
       years: 2,
       active: false,
       size: 70,
-      top: 293,
-      left: 302
+      top: '68.13%',
+      left: '59.44%'
     },
     {
       title: 'PHP',
@@ -165,8 +165,8 @@ var data = {
       years: 3,
       active: false,
       size: 50,
-      top: 229,
-      left: 333
+      top: '53.25%',
+      left: '65.55%'
     },
     {
       title: 'Git',
@@ -174,8 +174,8 @@ var data = {
       years: 5,
       active: true,
       size: 50,
-      top: 99,
-      left: 349
+      top: '23.02%',
+      left: '68.7%'
     },
     {
       title: 'HTML\n\nHBS\n\nJADE',
@@ -183,8 +183,8 @@ var data = {
       years: 10,
       active: true,
       size: 80,
-      top: 20,
-      left: 282
+      top: '4.65%',
+      left: '55.51%'
     },
     {
       title: 'MongoDB\n\n+\n\nMongoose',
@@ -192,8 +192,8 @@ var data = {
       years: 5,
       active: true,
       size: 100,
-      top: 220,
-      left: 195
+      top: '51.16%',
+      left: '38.38%'
     },
     {
       title: 'WebPack\n\nGulp\n\nGrunt\n\nRequire.js',
@@ -202,8 +202,8 @@ var data = {
       active: true,
       size: 90,
       fontSize: 'smaller',
-      top: 7,
-      left: 392
+      top: '1.627%',
+      left: '77.16%'
     },
     {
       title: '1C 7.7',
@@ -211,8 +211,8 @@ var data = {
       years: 10,
       active: false,
       size: 60,
-      top: 325,
-      left: 153
+      top: '75.58%',
+      left: '30.11%'
     },
     {
       title: 'MySQL\n\nSQLite',
@@ -221,8 +221,8 @@ var data = {
       active: false,
       size: 60,
       fontSize: 'smaller',
-      top: 132,
-      left: 420
+      top: '30.69%',
+      left: '82.67%'
     },
     {
       title: 'Redis',
@@ -231,8 +231,8 @@ var data = {
       active: false,
       size: 50,
       fontSize: 'smaller',
-      top: 202,
-      left: 98
+      top: '46.97%',
+      left: '19.29%'
     },
     {
       title: 'OAuth',
@@ -241,8 +241,8 @@ var data = {
       active: true,
       size: 50,
       fontSize: 'smaller',
-      top: 257,
-      left: 124
+      top: '59.76%',
+      left: '24.4%'
     },
     {
       title: 'JWT',
@@ -251,8 +251,8 @@ var data = {
       active: true,
       size: 50,
       fontSize: 'smaller',
-      top: 345,
-      left: 241
+      top: '80.23%',
+      left: '47.44%'
     }
   ],
   projects: [
