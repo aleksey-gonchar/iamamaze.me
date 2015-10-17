@@ -57,7 +57,7 @@ export default class Projects extends React.Component {
 
     const content = (
       <Panel header={(<h2>// 5 LARGE PROJECTS THAT CAUSES PRIDE</h2>)}>
-        <ul className='cv-projects'>{projects}</ul>
+        <ul className='cv-projects clearfix'>{projects}</ul>
       </Panel>
     )
 
