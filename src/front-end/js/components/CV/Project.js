@@ -14,8 +14,12 @@ export default class Project extends React.Component {
 
     return (
       <li className='cv-project' key={this.props.key}>
-        <Table bordered>
-          <tbody>
+        <div className='cv-project-period'>
+          {period}
+        </div>
+        <div className='cv-project-details'>
+          <Table condensed>
+            <tbody>
             <tr>
               <td>Period</td>
               <td>{period}</td>
@@ -40,8 +44,10 @@ export default class Project extends React.Component {
               <td>Responsibilities</td>
               <td>{responsibilities}</td>
             </tr>
-          </tbody>
-        </Table>
+            </tbody>
+          </Table>
+        </div>
+
       </li>
 
     )
