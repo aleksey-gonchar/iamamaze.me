@@ -1,0 +1,35 @@
+@import '~vendor/styles/index';
+@import 'varaibles';
+
+@import 'mixins/transition';
+@import 'mixins/gradients';
+
+@import 'components/helpers/Waiter';
+//@import './components/inputs/PasswordInput'
+
+@import 'components/Navigation';
+@import 'components/UserNavbar';
+@import 'components/Footer';
+
+@import 'pages/CV';
+
+.page-content {
+
+  // portrait mode
+  @media screen and (max-width: $break-landscape) {
+    .row:first-child {
+      min-height: 400px;
+    }
+  }
+    // landscape
+  @media screen and (min-width: $break-landscape) {
+    margin-left: $navigation-landscape-width;
+    .row:first-child {
+      min-height: 700px;
+    }
+  }
+}
+
+.popover-content {
+  font-size: smaller;
+}

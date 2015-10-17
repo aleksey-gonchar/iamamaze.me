@@ -1,0 +1,27 @@
+.page-cv {
+  .panel {
+    border-style: none;
+    margin-bottom: 0;
+
+    .panel-heading{
+      color: $color-text-red;
+      border-style: none;
+      background-color: transparent;
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+      //font-weight: bold;
+    }
+    .panel-body{
+      padding-left: 0;
+      padding-right: 0;
+      text-wrap: normal;
+    }
+  }
+  @import "./CV/contacts";
+  @import "./CV/languages";
+  @import "./CV/hobbies";
+  @import "./CV/projects";
+  @import "./CV/education";
+  @import "./CV/skills";
+}

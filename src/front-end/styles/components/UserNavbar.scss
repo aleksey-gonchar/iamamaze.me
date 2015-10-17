@@ -1,0 +1,22 @@
+$userPicDimension: 40px;
+
+[data-class='UserNavbar'] {
+  .dropdown-toggle {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  a:focus {
+    outline: none;
+  }
+
+  .user-pic {
+    display: inline-block;
+  }
+
+  img {
+    width: $userPicDimension;
+    height: $userPicDimension;
+    margin-right: 7px;
+  }
+}
