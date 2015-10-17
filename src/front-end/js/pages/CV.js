@@ -37,15 +37,13 @@ export default class CV extends React.Component {
             <div className='col-md-8 col-xs-8'>
               <Summary/>
               <Skills/>
-              <Education/>
+              <Projects/>
             </div>
             <div className='col-md-4 col-xs-4'>
               <Contact/>
               <Languages/>
+              <Education/>
               <Hobbies/>
-            </div>
-            <div className='col-md-12 col-xs-12'>
-              <Projects/>
             </div>
           </div>
           <Footer/>
