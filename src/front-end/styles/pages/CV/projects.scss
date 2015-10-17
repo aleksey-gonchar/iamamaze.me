@@ -84,24 +84,23 @@
   }
 
   tr {
+    &:first-child {
+      td {
+        border-top: none;
+      }
+    }
+
     td:first-child {
       color: $color-text-cyan;
       font-weight: bold;
       //background-color: $bg-color-lightcyan;
       text-align: right;
+      padding-left: 0;
+      border-right: 1px solid #dddddd;
     }
   }
 
-  //.cv-edu-details {
-  //  display: block;
-  //  font-size: smaller;
-  //  em {
-  //    font-style: normal;
-  //    text-decoration: underline;
-  //  }
-  //
-  //  p {
-  //    margin: 0;
-  //  }
-  //}
+  table {
+    margin-bottom: 0;
+  }
 }
