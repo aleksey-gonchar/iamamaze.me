@@ -81,7 +81,6 @@ export default class Navigation extends React.Component {
           <Nav navbar>
             <NavItemLink to='/app/about'>ABOUT</NavItemLink>
             <NavItemLink to='/app/cv'>CV</NavItemLink>
-            <NavItemLink to='/app/hire-me'>HIRE ME</NavItemLink>
           </Nav>
         </div>
       </Navbar>
