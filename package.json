@@ -78,7 +78,7 @@
     "redux-react-router": "0.4.0",
     "redux-thunk": "0.1.0",
     "request": "2.40.0",
-    "require-tree": "1.0.1",
+    "require-tree": "1.1.1",
     "reselect": "1.0.0",
     "sass-loader": "2.0.1",
     "serve-favicon": "2.3.0",
@@ -121,6 +121,6 @@
     "parser": "babel-eslint"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": "5.7.x"
   }
 }

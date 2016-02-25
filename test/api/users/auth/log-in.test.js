@@ -19,7 +19,7 @@ describe('log in', function () {
   })
   after(helpers.stop)
 
-  it('log in user', function (next) {
+  it.only('log in user', function (next) {
     request.post(testUrl)
       .send(userData)
       .set('Accept', 'application/json')
