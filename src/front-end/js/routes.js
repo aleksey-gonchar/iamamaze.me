@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect, Index } from 'react-router'
 import RouterContainer from './containers/RouterContainer'
 import $ from 'jquery'
 
@@ -14,9 +14,10 @@ import Login from './pages/Login.js'
 
 function onEnter () { $.notifyClose() }
 
-export default (store) => {
+export default () => {
   return (
     <Route path='/app' component={App}>
+      <Index component={About}/>
       <Route path='/login' component={Login} onEnter={onEnter}/>
       <Route path='/registration' component={Registration} onEnter={onEnter}/>
       <Route path='/about' component={About}/>

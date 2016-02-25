@@ -36,7 +36,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /(\.js|\.jsx)$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
+      { test: /(\.js|\.jsx)$/, exclude: /node_modules/, loader: 'babel' },
       {
         test: /\.scss/,
         loader: ExtractTextPlugin.extract('style', 'css!sass')

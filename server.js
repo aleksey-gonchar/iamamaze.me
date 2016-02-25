@@ -1,4 +1,4 @@
-require('babel/register')
+require('babel-register')
 var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'

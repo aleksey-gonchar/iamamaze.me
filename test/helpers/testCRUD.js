@@ -243,7 +243,7 @@ function createTestCRUDFunction (baseUrl, options) {
 
           if (res) {
             if (_.has(res, 'header')) {
-              header = _.extend(header, res.header)
+              header = _.assignIn(header, res.header)
             }
           }
 
