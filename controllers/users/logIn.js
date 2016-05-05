@@ -1,4 +1,3 @@
-var $require = require(process.cwd() + '/lib/require')
 var errResNotAuthorized = $require('lib/api-err-responders/not-authorized')
 var User = $require('models/user')
 

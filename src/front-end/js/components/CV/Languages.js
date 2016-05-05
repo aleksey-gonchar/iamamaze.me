@@ -1,4 +1,4 @@
-import React from 'react/addons'
+import React from 'react'
 import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'

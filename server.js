@@ -1,5 +1,8 @@
-require('babel-register')
-var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
+'use strict'
+// require('babel-register')
+require('./lib/require')
+require('./lib/promise')
+var serverCfg = $requireConfig('server')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 process.env.FETCH_STATE = process.env.FETCH_STATE || false
@@ -14,11 +17,10 @@ global.INITIAL_STATE = {}
 var initMongo = require('./lib/initializers/mongo')
 var initExpress = require('./lib/initializers/express')
 var http = require('http')
-var Promise = require('bluebird')
-var log = require('./lib/logger')
+var log = require('./lib/logger').get('APP')
 var _ = require('lodash')
 
-if (_.include(['development', 'test'], process.env.NODE_ENV)) {
+if (_.includes(['development', 'test'], process.env.NODE_ENV)) {
   require('longjohn')
 }
 

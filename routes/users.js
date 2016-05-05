@@ -1,7 +1,5 @@
-var $require = require(process.cwd() + '/lib/require')
-var requireTree = require('require-tree')
-var usersCtrl = requireTree('../controllers/users')
-var apiHelpers = requireTree('../lib/api-helpers')
+var usersCtrl = $requireTree('controllers/users')
+var apiHelpers = $requireTree('lib/api-helpers')
 
 var User = $require('models/user')
 

@@ -1,20 +1,24 @@
-var express = require('express')
-var apiRouter = express.Router()
+'use strict'
 
-var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
+const express = require('express')
+const apiRouter = express.Router()
+
+const serverCfg = $requireConfig('server')
 
 module.exports = (app) => {
-  app.get('/', function (req, res) {
+  app.get('/', (req, res) => {
     res.redirect('/app/about')
   })
 
-  app.get('/app', function (req, res) {
+  app.get('/app', (req, res) => {
     res.redirect('/app/about')
   })
-
+  
   require('./auth/jwt')(app) // we need jwt check for all routes
 
   require('./users')(apiRouter)
   require('./cv')(apiRouter)
+  require('./app')(apiRouter)
+  
   app.use(serverCfg.api.mountPoint, apiRouter)
 }
