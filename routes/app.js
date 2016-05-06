@@ -2,7 +2,7 @@
 const _ = require('lodash')
 const pkg = $require('package.json')
 
-function renderApp (req, res, next) {
+let renderApp = _.curry((app, req, res, next) => {
   let initialState = {
     application: {
       token: null,
@@ -25,15 +25,17 @@ function renderApp (req, res, next) {
     description: pkg.description,
     version: pkg.version,
     keywords: pkg.keywords.join(', '),
-    html: html,
-    initialState: JSON.stringify(store.getState())
+    // html: html,
+    initialState: JSON.stringify(initialState)
   }
 
   if (!res.headersSent) {
-    res.render('index', opts)
+    res.template = 'index'
+    res.opts = opts
+    next()
   } else {
     next()
   }
-}
+})
 
-module.exports = router => router.get('/app*', renderApp)
+module.exports = app => app.get('/app/*', renderApp(app))

@@ -1,5 +1,4 @@
 /* global helpers */
-var $require = require(process.cwd() + '/lib/require')
 var faker = require('faker')
 var _ = require('lodash')
 var request = require('request')
@@ -98,12 +97,10 @@ function login (userData) {
   return deferred.promise
 }
 
-module.exports = function (helpers) {
-  helpers.user = {
-    getToken: getToken,
-    create: create,
-    login: login,
-    activate: activate,
-    createAndLogin: createAndLogin
-  }
+helpers.user = {
+  getToken: getToken,
+  create: create,
+  login: login,
+  activate: activate,
+  createAndLogin: createAndLogin
 }
