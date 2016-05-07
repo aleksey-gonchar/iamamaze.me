@@ -21,20 +21,20 @@ class About1 extends React.Component {
     )
   }
 }
-
+//
+// export default (
+//   <Route path='/app' component={App}>
+//     <Route path='about' component={About1}/>
+//   </Route>
+// )
 export default (
   <Route path='/app' component={App}>
-    <Route path='about' component={About1}/>
+    <Route path='about' component={About}/>
+    <Route path='cv' component={CV}/>
   </Route>
 )
-// export default () => {
-//   return (
-//     <Route path='/app' component={App}>
-//       <IndexRoute component={About}/>
-//       <Route path='/login' component={Login} onEnter={onEnter}/>
-//       <Route path='/registration' component={Registration} onEnter={onEnter}/>
-//       <Route path='/about' component={About}/>
-//       <Route path='/cv' component={CV}/>
-//     </Route>
-//   )
-// }
+
+// <IndexRoute component={About}/>
+// <Route path='/login' component={Login} onEnter={onEnter}/>
+// <Route path='/registration' component={Registration} onEnter={onEnter}/>
+

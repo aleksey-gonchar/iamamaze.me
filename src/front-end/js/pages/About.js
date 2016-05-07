@@ -24,8 +24,8 @@ export default class About extends React.Component {
           </div>
           <Footer />
         </div>
-
       </div>
     )
   }
 }
+

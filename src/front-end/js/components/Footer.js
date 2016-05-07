@@ -38,17 +38,19 @@ export default class Footer extends React.Component {
       <div className='row' data-class='Footer'>
         <div className='col-xs-12 col-md-12'>
           <table>
-            <tr>
-              <td>
-                <Icon name='copyright'/>&nbsp;
-                { moment().format('YYYY')}&nbsp;
-                <span className='name'>Alex Potter</span>
-                <span className='sub-title'> - Full stack javascript developer</span>
-              </td>
-              <td>
-                {socials}
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>
+                  <Icon name='copyright'/>&nbsp;
+                  { moment().format('YYYY')}&nbsp;
+                  <span className='name'>Alex Potter</span>
+                  <span className='sub-title'> - Full stack javascript developer</span>
+                </td>
+                <td>
+                  {socials}
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

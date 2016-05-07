@@ -8,7 +8,7 @@ import apiMdlwr from './middleware/apiMdlwr.js'
 import createRootReducer from './reducers'
 import DevTools from './containers/DevTools'
 
-const enchancer = compose(
+const enhancer = compose(
   applyMiddleware(
     apiMdlwr,
     thunkMdlwr,
@@ -20,7 +20,7 @@ const enchancer = compose(
 
 export default () => {
   const rootReducer = createRootReducer()
-  let AppStore = createStore(rootReducer, enchancer)
+  let AppStore = createStore(rootReducer, enhancer)
 
   if (process.env.NODE_ENV == 'development') {
     window.AppStore = AppStore

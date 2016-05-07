@@ -2,9 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import $ from 'jquery'
 
-import { Nav, Navbar, CollapsibleNav } from 'react-bootstrap'
+import { Nav, NavItem, Navbar, CollapsibleNav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Icon } from './helpers/FontAwesome.js'
 
 function scrollCheckForNav () {
   const navbarMenu = $('[data-class="Navigation"] .navbar-menu')
@@ -75,8 +74,12 @@ export default class Navigation extends React.Component {
         </div>
         <div className='navbar-menu'>
           <Nav navbar>
-            <LinkContainer to={{ pathname: '/app/about' }}>ABOUT</LinkContainer>
-            <LinkContainer to={{ pathname: '/app/cv' }}>CV</LinkContainer>
+            <LinkContainer to={{ pathname: '/app/about' }}>
+              <NavItem>ABOUT</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/app/cv' }}>
+              <NavItem>CV</NavItem>
+            </LinkContainer>
           </Nav>
         </div>
       </Navbar>

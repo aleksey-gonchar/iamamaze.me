@@ -42,21 +42,21 @@ class App extends React.Component {
     this.props.actions.rememberRouter(this.context.router)
   }
 
+  // render () {
+    // return (
+    //   <div id='app'>
+    //     {this.props.children || (<About />)}
+    //   </div>
+    // )
+  // }
   render () {
     return (
       <div id='app'>
         {this.props.children || (<About />)}
+        <ModalsContainer />
       </div>
     )
   }
-  // render () {
-  //   return (
-  //     <div id='app'>
-  //       {this.props.children || (<About />)}
-  //       <ModalsContainer />
-  //     </div>
-  //   )
-  // }
 }
 
 export default connect(select, actions)(App)
