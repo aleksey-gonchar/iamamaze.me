@@ -39,11 +39,7 @@ export function isFetched (store, section) {
 
 export default () => {
   let data = {}
-  if (__CLIENT__) {
-    data = _.result(window, 'INITIAL_STATE.cv')
-  } else {
-    data = JSON.parse(INITIAL_STATE).cv
-  }
+  data = _.result(window, 'INITIAL_STATE.cv')
 
   const initialState = _.defaultsDeep(data, {
     summary: '',

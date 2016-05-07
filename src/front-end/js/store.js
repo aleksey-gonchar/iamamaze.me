@@ -1,46 +1,28 @@
-/* global __CLIENT__, __DEVELOPMENT__ */
+/* global process.env */
 import { createStore, compose, applyMiddleware } from 'redux'
 import thunkMdlwr from 'redux-thunk'
 import promiseMdlwr from 'redux-promise'
+import createLogger from 'redux-logger'
+
 import apiMdlwr from './middleware/apiMdlwr.js'
 import createRootReducer from './reducers'
+import DevTools from './containers/DevTools'
 
-let combinedCreateStore
-// if (_.result(process.env, 'NODE_ENV') == 'development') {
-//  const { devTools } = require('redux-devtools')
-//  combinedCreateStore = compose(devTools(), createStore)
-// } else {
-//  combinedCreateStore = compose(createStore)
-// }
-combinedCreateStore = compose(createStore)
-
-let finalCreateStore = null
-if (__CLIENT__ && __DEVELOPMENT__) {
-  const createLogger = require('redux-logger')
-  const logger = createLogger({
-    level: 'error',
-    collapsed: true
-  })
-
-  finalCreateStore = applyMiddleware(
+const enchancer = compose(
+  applyMiddleware(
     apiMdlwr,
     thunkMdlwr,
     promiseMdlwr,
-    logger
-  )(combinedCreateStore)
-} else {
-  finalCreateStore = applyMiddleware(
-    apiMdlwr,
-    thunkMdlwr,
-    promiseMdlwr
-  )(combinedCreateStore)
-}
+    createLogger()
+  ),
+  DevTools.instrument()
+)
 
 export default () => {
   const rootReducer = createRootReducer()
-  let AppStore = finalCreateStore(rootReducer)
+  let AppStore = createStore(rootReducer, enchancer)
 
-  if (__CLIENT__ && __DEVELOPMENT__) {
+  if (process.env.NODE_ENV == 'development') {
     window.AppStore = AppStore
   }
 

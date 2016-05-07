@@ -3,6 +3,7 @@ import { isFetched } from '../../reducers/CVReducer.js'
 import * as CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import $ from 'jquery'
 
 import { Panel, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
@@ -10,10 +11,8 @@ import Waiter from '../helpers/Waiter.js'
 import uuid from 'node-uuid'
 import marked from 'marked'
 
-if (__CLIENT__) {
-  const $ = require('jquery')
-  //require('../../helpers/draggable.js')
-}
+
+//require('../../helpers/draggable.js')
 
 function select (state) {
   return {

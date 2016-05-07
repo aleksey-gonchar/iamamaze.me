@@ -11,8 +11,9 @@ function select (state) {
   return { modals: Object.assign({}, state.modals) }
 }
 
-@connect(select)
-export default class ModalsContainer extends React.Component {
+// @connect(select)
+// export default class ModalsContainer extends React.Component {
+class ModalsContainer extends React.Component {
   static propTypes = {
     modals: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func.isRequired
@@ -50,3 +51,5 @@ export default class ModalsContainer extends React.Component {
     )
   }
 }
+
+export default connect(select)(ModalsContainer)

@@ -10,5 +10,5 @@ export default () => {
     modals
   })
 
-  if (__CLIENT__ && !__DEVELOPMENT__) { delete window.INITIAL_STATE }
+  if (process.env.NODE_ENV !== 'development') { delete window.INITIAL_STATE }
 }

@@ -3,12 +3,8 @@ import { Link } from 'react-router'
 import $ from 'jquery'
 
 import { Nav, Navbar, CollapsibleNav } from 'react-bootstrap'
-import { NavItemLink } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { Icon } from './helpers/FontAwesome.js'
-
-NavItemLink.contextTypes = Object.assign(NavItemLink.contextTypes, {
-  router: React.PropTypes.object
-})
 
 function scrollCheckForNav () {
   const navbarMenu = $('[data-class="Navigation"] .navbar-menu')
@@ -79,8 +75,8 @@ export default class Navigation extends React.Component {
         </div>
         <div className='navbar-menu'>
           <Nav navbar>
-            <NavItemLink to='/app/about'>ABOUT</NavItemLink>
-            <NavItemLink to='/app/cv'>CV</NavItemLink>
+            <LinkContainer to={{ pathname: '/app/about' }}>ABOUT</LinkContainer>
+            <LinkContainer to={{ pathname: '/app/cv' }}>CV</LinkContainer>
           </Nav>
         </div>
       </Navbar>
