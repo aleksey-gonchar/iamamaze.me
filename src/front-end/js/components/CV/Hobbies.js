@@ -21,8 +21,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Hobbies extends React.Component {
+class Hobbies extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'hobbies')) {
       return Promise.resolve()
@@ -72,3 +71,5 @@ export default class Hobbies extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Hobbies)

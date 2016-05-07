@@ -21,8 +21,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Contact extends React.Component {
+class Contact extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'contacts')) {
       return Promise.resolve()
@@ -84,3 +83,5 @@ export default class Contact extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Contact)

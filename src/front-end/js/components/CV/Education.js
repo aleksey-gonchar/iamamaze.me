@@ -22,8 +22,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Education extends React.Component {
+class Education extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'education')) {
       return Promise.resolve()
@@ -81,3 +80,5 @@ export default class Education extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Education)

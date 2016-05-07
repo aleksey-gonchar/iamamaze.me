@@ -9,8 +9,6 @@ import App from './containers/App.js'
 /* partials */
 import About from './pages/About.js'
 import CV from './pages/CV.js'
-import Registration from './pages/Registration.js'
-import Login from './pages/Login.js'
 
 function onEnter () { $.notifyClose() }
 

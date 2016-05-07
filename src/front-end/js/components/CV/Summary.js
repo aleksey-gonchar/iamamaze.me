@@ -21,8 +21,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Summary extends React.Component {
+class Summary extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'summary')) {
       return Promise.resolve()
@@ -55,3 +54,5 @@ export default class Summary extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Summary)

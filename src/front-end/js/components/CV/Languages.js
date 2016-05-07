@@ -22,8 +22,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Languages extends React.Component {
+class Languages extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'languages')) {
       return Promise.resolve()
@@ -94,3 +93,5 @@ export default class Languages extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Languages)
