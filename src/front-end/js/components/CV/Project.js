@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap'
 
 export default class Project extends React.Component {
   static propTypes = {
-    key: PropTypes.string,
+    id: PropTypes.string,
     project: PropTypes.object
   }
 
@@ -13,7 +13,7 @@ export default class Project extends React.Component {
       usedSoft, roleDescription, responsibilities} = this.props.project
 
     return (
-      <li className='cv-project' key={this.props.key}>
+      <li className='cv-project' key={this.props.id}>
         <div className='cv-project-period'>
           {period}
         </div>
@@ -47,9 +47,7 @@ export default class Project extends React.Component {
             </tbody>
           </Table>
         </div>
-
       </li>
-
     )
   }
 }

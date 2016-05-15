@@ -77,12 +77,13 @@ class Skills extends React.Component {
         )
 
         const disabled = skill.active ? '' : 'disabled'
+        const idOrKey = uuid.v4()
         const el = (
-          <li className={`cv-skill ${disabled}`} key={uuid.v4()}
+          <li className={`cv-skill ${disabled}`} key={idOrKey}
               style={{ width: `${skill.size}px`, height: `${skill.size}px`,
                        top: skill.top, left: skill.left
                     }}>
-            <OverlayTrigger placement='bottom' overlay={popover}>
+            <OverlayTrigger placement='bottom' overlay={popover} >
               <div className='cv-skill-title'
                    style={{ height: 'inherit', fontSize: skill.fontSize }}
                    dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>

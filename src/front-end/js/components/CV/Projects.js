@@ -47,8 +47,9 @@ class Projects extends React.Component {
 
     if (this.isFetched()) {
       projects = _.reduce(this.props.projects, (res, project) => {
-        const el = (<Project project={project} key={uuid.v4()} />)
-        res[el.key]= el
+        const key = uuid.v4()
+        const el = (<Project project={project} key={key} id={key} />)
+        res[key]= el
         return res
       }, {})
 

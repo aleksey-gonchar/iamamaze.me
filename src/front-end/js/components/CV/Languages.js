@@ -60,8 +60,9 @@ class Languages extends React.Component {
 
         let stars = _.fill(Array(5), star, 0, language.rating+1)
         stars = _.fill(stars, starEmpty, language.rating, 5)
+        const key = uuid.v4()
         const el = (
-          <li key={uuid.v4()}>
+          <li key={key}>
             <OverlayTrigger placement='left' overlay={popover}>
               <div className='cv-language'>
                 <div className='cv-language-title'>{language.title}</div>
@@ -74,7 +75,7 @@ class Languages extends React.Component {
             </OverlayTrigger>
           </li>
         )
-        res[el.key] = el
+        res[key] = el
         return res
       }, {})
 

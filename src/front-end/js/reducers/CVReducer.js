@@ -18,7 +18,7 @@ function fetchStateSuccess (state, action) {
 }
 
 function fetchStateError (state, action) {
-  notify.error(action.payload)
+  notify.error(action.error || action.payload)
   return state
 }
 /*
