@@ -81,6 +81,7 @@
     "object-to-string": "1.0.0",
     "qs": "6.1.0",
     "react": "15.0.2",
+    "react-addons-create-fragment": "^15.0.2",
     "react-bootstrap": "0.29.3",
     "react-chosen": "0.3.8",
     "react-dom": "15.0.2",

@@ -1,6 +1,7 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
@@ -51,7 +52,7 @@ class Projects extends React.Component {
         return res
       }, {})
 
-      projects = React.addons.createFragment(projects)
+      projects = createFragment(projects)
     }
 
     const content = (

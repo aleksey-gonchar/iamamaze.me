@@ -1,6 +1,7 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
@@ -67,7 +68,7 @@ class Contact extends React.Component {
         return res
       }, {})
 
-      contacts = React.addons.createFragment(contacts)
+      contacts = createFragment(contacts)
     }
 
     const content = (

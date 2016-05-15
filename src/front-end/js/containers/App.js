@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { PropTypes } from 'react'
-import ModalsContainer from './ModalsContainer.js'
 import AppActions from '../actions/AppActions.js'
 import { isFetched } from '../reducers/AppReducer.js'
 import { bindActionCreators } from 'redux'
@@ -42,18 +41,10 @@ class App extends React.Component {
     this.props.actions.rememberRouter(this.context.router)
   }
 
-  // render () {
-    // return (
-    //   <div id='app'>
-    //     {this.props.children || (<About />)}
-    //   </div>
-    // )
-  // }
   render () {
     return (
       <div id='app'>
         {this.props.children || (<About />)}
-        <ModalsContainer />
       </div>
     )
   }

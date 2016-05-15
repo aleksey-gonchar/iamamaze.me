@@ -1,6 +1,7 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import $ from 'jquery'
@@ -92,7 +93,7 @@ class Skills extends React.Component {
         return res
       }, {}).value()
 
-      skills = React.addons.createFragment(skills)
+      skills = createFragment(skills)
     }
 
     const content = (

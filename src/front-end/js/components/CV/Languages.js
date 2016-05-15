@@ -1,6 +1,7 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import marked from 'marked'
@@ -77,7 +78,7 @@ class Languages extends React.Component {
         return res
       }, {})
 
-      languages = React.addons.createFragment(languages)
+      languages = createFragment(languages)
     }
 
     const content = (

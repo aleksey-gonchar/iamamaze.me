@@ -1,13 +1,13 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
 import marked from 'marked'
 
 import { Panel, Table } from 'react-bootstrap'
-import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 
 function select (state) {
@@ -61,7 +61,7 @@ class Education extends React.Component {
         return res
       }, {}).value()
 
-      education = React.addons.createFragment(education)
+      education = createFragment(education)
     }
 
     const content = (

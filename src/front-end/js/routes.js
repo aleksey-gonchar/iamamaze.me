@@ -10,21 +10,6 @@ import App from './containers/App.js'
 import About from './pages/About.js'
 import CV from './pages/CV.js'
 
-function onEnter () { $.notifyClose() }
-
-class About1 extends React.Component {
-  render () {
-    return (
-      <div>about1</div>
-    )
-  }
-}
-//
-// export default (
-//   <Route path='/app' component={App}>
-//     <Route path='about' component={About1}/>
-//   </Route>
-// )
 export default (
   <Route path='/app' component={App}>
     <Route path='about' component={About}/>
