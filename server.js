@@ -1,6 +1,4 @@
 'use strict'
-const bugsnag = require('bugsnag')
-bugsnag.register('7b7f01539793def608c83d7cc8de87e3')
 
 // require('babel-register')
 require('./lib/require')
