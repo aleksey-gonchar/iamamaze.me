@@ -1,12 +1,11 @@
 /* global it, expect */
-var $require = require(process.cwd() + '/lib/require')
-var _ = require('lodash')
-var qs = require('querystring')
-var moment = require('moment')
-var buildCRUD = $require('lib/api-helpers/buildCRUD')
+const _ = require('lodash')
+const qs = require('querystring')
+const moment = require('moment')
+const buildCRUD = $require('lib/api-helpers/buildCRUD')
 require('moment-objectid')()
-var request = require('superagent')
-var Promise = require('bluebird')
+const request = require('superagent')
+const Promise = require('bluebird')
 
 var defaults = {
   'create-valid': {
@@ -243,7 +242,7 @@ function createTestCRUDFunction (baseUrl, options) {
 
           if (res) {
             if (_.has(res, 'header')) {
-              header = _.extend(header, res.header)
+              header = _.assignIn(header, res.header)
             }
           }
 
@@ -270,6 +269,4 @@ function createTestCRUDFunction (baseUrl, options) {
   }
 }
 
-module.exports = function (helpers) {
-  helpers.testCRUD = createTestCRUDFunction
-}
+helpers.testCRUD = createTestCRUDFunction

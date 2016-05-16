@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { PropTypes } from 'react'
-import ModalsContainer from './ModalsContainer.js'
-import * as AppActions from '../actions/AppActions.js'
+import AppActions from '../actions/AppActions.js'
 import { isFetched } from '../reducers/AppReducer.js'
 import { bindActionCreators } from 'redux'
 
@@ -20,8 +19,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class App extends React.Component {
+class App extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     actions: PropTypes.object
@@ -47,8 +45,9 @@ export default class App extends React.Component {
     return (
       <div id='app'>
         {this.props.children || (<About />)}
-        <ModalsContainer />
       </div>
     )
   }
 }
+
+export default connect(select, actions)(App)

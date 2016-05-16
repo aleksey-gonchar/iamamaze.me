@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 import _ from 'lodash'
 import _s from 'underscore.string'
 import constants from '../constants.js'
+import notify from '../helpers/notify.js'
 import $ from 'jquery'
 
 const { FETCH_CV_STATE } = constants.cv
@@ -17,7 +18,7 @@ function fetchStateSuccess (state, action) {
 }
 
 function fetchStateError (state, action) {
-  notify.error(action.payload)
+  notify.error(action.error || action.payload)
   return state
 }
 /*
@@ -38,12 +39,7 @@ export function isFetched (store, section) {
 }
 
 export default () => {
-  let data = {}
-  if (__CLIENT__) {
-    data = _.result(window, 'INITIAL_STATE.cv')
-  } else {
-    data = JSON.parse(INITIAL_STATE).cv
-  }
+  let data = _.result(window, 'INITIAL_STATE.cv')
 
   const initialState = _.defaultsDeep(data, {
     summary: '',

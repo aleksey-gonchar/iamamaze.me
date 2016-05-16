@@ -1,6 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
@@ -21,8 +22,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Contact extends React.Component {
+class Contact extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'contacts')) {
       return Promise.resolve()
@@ -68,7 +68,7 @@ export default class Contact extends React.Component {
         return res
       }, {})
 
-      contacts = React.addons.createFragment(contacts)
+      contacts = createFragment(contacts)
     }
 
     const content = (
@@ -84,3 +84,5 @@ export default class Contact extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Contact)

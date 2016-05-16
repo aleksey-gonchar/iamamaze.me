@@ -1,5 +1,11 @@
-require('babel/register')
-var serverCfg = require('konphyg')(process.cwd() + '/config')('server')
+'use strict'
+const bugsnag = require('bugsnag')
+bugsnag.register('7b7f01539793def608c83d7cc8de87e3')
+
+// require('babel-register')
+require('./lib/require')
+require('./lib/promise')
+const serverCfg = $requireConfig('server')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 process.env.FETCH_STATE = process.env.FETCH_STATE || false
@@ -11,26 +17,28 @@ global.__DEVELOPMENT__ = process.env.NODE_ENV === 'development'
 global.__API_BASE_URL__ = 'http://' + serverCfg.host + ':' + serverCfg.port + serverCfg.api.mountPoint
 global.INITIAL_STATE = {}
 
-var initMongo = require('./lib/initializers/mongo')
-var initExpress = require('./lib/initializers/express')
-var http = require('http')
-var Promise = require('bluebird')
-var log = require('./lib/logger')
-var _ = require('lodash')
+const initMongo = require('./lib/initializers/mongo')
+const initExpress = require('./lib/initializers/express')
+const http = require('http')
+const log = require('./lib/logger').get('APP')
+const _ = require('lodash')
 
-if (_.include(['development', 'test'], process.env.NODE_ENV)) {
+if (_.includes(['development', 'test'], process.env.NODE_ENV)) {
   require('longjohn')
 }
 
-log.info('Starting app in [' + process.env.NODE_ENV + '] mode')
+log.info('Starting app in [' + process.env.NODE_ENV + '] env')
 
-var port = serverCfg.port || 3000
-var server
-var onServerListenHook = null
+const port = serverCfg.port || 3000
+let server
+let onServerListenHook = null
 
-Promise.all([initMongo(), initExpress()])
-  .then(function (res) {
-    var app = res[1]
+Promise.all([
+  initMongo(),
+  initExpress()
+])
+  .then((res) => {
+    let app = res[1]
     server = http.createServer(app)
     server.listen(port)
     server.on('error', onError)
@@ -75,7 +83,7 @@ function onClosing () {
   log.info('Server stopped')
 }
 
-module.exports = function (hook) {
+module.exports = (hook) => {
   if (_.isFunction(hook)) {
     onServerListenHook = hook
   }

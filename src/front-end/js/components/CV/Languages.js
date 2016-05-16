@@ -1,6 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import marked from 'marked'
@@ -22,8 +23,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Languages extends React.Component {
+class Languages extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'languages')) {
       return Promise.resolve()
@@ -60,8 +60,9 @@ export default class Languages extends React.Component {
 
         let stars = _.fill(Array(5), star, 0, language.rating+1)
         stars = _.fill(stars, starEmpty, language.rating, 5)
+        const key = uuid.v4()
         const el = (
-          <li key={uuid.v4()}>
+          <li key={key}>
             <OverlayTrigger placement='left' overlay={popover}>
               <div className='cv-language'>
                 <div className='cv-language-title'>{language.title}</div>
@@ -74,11 +75,11 @@ export default class Languages extends React.Component {
             </OverlayTrigger>
           </li>
         )
-        res[el.key] = el
+        res[key] = el
         return res
       }, {})
 
-      languages = React.addons.createFragment(languages)
+      languages = createFragment(languages)
     }
 
     const content = (
@@ -94,3 +95,5 @@ export default class Languages extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Languages)

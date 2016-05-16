@@ -1,6 +1,4 @@
-var $require = require(process.cwd() + '/lib/require')
-var requireTree = require('require-tree')
-var cvCtrl = requireTree('../controllers/cv')
+var cvCtrl = $requireTree('controllers/cv')
 
 var CV = $require('models/cv')
 
