@@ -1,13 +1,13 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
 import marked from 'marked'
 
 import { Panel, Table } from 'react-bootstrap'
-import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 
 function select (state) {
@@ -22,8 +22,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Education extends React.Component {
+class Education extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'education')) {
       return Promise.resolve()
@@ -62,7 +61,7 @@ export default class Education extends React.Component {
         return res
       }, {}).value()
 
-      education = React.addons.createFragment(education)
+      education = createFragment(education)
     }
 
     const content = (
@@ -81,3 +80,5 @@ export default class Education extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Education)

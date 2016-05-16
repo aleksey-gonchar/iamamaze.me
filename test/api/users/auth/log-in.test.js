@@ -11,13 +11,14 @@ describe('log in', function () {
 
   var testUrl = helpers.variables.apiEndpoint + '/users/log-in'
 
-  before(helpers.start)
-  before((next) => {
-    helpers.user.createAndLogin(userData).then((user) => {
-      next()
-    })
+  before(next => {
+    helpers.server.stop()
+      .then(helpers.server.start)
+      .then(() => next())
+      .catch(next)
   })
-  after(helpers.stop)
+
+  after(helpers.server.stop)
 
   it.only('log in user', function (next) {
     request.post(testUrl)

@@ -1,4 +1,4 @@
-/* global __CLIENT__, __DEVELOPMENT__, INITIAL_STATE */
+/* global process.env, INITIAL_STATE */
 import { handleActions } from 'redux-actions'
 import notify from '../helpers/notify.js'
 import _ from 'lodash'
@@ -110,11 +110,7 @@ function gotoLogin (state, action) {
 
 export default () => {
   let data = {}
-  if (__CLIENT__) {
-    data = _.result(window, 'INITIAL_STATE.application')
-  } else {
-    data = JSON.parse(INITIAL_STATE).application
-  }
+  data = _.result(window, 'INITIAL_STATE.application')
 
   const initialState = _.defaultsDeep(data, {
     isLoggedIn: _.isString(data.token),

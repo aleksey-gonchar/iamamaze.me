@@ -2,23 +2,21 @@ import 'font-awesome/scss/font-awesome.scss'
 import 'index.scss'
 
 import React from 'react'
-import BrowserHistory from 'react-router/lib/BrowserHistory'
-import Location from 'react-router/lib/Location'
-import qs from 'qs'
+import { browserHistory } from 'react-router'
+import { render } from 'react-dom'
 import $ from 'jquery'
+// import { syncHistoryWithStore } from 'react-router-redux'
 
-import initStore from './store.js'
-import initRouter from './router.js'
+import Root from './containers/Root'
+import initStore from './store'
+// import initRouter from './router'
 
-const history = new BrowserHistory()
-const search = document.location.search
-const query = search && qs.parse(search)
-const location = new Location(document.location.pathname, query)
+const store = initStore()
+// const history = syncHistoryWithStore(browserHistory, store)
 
 $(() => {
-  const store = initStore()
-  initRouter(location, history, store)
-    .then(({content}) => {
-      React.render(content, document.body)
-    })
+  render(
+    <Root store={store} history={browserHistory} />,
+    document.getElementById('root')
+  )
 })

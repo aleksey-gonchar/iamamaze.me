@@ -36,7 +36,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /(\.js|\.jsx)$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
+      { test: /(\.js|\.jsx)$/, exclude: /node_modules/, loader: 'babel' },
       {
         test: /\.scss/,
         loader: ExtractTextPlugin.extract('style', 'css!sass')
@@ -58,10 +58,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       __FETCH_STATE__: true,
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEVELOPMENT__: process.env.NODE_ENV === 'development',
-      __API_BASE_URL__: JSON.stringify(apiBaseUrl)
+      __API_BASE_URL__: JSON.stringify(apiBaseUrl),
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin('common.bundle', 'common.bundle.js'),
     new webpack.SourceMapDevToolPlugin({

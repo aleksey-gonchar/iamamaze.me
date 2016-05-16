@@ -1,6 +1,7 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import uuid from 'node-uuid'
@@ -22,8 +23,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Projects extends React.Component {
+class Projects extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'projects')) {
       return Promise.resolve()
@@ -47,12 +47,13 @@ export default class Projects extends React.Component {
 
     if (this.isFetched()) {
       projects = _.reduce(this.props.projects, (res, project) => {
-        const el = (<Project project={project} key={uuid.v4()} />)
-        res[el.key]= el
+        const key = uuid.v4()
+        const el = (<Project project={project} key={key} id={key} />)
+        res[key]= el
         return res
       }, {})
 
-      projects = React.addons.createFragment(projects)
+      projects = createFragment(projects)
     }
 
     const content = (
@@ -68,3 +69,5 @@ export default class Projects extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Projects)

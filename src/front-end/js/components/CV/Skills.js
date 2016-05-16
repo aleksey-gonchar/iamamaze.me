@@ -1,8 +1,10 @@
 import React from 'react'
+import createFragment from 'react-addons-create-fragment'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import $ from 'jquery'
 
 import { Panel, OverlayTrigger, Popover } from 'react-bootstrap'
 import { Icon } from '../helpers/FontAwesome.js'
@@ -10,10 +12,8 @@ import Waiter from '../helpers/Waiter.js'
 import uuid from 'node-uuid'
 import marked from 'marked'
 
-if (__CLIENT__) {
-  const $ = require('jquery')
-  //require('../../helpers/draggable.js')
-}
+
+//require('../../helpers/draggable.js')
 
 function select (state) {
   return {
@@ -31,8 +31,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Skills extends React.Component {
+class Skills extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'skills')) {
       return Promise.resolve()
@@ -78,12 +77,13 @@ export default class Skills extends React.Component {
         )
 
         const disabled = skill.active ? '' : 'disabled'
+        const idOrKey = uuid.v4()
         const el = (
-          <li className={`cv-skill ${disabled}`} key={uuid.v4()}
+          <li className={`cv-skill ${disabled}`} key={idOrKey}
               style={{ width: `${skill.size}px`, height: `${skill.size}px`,
                        top: skill.top, left: skill.left
                     }}>
-            <OverlayTrigger placement='bottom' overlay={popover}>
+            <OverlayTrigger placement='bottom' overlay={popover} >
               <div className='cv-skill-title'
                    style={{ height: 'inherit', fontSize: skill.fontSize }}
                    dangerouslySetInnerHTML={ {__html: marked(skill.title)} }/>
@@ -94,7 +94,7 @@ export default class Skills extends React.Component {
         return res
       }, {}).value()
 
-      skills = React.addons.createFragment(skills)
+      skills = createFragment(skills)
     }
 
     const content = (
@@ -115,3 +115,5 @@ export default class Skills extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Skills)

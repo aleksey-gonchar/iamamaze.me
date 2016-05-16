@@ -1,12 +1,11 @@
 import React from 'react'
 import { isFetched } from '../../reducers/CVReducer.js'
-import * as CVActions from '../../actions/CVActions.js'
+import CVActions from '../../actions/CVActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import marked from 'marked'
 
 import { Panel } from 'react-bootstrap'
-import { Icon } from '../helpers/FontAwesome.js'
 import Waiter from '../helpers/Waiter.js'
 
 function select (state) {
@@ -21,8 +20,7 @@ function actions (dispatch) {
   }
 }
 
-@connect(select, actions)
-export default class Summary extends React.Component {
+class Summary extends React.Component {
   static fetchState (store) {
     if (isFetched(store.getState().cv, 'summary')) {
       return Promise.resolve()
@@ -55,3 +53,5 @@ export default class Summary extends React.Component {
     )
   }
 }
+
+export default connect(select, actions)(Summary)

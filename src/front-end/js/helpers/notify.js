@@ -26,7 +26,8 @@ export function error (body) {
 
   if (_.has(body, 'error')) { msg = body.error }
   if (_.has(body, 'message')) {
-    msg = `<span class="label label-warning">${body.status}</span> ${body.message}`
+    const key = body.status || 'error'
+    msg = `<span class="label label-warning">${key}</span> ${body.message}`
   } else if (_.has(body, 'errors')) {
     if (_.isObject(body.errors)) {
       _.each(body.errors, (val, key) => {

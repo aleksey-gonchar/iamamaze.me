@@ -35,16 +35,12 @@ function createTransitionHook (store) {
   }
 }
 
-export default (location, history, store) => {
+export default (history, store) => {
   return new Promise((resolve, reject) => {
     const routes = createRoutes(store)
-    Router.run(routes, location, [createTransitionHook(store)], (error, routerState, transition) => {
+    Router.run(routes, history, [createTransitionHook(store)], (error, routerState, transition) => {
       if (error) {
         return reject(error)
-      }
-
-      if (history) {
-        routerState.history = history
       }
 
       const content = (
@@ -54,7 +50,6 @@ export default (location, history, store) => {
       )
 
       resolve({content})
-
     })
   })
 }

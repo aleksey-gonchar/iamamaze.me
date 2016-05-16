@@ -17,14 +17,14 @@ const initialState = {
 }
 
 function hide (state, action) {
-  const modal = _.extend({}, state[action.payload], { isOpen: false })
+  const modal = _.assignIn({}, state[action.payload], { isOpen: false })
   state[action.payload] = modal
   return state
 }
 
 function show (state, action) {
   $.notifyClose()
-  const modal = _.extend({}, state[action.payload], { isOpen: true })
+  const modal = _.assignIn({}, state[action.payload], { isOpen: true })
   state[action.payload] = modal
   return state
 }
