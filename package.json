@@ -1,6 +1,6 @@
 {
   "name": "IAmAMaze.me",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Alex Potter personal web page",
   "main": "server.js",
   "scripts": {
