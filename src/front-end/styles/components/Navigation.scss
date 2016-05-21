@@ -29,6 +29,17 @@
     }
   }
 
+  .solid-bg {
+    a {
+      margin: 6px;
+    }
+
+    .navbar-nav {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+  }
+
   @mixin navbar-nav-dark-links () {
     li {
       a {
@@ -88,7 +99,7 @@
 
       .navbar-nav {
         float: right;
-        margin-right: 20px;
+        margin-right: 10px;
 
         li {
           float: left;
@@ -163,7 +174,7 @@
 
       .navbar-nav {
         float: right;
-        margin-right: 20px;
+        margin-right: 10px;
       }
     }
     .container-fluid {
