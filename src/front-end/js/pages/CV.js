@@ -26,26 +26,54 @@ export default class CV extends React.Component {
   }
 
   render () {
+    const wndWidth = $(window).width()
+    let row
+    if (wndWidth < 768) {
+      // list
+      row = (
+        <div className='row'>
+          <div className='col-md-12 col-xs-12'>
+            <h1>CV</h1>
+          </div>
+          <div className='col-md-12 col-xs-12'>
+            <Summary/>
+            <Contact/>
+            <Skills/>
+            <Languages/>
+            <Projects/>
+            <Education/>
+            <Hobbies/>
+          </div>
+        </div>
+      )
+    } else {
+      // landscape
+      row = (
+        <div className='row'>
+          <div className='col-md-12 col-xs-12'>
+            <h1>CV</h1>
+          </div>
+          <div className='col-md-8 col-xs-8'>
+            <Summary/>
+            <Skills/>
+            <Projects/>
+          </div>
+          <div className='col-md-4 col-xs-4'>
+            <Contact/>
+            <Languages/>
+            <Education/>
+            <Hobbies/>
+          </div>
+        </div>
+      )
+    }
+
+
     return (
       <div>
         <Navigation />
         <div className='container-fluid page-content page-cv'>
-          <div className='row'>
-            <div className='col-md-12 col-xs-12'>
-              <h1>CV</h1>
-            </div>
-            <div className='col-md-8 col-xs-8'>
-              <Summary/>
-              <Skills/>
-              <Projects/>
-            </div>
-            <div className='col-md-4 col-xs-4'>
-              <Contact/>
-              <Languages/>
-              <Education/>
-              <Hobbies/>
-            </div>
-          </div>
+          {row}
           <Footer/>
         </div>
 

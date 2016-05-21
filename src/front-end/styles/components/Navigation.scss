@@ -72,8 +72,82 @@
     }
   }
 
-  // portrait mode
-  @media screen and (max-width: $break-landscape) {
+  @media screen and (max-device-width: 768px) {
+    background-position: 50% 0;
+
+    .navbar-menu {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      width: 100%;
+      @include transition(background-color .5s);
+
+      &.solid-bg {
+        background-color: rgba(#214263, 0.8);
+      }
+
+      .navbar-nav {
+        float: right;
+        margin-right: 20px;
+
+        li {
+          float: left;
+        }
+      }
+    }
+    .container-fluid {
+      display: table;
+    }
+
+    .navbar-header {
+      display: table;
+      vertical-align: baseline;
+      float: none;
+      height: 300px;
+      margin-top: 135px;
+      //margin-bottom: 70px;
+      & > a {
+        display: inline-block;
+        width: $navigation-avatar-dimension;
+        height: $navigation-avatar-dimension;
+      }
+
+      .navbar-avatar {
+        display: table-cell;
+      }
+
+      .navbar-titles {
+        padding-left: 20px;
+        display: table-cell;
+
+        .navbar-titles-container {
+          position: relative;
+          top: -42px;
+        }
+
+        .navbar-name {
+          display: block;
+        }
+
+        h2 {
+          margin-top:0;
+        }
+      }
+    }
+
+    .navbar-nav {
+      @include navbar-nav-dark-links();
+
+      &.light-links {
+        @include navbar-nav-light-links();
+      }
+    }
+
+  }
+  @media screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  {
     background-position: 50% 0;
 
     .navbar-menu {
@@ -143,7 +217,7 @@
   }
 
   // landscape
-  @media screen and (min-width: $break-landscape) {
+  @media screen and (min-device-width: 1024px) {
     background-position: 50% 50%;
     position: fixed;
     height: 100%;

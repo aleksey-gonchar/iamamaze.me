@@ -13,16 +13,43 @@
 
 @import 'pages/CV';
 
-.page-content {
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+  /* Styles */
+}
 
-  // portrait mode
-  @media screen and (max-width: $break-landscape) {
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 320px) {
+  /* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-device-width : 768px) {
+  .page-content {
     .row:first-child {
       min-height: 400px;
     }
   }
-    // landscape
-  @media screen and (min-width: $break-landscape) {
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+  .page-content {
+    .row:first-child {
+      min-height: 700px;
+    }
+  }
+}
+
+@media only screen
+and (min-device-width : 1024px) {
+  .page-content {
     margin-left: $navigation-landscape-width;
     .row:first-child {
       min-height: 700px;
