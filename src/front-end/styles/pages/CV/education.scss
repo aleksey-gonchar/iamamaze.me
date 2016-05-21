@@ -29,11 +29,11 @@
 
 .cv-education-item-year{
   // portrait mode
-  @media screen and (max-width: $break-landscape) {
+  @media screen and (max-device-width: 768px) {
     width: 20%;
   }
   // landscape
-  @media screen and (min-width: $break-landscape) {
+  @media screen and (min-device-width: 769px) {
     width: 18%;
   }
   float: left;
@@ -46,11 +46,11 @@
 .cv-education-item-text {
   background: #f5f5f5;
   // portrait mode
-  @media screen and (max-width: $break-landscape) {
+  @media screen and (max-device-width: 768px) {
     width: 80%;
   }
   // landscape
-  @media screen and (min-width: $break-landscape) {
+  @media screen and (min-device-width: 769px) {
     width: 82%;
   }
   padding: 8px;
