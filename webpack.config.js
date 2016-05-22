@@ -1,13 +1,33 @@
-var webpack = require('webpack')
-var path = require('path')
-var srcPath = path.join(__dirname, 'src')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var config = require('konphyg')(process.cwd() + '/config')
-var serverCfg = config('server')
-var frontCfg = config('front-end')
+const webpack = require('webpack')
+const path = require('path')
+const srcPath = path.join(__dirname, 'src')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const config = require('konphyg')(process.cwd() + '/config')
+const serverCfg = config('server')
+const frontCfg = config('front-end')
 
-var port = frontCfg.port ? ':' + frontCfg.port : ''
-var apiBaseUrl = 'http://' + frontCfg.host + port + serverCfg.api.mountPoint
+const apiBaseUrl = serverCfg.api.mountPoint
+
+let plugins = [
+  new webpack.DefinePlugin({
+    __FETCH_STATE__: true,
+    __API_BASE_URL__: JSON.stringify(apiBaseUrl),
+    'process.env': {
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }
+  }),
+  new webpack.optimize.CommonsChunkPlugin('common.bundle', 'common.bundle.js'),
+  new ExtractTextPlugin('[name].css', { allChunks: true })
+]
+
+if (process.env.NODE_ENV === 'development')  {
+  plugins = plugins.concat([
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
+      exclude: [/\.css/]
+    })
+  ])
+}
 
 module.exports = {
   target: 'web',
@@ -15,7 +35,7 @@ module.exports = {
   entry: {
     'index.bundle': path.join(srcPath, 'front-end/js/index.js'),
     'common.bundle': [
-      'lodash', 'jquery', 'underscore.string', 'moment', 'superagent',
+      'lodash', 'jquery', 'moment', 'superagent',
       'react', 'react-router', 'react-bootstrap', 'react-router-bootstrap',
       'redux', 'react-redux', 'redux-actions', 'js-cookie', 'lodash', 'marked'
     ],
@@ -55,21 +75,7 @@ module.exports = {
       { test: /\.jpe?g$|\.gif$|\.png$|\.wav$|\.mp3$/, loader: 'file' }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      __FETCH_STATE__: true,
-      __API_BASE_URL__: JSON.stringify(apiBaseUrl),
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin('common.bundle', 'common.bundle.js'),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].js.map',
-      exclude: [/\.css/]
-    }),
-    new ExtractTextPlugin('[name].css', { allChunks: true })
-  ],
+  plugins,
   debug: true,
   cssnext: {
     browsers: 'last 2 versions'
