@@ -45,7 +45,7 @@ class Education extends React.Component {
     let education = []
 
     if (this.isFetched()) {
-      education = _.chain(this.props.education).sort('year').reverse().reduce((res, edu) => {
+      education = _.chain(this.props.education).sortBy('year').reverse().reduce((res, edu) => {
         const el = (
           <li className='cv-education-item' key={uuid.v4()}>
             <div className='cv-education-item-year'>
