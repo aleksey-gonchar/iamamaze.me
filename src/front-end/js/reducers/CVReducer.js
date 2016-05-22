@@ -1,6 +1,5 @@
 import { handleActions } from 'redux-actions'
 import _ from 'lodash'
-import _s from 'underscore.string'
 import constants from '../constants.js'
 import notify from '../helpers/notify.js'
 import $ from 'jquery'
@@ -13,7 +12,7 @@ function fetchStateRequest (state, action) {
 
 function fetchStateSuccess (state, action) {
   let newState = Object.assign({}, state)
-  newState[_s.camelize(action.meta.section)] = action.payload
+  newState[_.camelCase(action.meta.section)] = action.payload
   return newState
 }
 
